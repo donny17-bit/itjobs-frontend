@@ -1,3 +1,13 @@
+:root {
+  --color-purple: #5e50a1;
+  --color-yellow: #fbb017;
+  --color-black: #1f2a36;
+  --color-darkgray: #46505c;
+  --color-gray: #9ea0a5;
+  --color-lightgray: #e2e5ed;
+  --color-background: #f6f7f8;
+}
+
 html,
 body {
   padding: 0;
