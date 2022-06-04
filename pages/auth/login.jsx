@@ -39,7 +39,12 @@ export default function Login() {
                 }}
               >
                 <div className="p-5">
-                  <Image src="/logo_login.png" width={150} height={50} />
+                  <Image
+                    src="/logo_login.png"
+                    width={150}
+                    height={50}
+                    alt="logo"
+                  />
 
                   <div
                     // className="d-flex justify-content-center align-items-center border"
@@ -59,7 +64,12 @@ export default function Login() {
             </div>
             <div className="col-md-6 ">
               <div className="d-md-none pb-5">
-                <Image src="/logo_login_mobile.png" width={100} height={30} />
+                <Image
+                  src="/logo_login_mobile.png"
+                  width={100}
+                  height={30}
+                  alt="logo"
+                />
               </div>
               <div className="p-md-5">
                 <h2>Hello, PewPeople </h2>
@@ -67,8 +77,35 @@ export default function Login() {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
                   euismod ipsum et dui rhoncus auctor.
                 </p>
-                <p className="d-block">Masuk Sebagai</p>
-                <div className="d-flex w-100">
+                <div className="d-flex">
+                  <p className="d-block">Masuk Sebagai : </p>
+                  <div className="form-check form-check-inline ms-md-3 ms-2">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio1"
+                      value="pekerja"
+                    />
+                    <label className="form-check-label" htmlFor="inlineRadio1">
+                      Pekerja
+                    </label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio2"
+                      value="company"
+                    />
+                    <label className="form-check-label" htmlFor="inlineRadio2">
+                      Company
+                    </label>
+                  </div>
+                </div>
+
+                {/* <div className="d-flex w-100">
                   <button
                     className="btn btn-outline-warning w-100"
                     value="pekerja"
@@ -83,8 +120,8 @@ export default function Login() {
                   >
                     Perekrut
                   </button>
-                </div>
-                <form action="" className="mt-md-5">
+                </div> */}
+                <form action="" className="mt-md-4">
                   <div className="mb-3">
                     <label
                       htmlFor="formGroupExampleInput"
@@ -94,7 +131,7 @@ export default function Login() {
                     </label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control p-md-3"
                       id="formGroupExampleInput"
                       placeholder="Masukan Alamat Email"
                     />
@@ -108,25 +145,31 @@ export default function Login() {
                     </label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control p-md-3"
                       id="formGroupExampleInput2"
                       placeholder="Masukan Kata Sandi"
                     />
                   </div>
 
                   <div className="text-end">
-                    <Link href={`/auth/forgot-password`}>Lupa Kata Sandi?</Link>
+                    <Link href={`/auth/forgot-password`}>
+                      <a style={{ textDecoration: "none" }}>Lupa Kata Sandi?</a>
+                    </Link>
                   </div>
 
                   <button
                     type="button"
-                    className="btn btn-warning text-light p-md-3 w-100 mt-md-3"
+                    className="btn btn-warning text-light p-md-3 w-100 mt-md-5"
                   >
                     Masuk
                   </button>
-                  <p className="text-center mt-md-5 mt-3 ">
+                  <p className="text-center mt-md-3 mt-2 ">
                     Anda Belum Punya Akun?
-                    <Link href={`/auth/register`}>Daftar Disini</Link>
+                    <Link href={`/auth/register`}>
+                      <a style={{ textDecoration: "none", marginLeft: "2px" }}>
+                        Daftar Disini
+                      </a>
+                    </Link>
                   </p>
                 </form>
               </div>

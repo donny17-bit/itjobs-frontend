@@ -39,7 +39,12 @@ export default function Login() {
                 }}
               >
                 <div className="p-5">
-                  <Image src="/logo_login.png" width={150} height={50} />
+                  <Image
+                    src="/logo_login.png"
+                    width={150}
+                    height={50}
+                    alt="logo"
+                  />
 
                   <div
                     // className="d-flex justify-content-center align-items-center border"
@@ -59,7 +64,12 @@ export default function Login() {
             </div>
             <div className="col-md-6 h-100">
               <div className="d-md-none pb-5">
-                <Image src="/logo_login_mobile.png" width={100} height={30} />
+                <Image
+                  src="/logo_login_mobile.png"
+                  width={100}
+                  height={30}
+                  alt="logo"
+                />
               </div>
               <div className="p-md-5">
                 <h2>Hello, PewPeople </h2>
@@ -77,7 +87,7 @@ export default function Login() {
                     </label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control p-md-3"
                       id="formGroupExampleInput"
                       placeholder="Masukan Kata Sandi Baru"
                     />
@@ -91,14 +101,14 @@ export default function Login() {
                     </label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control p-md-3"
                       id="formGroupExampleInput2"
                       placeholder="Masukan Konfirmasi Kata Sandi Baru"
                     />
                   </div>
                   <button
                     type="button"
-                    className="btn btn-warning text-light p-md-3 w-100 mt-md-3"
+                    className="btn btn-warning text-light p-md-3 w-100 mt-md-5"
                   >
                     Reset Password
                   </button>

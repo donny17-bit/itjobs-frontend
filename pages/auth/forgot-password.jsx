@@ -34,12 +34,17 @@ export default function Login() {
                   backgroundImage: `linear-gradient(rgba(94, 80, 161, 0.8)100%, rgba(94, 80, 161, 0.5)100%),url(/bg-login.png)`,
                   boxSizing: "border-box",
                   // border: "1px solid",
-                  minHeight: "100%",
+                  height: "100%",
                   // backgroundColor: "black",
                 }}
               >
                 <div className="p-5">
-                  <Image src="/logo_login.png" width={150} height={50} />
+                  <Image
+                    src="/logo_login.png"
+                    width={150}
+                    height={50}
+                    alt="logo"
+                  />
 
                   <div
                     // className="d-flex justify-content-center align-items-center border"
@@ -59,7 +64,12 @@ export default function Login() {
             </div>
             <div className="col-md-6 h-100">
               <div className="d-md-none pb-5">
-                <Image src="/logo_login_mobile.png" width={100} height={30} />
+                <Image
+                  src="/logo_login_mobile.png"
+                  width={100}
+                  height={30}
+                  alt="logo"
+                />
               </div>
               <h2>Reset password</h2>
               <p className="my-md-3">
@@ -73,14 +83,14 @@ export default function Login() {
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control p-md-3"
                     id="formGroupExampleInput"
                     placeholder="Masukan Alamat Email"
                   />
                 </div>
                 <button
                   type="button"
-                  className="btn btn-warning text-light w-100 mt-3"
+                  className="btn btn-warning text-light p-md-3 w-100 mt-md-5"
                 >
                   Send password reset email
                 </button>
