@@ -30,7 +30,12 @@ export default function RegisterPekerja() {
               }}
             >
               <div className="p-5 h-100">
-                <Image src="/logo_login.png" width={150} height={50} />
+                <Image
+                  src="/logo_login.png"
+                  width={150}
+                  height={50}
+                  alt="logo"
+                />
 
                 <div className="w-100 h-100 d-flex justify-content-center align-items-center">
                   <div className="">
@@ -46,7 +51,12 @@ export default function RegisterPekerja() {
             </div>
             <div className="col-md-6 h-100">
               <div className="d-md-none pb-5 mb-4">
-                <Image src="/logo_login_mobile.png" width={100} height={30} />
+                <Image
+                  src="/logo_login_mobile.png"
+                  width={100}
+                  height={30}
+                  alt="logo"
+                />
               </div>
               <div className="p-md-5 mx-md-5">
                 <h2>Hello, PewPeople </h2>

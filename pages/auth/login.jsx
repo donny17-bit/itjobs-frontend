@@ -20,8 +20,8 @@ export default function Login() {
         //   minHeight: "100vh",
         // }}
       >
-        <div className="container p-5 ">
-          <div className="row ">
+        <div className="container p-5">
+          <div className="row">
             <div className="col-md-6 d-none d-md-block">
               <div
                 // className="col-md-6 d-none d-md-block"
@@ -62,7 +62,7 @@ export default function Login() {
                 </div>
               </div>
             </div>
-            <div className="col-md-6 ">
+            <div className="col-md-6">
               <div className="d-md-none pb-5">
                 <Image
                   src="/logo_login_mobile.png"

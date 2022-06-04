@@ -71,30 +71,35 @@ export default function Login() {
                   alt="logo"
                 />
               </div>
-              <h2>Reset password</h2>
-              <p className="my-md-3">
-                Enter your user account&apos;s verified email address and we
-                will send you a password reset link.
-              </p>
-              <form action="" className="mt-md-5">
-                <div className="mb-3">
-                  <label htmlFor="formGroupExampleInput" className="form-label">
-                    Email
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control p-md-3"
-                    id="formGroupExampleInput"
-                    placeholder="Masukan Alamat Email"
-                  />
-                </div>
-                <button
-                  type="button"
-                  className="btn btn-warning text-light p-md-3 w-100 mt-md-4 mt-2"
-                >
-                  Send password reset email
-                </button>
-              </form>
+              <div className="p-md-5">
+                <h2>Reset password</h2>
+                <p className="my-md-3">
+                  Enter your user account&apos;s verified email address and we
+                  will send you a password reset link.
+                </p>
+                <form action="" className="mt-md-5">
+                  <div className="mb-3">
+                    <label
+                      htmlFor="formGroupExampleInput"
+                      className="form-label"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control p-md-3"
+                      id="formGroupExampleInput"
+                      placeholder="Masukan Alamat Email"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    className="btn btn-warning text-light p-md-3 w-100 mt-md-4 mt-2"
+                  >
+                    Send password reset email
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>

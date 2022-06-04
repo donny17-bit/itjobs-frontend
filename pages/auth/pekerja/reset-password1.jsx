@@ -29,7 +29,12 @@ export default function ResetPassword() {
               }}
             >
               <div className="p-5 h-100">
-                <Image src="/logo_login.png" width={150} height={50} />
+                <Image
+                  src="/logo_login.png"
+                  width={150}
+                  height={50}
+                  alt="logo"
+                />
 
                 <div className="w-100 h-100 d-flex justify-content-center align-items-center">
                   <div className="">
@@ -45,7 +50,12 @@ export default function ResetPassword() {
             </div>
             <div className="col-md-6 h-100">
               <div className="d-md-none py-4">
-                <Image src="/logo_login.png" width={150} height={50} />
+                <Image
+                  src="/logo_login.png"
+                  width={150}
+                  height={50}
+                  alt="logo"
+                />
               </div>
               <div className="p-md-5 m-md-5">
                 <h2>Reset password</h2>
