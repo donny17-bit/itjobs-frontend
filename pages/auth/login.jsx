@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // import bgImage from "/public/bg-login.png";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Login() {
+  const [role, setRole] = useState("");
+
+  const handleRole = (e) => {
+    setRole(e.target.value);
+  };
+  console.log(role);
   return (
     <>
       <div
@@ -55,10 +62,18 @@ export default function Login() {
                 </p>
                 <p className="d-block">Masuk Sebagai</p>
                 <div className="d-flex w-100">
-                  <button className="btn btn-outline-warning w-100">
+                  <button
+                    className="btn btn-outline-warning w-100"
+                    value="pekerja"
+                    onClick={handleRole}
+                  >
                     Pekerja
                   </button>
-                  <button className="btn btn-outline-warning w-100">
+                  <button
+                    value="company"
+                    className="btn btn-outline-warning w-100"
+                    onClick={handleRole}
+                  >
                     Perekrut
                   </button>
                 </div>
@@ -99,7 +114,8 @@ export default function Login() {
                     Masuk
                   </button>
                   <p className="text-center mt-md-5 mt-3">
-                    Anda Belum Punya Akun? Daftar Disini
+                    Anda Belum Punya Akun?
+                    <Link href={`/auth/register-${role}`}>Daftar Disini</Link>
                   </p>
                 </form>
               </div>

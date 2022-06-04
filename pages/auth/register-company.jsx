@@ -1,8 +1,9 @@
 import React from "react";
 // import bgImage from "/public/bg-login.png";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function RegisterPerekrut() {
+export default function RegisterCompany() {
   return (
     <>
       <div
@@ -159,7 +160,8 @@ export default function RegisterPerekrut() {
                     Daftar
                   </button>
                   <p className="text-center mt-md-1">
-                    Anda Sudah Punya Akun? Login Disini
+                    Anda Sudah Punya Akun?{" "}
+                    <Link href={`/auth/login`}>Login Disini</Link>
                   </p>
                 </form>
               </div>
