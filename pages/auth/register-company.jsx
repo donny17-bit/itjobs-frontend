@@ -184,7 +184,9 @@ export default function Login() {
                   </button>
                   <p className="text-center mt-md-1">
                     Anda Sudah Punya Akun?{" "}
-                    <Link href={`/auth/login`}>Login Disini</Link>
+                    <Link href={`/auth/login`}>
+                      <a style={{ textDecoration: "none" }}>Login Disini</a>
+                    </Link>
                   </p>
                 </form>
               </div>
