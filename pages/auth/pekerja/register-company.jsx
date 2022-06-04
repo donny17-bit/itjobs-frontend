@@ -64,226 +64,224 @@ export default function RegisterCompany() {
                   alt="logo"
                 />
               </div>
-              <div className="p-md-5 mx-md-5">
-                <h2>Hello, PewPeople </h2>
-                <p className="my-md-3">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-                  euismod ipsum et dui rhoncus auctor.
-                </p>
-                <p className="d-block">Masuk Sebagai</p>
-                <div className="d-flex w-100">
-                  <button
-                    className="btn btn-outline-warning w-100"
-                    value="pekerja"
-                    onClick={handleRole}
-                  >
-                    Pekerja
-                  </button>
-                  <button
-                    value="company"
-                    className="btn btn-outline-warning w-100"
-                    onClick={handleRole}
-                  >
-                    Perekrut
-                  </button>
-                </div>
-
-                {role === "pekerja" ? (
-                  <form action="" className="mt-md-5">
-                    <div className="mb-3">
-                      <label
-                        htmlFor="formGroupExampleInput"
-                        className="form-label"
-                      >
-                        Nama
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control py-md-3"
-                        id="formGroupExampleInput"
-                        placeholder="Masukan Nama Panjang"
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label
-                        htmlFor="formGroupExampleInput"
-                        className="form-label"
-                      >
-                        Email
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control py-md-3"
-                        id="formGroupExampleInput"
-                        placeholder="Masukan Alamat Email"
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label
-                        htmlFor="formGroupExampleInput2"
-                        className="form-label"
-                      >
-                        No HandPhone
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control py-md-3"
-                        id="formGroupExampleInput2"
-                        placeholder="Masukan No HandPhone"
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label
-                        htmlFor="formGroupExampleInput2"
-                        className="form-label"
-                      >
-                        Kata Sandi
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control py-md-3"
-                        id="formGroupExampleInput2"
-                        placeholder="Masukan Kata Sandi"
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label
-                        htmlFor="formGroupExampleInput2"
-                        className="form-label"
-                      >
-                        Konfirmasi Kata Sandi
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control py-md-3"
-                        id="formGroupExampleInput2"
-                        placeholder="Masukan Konfirmasi Kata Sandi"
-                      />
-                    </div>
-                    <button
-                      type="button"
-                      className="btn btn-warning text-light w-100 py-md-3 my-md-3"
-                    >
-                      Daftar
-                    </button>
-                    <p className="text-center mt-md-1">
-                      Anda Sudah Punya Akun?{" "}
-                      <Link href={`/auth/login`}>Login Disini</Link>
-                    </p>
-                  </form>
-                ) : (
-                  <form action="" className="mt-md-5 h-100 ">
-                    <div className="mb-3">
-                      <label
-                        htmlFor="formGroupExampleInput"
-                        className="form-label"
-                      >
-                        Nama
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control py-md-3"
-                        id="formGroupExampleInput"
-                        placeholder="Masukan Nama Panjang"
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label
-                        htmlFor="formGroupExampleInput"
-                        className="form-label"
-                      >
-                        Email
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control py-md-3"
-                        id="formGroupExampleInput"
-                        placeholder="Masukan Alamat Email"
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label
-                        htmlFor="formGroupExampleInput"
-                        className="form-label"
-                      >
-                        Perusahaan
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control py-md-3"
-                        id="formGroupExampleInput"
-                        placeholder="Masukan Nama Perusahaan"
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label
-                        htmlFor="formGroupExampleInput"
-                        className="form-label"
-                      >
-                        Bidang Perusahaan
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control py-md-3"
-                        id="formGroupExampleInput"
-                        placeholder="Masukan Bidang Perusahaan"
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label
-                        htmlFor="formGroupExampleInput2"
-                        className="form-label"
-                      >
-                        No HandPhone
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control py-md-3"
-                        id="formGroupExampleInput2"
-                        placeholder="Masukan No HandPhone"
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label
-                        htmlFor="formGroupExampleInput2"
-                        className="form-label"
-                      >
-                        Kata Sandi
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control py-md-3"
-                        id="formGroupExampleInput2"
-                        placeholder="Masukan Kata Sandi"
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label
-                        htmlFor="formGroupExampleInput2"
-                        className="form-label"
-                      >
-                        Konfirmasi Kata Sandi
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control py-md-3"
-                        id="formGroupExampleInput2"
-                        placeholder="Masukan Konfirmasi Kata Sandi"
-                      />
-                    </div>
-                    <button
-                      type="button"
-                      className="btn btn-warning text-light w-100 py-md-3 my-md-3 my-3"
-                    >
-                      Daftar
-                    </button>
-                    <p className="text-center mt-md-1">
-                      Anda Sudah Punya Akun?{" "}
-                      <Link href={`/auth/login`}>Login Disini</Link>
-                    </p>
-                  </form>
-                )}
+              <h2>Hello, PewPeople </h2>
+              <p className="my-md-3">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+                euismod ipsum et dui rhoncus auctor.
+              </p>
+              <p className="d-block">Masuk Sebagai</p>
+              <div className="d-flex w-100">
+                <button
+                  className="btn btn-outline-warning w-100"
+                  value="pekerja"
+                  onClick={handleRole}
+                >
+                  Pekerja
+                </button>
+                <button
+                  value="company"
+                  className="btn btn-outline-warning w-100"
+                  onClick={handleRole}
+                >
+                  Perekrut
+                </button>
               </div>
+
+              {role === "pekerja" ? (
+                <form action="" className="mt-md-5">
+                  <div className="mb-3">
+                    <label
+                      htmlFor="formGroupExampleInput"
+                      className="form-label"
+                    >
+                      Nama
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control py-md-3"
+                      id="formGroupExampleInput"
+                      placeholder="Masukan Nama Panjang"
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label
+                      htmlFor="formGroupExampleInput"
+                      className="form-label"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control py-md-3"
+                      id="formGroupExampleInput"
+                      placeholder="Masukan Alamat Email"
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label
+                      htmlFor="formGroupExampleInput2"
+                      className="form-label"
+                    >
+                      No HandPhone
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control py-md-3"
+                      id="formGroupExampleInput2"
+                      placeholder="Masukan No HandPhone"
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label
+                      htmlFor="formGroupExampleInput2"
+                      className="form-label"
+                    >
+                      Kata Sandi
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control py-md-3"
+                      id="formGroupExampleInput2"
+                      placeholder="Masukan Kata Sandi"
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label
+                      htmlFor="formGroupExampleInput2"
+                      className="form-label"
+                    >
+                      Konfirmasi Kata Sandi
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control py-md-3"
+                      id="formGroupExampleInput2"
+                      placeholder="Masukan Konfirmasi Kata Sandi"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    className="btn btn-warning text-light w-100 py-md-3 my-md-3"
+                  >
+                    Daftar
+                  </button>
+                  <p className="text-center mt-md-1">
+                    Anda Sudah Punya Akun?{" "}
+                    <Link href={`/auth/login`}>Login Disini</Link>
+                  </p>
+                </form>
+              ) : (
+                <form action="" className="mt-md-5 h-100 ">
+                  <div className="mb-3">
+                    <label
+                      htmlFor="formGroupExampleInput"
+                      className="form-label"
+                    >
+                      Nama
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control py-md-3"
+                      id="formGroupExampleInput"
+                      placeholder="Masukan Nama Panjang"
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label
+                      htmlFor="formGroupExampleInput"
+                      className="form-label"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control py-md-3"
+                      id="formGroupExampleInput"
+                      placeholder="Masukan Alamat Email"
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label
+                      htmlFor="formGroupExampleInput"
+                      className="form-label"
+                    >
+                      Perusahaan
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control py-md-3"
+                      id="formGroupExampleInput"
+                      placeholder="Masukan Nama Perusahaan"
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label
+                      htmlFor="formGroupExampleInput"
+                      className="form-label"
+                    >
+                      Bidang Perusahaan
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control py-md-3"
+                      id="formGroupExampleInput"
+                      placeholder="Masukan Bidang Perusahaan"
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label
+                      htmlFor="formGroupExampleInput2"
+                      className="form-label"
+                    >
+                      No HandPhone
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control py-md-3"
+                      id="formGroupExampleInput2"
+                      placeholder="Masukan No HandPhone"
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label
+                      htmlFor="formGroupExampleInput2"
+                      className="form-label"
+                    >
+                      Kata Sandi
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control py-md-3"
+                      id="formGroupExampleInput2"
+                      placeholder="Masukan Kata Sandi"
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label
+                      htmlFor="formGroupExampleInput2"
+                      className="form-label"
+                    >
+                      Konfirmasi Kata Sandi
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control py-md-3"
+                      id="formGroupExampleInput2"
+                      placeholder="Masukan Konfirmasi Kata Sandi"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    className="btn btn-warning text-light w-100 py-md-3 my-md-3 my-3"
+                  >
+                    Daftar
+                  </button>
+                  <p className="text-center mt-md-1">
+                    Anda Sudah Punya Akun?{" "}
+                    <Link href={`/auth/login`}>Login Disini</Link>
+                  </p>
+                </form>
+              )}
             </div>
           </div>
         </div>

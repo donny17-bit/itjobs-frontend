@@ -20,7 +20,7 @@ export default function Login() {
         //   minHeight: "100vh",
         // }}
       >
-        <div className="container p-5">
+        <div className="container p-md-5 p-3">
           <div className="row">
             <div className="col-md-6 d-none d-md-block">
               <div
@@ -159,7 +159,7 @@ export default function Login() {
 
                   <button
                     type="button"
-                    className="btn btn-warning text-light p-md-3 w-100 mt-md-5"
+                    className="btn btn-warning text-light p-md-3 w-100 mt-md-5 mt-3"
                   >
                     Masuk
                   </button>

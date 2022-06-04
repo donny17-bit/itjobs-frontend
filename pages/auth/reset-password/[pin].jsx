@@ -108,7 +108,7 @@ export default function Login() {
                   </div>
                   <button
                     type="button"
-                    className="btn btn-warning text-light p-md-3 w-100 mt-md-5"
+                    className="btn btn-warning text-light p-md-3 w-100 mt-md-5 mt-3"
                   >
                     Reset Password
                   </button>
