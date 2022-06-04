@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/profile.css";
 import "../scss/customBootstrap.min.css";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
