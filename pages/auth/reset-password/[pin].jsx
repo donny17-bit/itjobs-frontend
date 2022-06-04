@@ -13,15 +13,15 @@ export default function Login() {
   return (
     <>
       <div
-        className="bg-light vh-100"
+        className="bg-light"
         // style={{
         //   backgroundColor: "var(--color-yellow)",
 
         //   minHeight: "100vh",
         // }}
       >
-        <div className="container p-md-5 p-3 h-100">
-          <div className="row h-100">
+        <div className="container p-md-5 p-3 ">
+          <div className="row ">
             <div className="col-md-6 d-none d-md-block">
               <div
                 // className="col-md-6 d-none d-md-block"
@@ -57,7 +57,7 @@ export default function Login() {
                 </div>
               </div>
             </div>
-            <div className="col-md-6 h-100">
+            <div className="col-md-6 ">
               <div className="d-md-none pb-5">
                 <Image src="/logo_login_mobile.png" width={100} height={30} />
               </div>
