@@ -61,50 +61,30 @@ export default function Login() {
               <div className="d-md-none pb-5">
                 <Image src="/logo_login_mobile.png" width={100} height={30} />
               </div>
-              <div className="p-md-5">
-                <h2>Hello, PewPeople </h2>
-                <p className="my-md-3">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-                  euismod ipsum et dui rhoncus auctor.
-                </p>
-                <form action="" className="mt-md-5">
-                  <div className="mb-3">
-                    <label
-                      htmlFor="formGroupExampleInput"
-                      className="form-label"
-                    >
-                      Kata Sandi Baru
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="formGroupExampleInput"
-                      placeholder="Masukan Kata Sandi Baru"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="formGroupExampleInput2"
-                      className="form-label"
-                    >
-                      Konfirmasi Kata Sandi Baru
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="formGroupExampleInput2"
-                      placeholder="Masukan Konfirmasi Kata Sandi Baru"
-                    />
-                  </div>
-                  <button
-                    type="button"
-                    className="btn btn-warning text-light p-md-3 w-100 mt-md-3"
-                  >
-                    Reset Password
-                  </button>
-                  \
-                </form>
-              </div>
+              <h2>Reset password</h2>
+              <p className="my-md-3">
+                Enter your user account&apos;s verified email address and we
+                will send you a password reset link.
+              </p>
+              <form action="" className="mt-md-5">
+                <div className="mb-3">
+                  <label htmlFor="formGroupExampleInput" className="form-label">
+                    Email
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="formGroupExampleInput"
+                    placeholder="Masukan Alamat Email"
+                  />
+                </div>
+                <button
+                  type="button"
+                  className="btn btn-warning text-light w-100 mt-3"
+                >
+                  Send password reset email
+                </button>
+              </form>
             </div>
           </div>
         </div>
