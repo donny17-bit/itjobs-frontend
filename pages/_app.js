@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import "../scss/customBootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import Store from "../store";
