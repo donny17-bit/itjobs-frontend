@@ -52,32 +52,212 @@ function Edit() {
               <button className="btn btn-outline-primary">Kembali</button>
             </div>
           </div>
-          <div className="col p-4 profile_col_container">
-            <div className="row ms-2">
-              <div className="col-2 profile_menu_active profile_active text-center">
-                Portofolio
+          <div className="col">
+            <div className="row mb-4 profile_col_container">
+              <div className="row m-0 border-bottom ps-2 pt-4">
+                <label className="col-2 profile_menu_active text-center">
+                  Data diri
+                </label>
               </div>
-              <div className="col-4 profile_menu_disable text-center">
-                Pengalaman Kerja
-              </div>
+              <form className="row m-0 g-3 mt-2 p-3">
+                <div className="col-sm-12">
+                  <label for="inputEmail4" className="form-label">
+                    Nama lengkap
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Masukkan nama lengkap"
+                  />
+                </div>
+                <div className="col-sm-12">
+                  <label for="inputAddress" className="form-label">
+                    Job desk
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputAddress"
+                    placeholder="Masukkan job desk"
+                  />
+                </div>
+                <div className="col-sm-12">
+                  <label for="inputAddress2" className="form-label">
+                    Domisili
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputAddress2"
+                    placeholder="Masukkan domisili"
+                  />
+                </div>
+                <div className="col-md-4">
+                  <label className="form-label">Instagram</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Masukkan username IG"
+                  />
+                </div>
+                <div className="col-md-4">
+                  <label className="form-label">Github</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Masukkan username Github"
+                  />
+                  {/* <select id="inputState" className="form-select">
+                  <option selected>Choose...</option>
+                  <option>...</option>
+                </select> */}
+                </div>
+                <div className="col-md-4">
+                  <label className="form-label">Gitlab</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Masukkan username Gitlab"
+                  />
+                </div>
+                <div className="col-md-12">
+                  <label className="form-label">Deskripsi singkat</label>
+                  <textarea
+                    type="text"
+                    className="form-control"
+                    name="deskripsi"
+                    rows="5"
+                    placeholder="Tulis deskripsi singkat"
+                  ></textarea>
+                </div>
+                <div className="col-12 mt-5 text-end">
+                  <button type="submit" className="btn btn-warning">
+                    Simpan
+                  </button>
+                </div>
+              </form>
             </div>
-            <div className="row row-cols-3 g-3 mt-4">
-              <div className="col p-0 text-center">
-                <img src={image2} className="profile_porto_img" alt="" />
-                <p className="mt-2 profile_porto_text">Social Media App</p>
+            <div className="row mb-4 pb-4 profile_col_container">
+              <div className="row m-0 border-bottom ps-2 pt-4">
+                <label className="col-2 profile_menu_active ps-3">Skill</label>
               </div>
-              <div className="col p-0 text-center">
-                <img src={image1} className="profile_porto_img" alt="" />
-                <p className="mt-2 profile_porto_text">Social Media App</p>
+              <form className="row m-0 g-3 mt-2 p-3">
+                <div className="col-sm-10">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Masukkan skill anda"
+                  />
+                </div>
+                <div className="col-sm text-end d-grid">
+                  <button className="btn btn-warning">Submit</button>
+                </div>
+                <div className="row m-0 border">
+                  <div className="col-sm border">Javascript </div>
+                </div>
+              </form>
+            </div>
+            <div className="row mb-4 pb-4 profile_col_container">
+              <div className="row m-0 border-bottom ps-3 pt-4">
+                <label className="col-4 profile_menu_active">
+                  Pengalaman kerja
+                </label>
               </div>
-              <div className="col p-0 text-center">
-                <img src={image1} className="profile_porto_img" alt="" />
-                <p className="mt-2">Social Media App</p>
+              <form className="row m-0 g-3 mt-2 p-3">
+                <div className="col-sm-6">
+                  <label for="inputEmail4" className="form-label">
+                    Nama perusahaan
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Masukkan nama perusahaan"
+                  />
+                </div>
+                <div className="col-sm-6">
+                  <label for="inputAddress" className="form-label">
+                    Posisi
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Masukkan posisi"
+                  />
+                </div>
+                <div className="col-sm-6">
+                  <label for="inputAddress2" className="form-label">
+                    Tanggal masuk
+                  </label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    placeholder="Masukkan tanggal masuk"
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label className="form-label">Tanggal keluar</label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    placeholder="Masukkan username tanggal keluar"
+                  />
+                </div>
+                <div className="col-md-12 mb-4">
+                  <label className="form-label">Deskripsi singkat</label>
+                  <textarea
+                    type="text"
+                    className="form-control"
+                    name="deskripsi"
+                    rows="5"
+                    placeholder="Tulis deskripsi singkat"
+                  ></textarea>
+                </div>
+                <hr className="ms-2 me-2 col-sm" />
+                <div className="col-12 d-grid text-end">
+                  <button type="submit" className="btn btn-outline-warning">
+                    Tambah Pengalaman Kerja
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div className="row mb-4 pb-4 profile_col_container">
+              <div className="row m-0 border-bottom ps-3 pt-4">
+                <label className="col-4 profile_menu_active">Portofolio</label>
               </div>
-              <div className="col p-0 text-center">
-                <img src={image1} className="profile_porto_img" alt="" />
-                <p className="mt-2">Social Media App</p>
-              </div>
+              <form className="row m-0 g-3 mt-2 p-3">
+                <div className="col-sm-12">
+                  <label className="form-label">Nama aplikasi</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Masukkan nama aplikasi"
+                  />
+                </div>
+                <div className="col-sm-12">
+                  <label className="form-label">Link repository</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Masukkan link"
+                  />
+                </div>
+                <div className="col-sm-12">
+                  <label for="inputAddress2" className="form-label">
+                    Upload gambar
+                  </label>
+                  <input
+                    type="file"
+                    className="form-control"
+                    placeholder="Masukkan tanggal masuk"
+                  />
+                </div>
+                <hr className="ms-2 me-2 col-sm mt-5" />
+                <div className="col-12 d-grid text-end">
+                  <button type="submit" className="btn btn-outline-warning">
+                    Tambah Portofolio
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
