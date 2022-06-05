@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import Card from "../../components/card";
 
@@ -6,7 +7,7 @@ function Home() {
     <div style={{ backgroundColor: "#F6F7F8", minHeight: "100vh" }}>
       <div className="">
         <div
-          className="d-block d-md-none bg-primary"
+          className="d-block d-md-none bg-primary position-relative overflow-hidden"
           style={{
             height: "170px",
             borderBottomRightRadius: "30px",
@@ -27,20 +28,17 @@ function Home() {
               fillOpacity="0.1"
             />
           </svg>
-          <div className="position-absolute top-0 end-0">
-            <svg
-              width="380"
-              height="174"
-              viewBox="0 0 377 174"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M37.1946 150.513C20.7275 159.845 5.78508 146.624 0.372261 138.847C-0.542581 137.347 -0.923765 136.139 -1 135.723L-1 174L375 174L375 -2C362.955 27.094 329.5 136.249 307.073 144.055C276.599 154.662 241.662 129.681 200.494 150.513C159.326 171.344 127.307 159.47 108.324 150.513C89.3406 141.556 57.7786 138.847 37.1946 150.513Z"
-                fill="white"
-                fillOpacity="0.05"
-              />
-            </svg>
+          <div
+            className="position-absolute bottom-0 mb-4 end-0 "
+            style={{ width: "100%", height: "170px" }}
+          >
+            <Image
+              src="/Vector41.svg"
+              layout="responsive"
+              width="100px"
+              height="50px"
+              alt=""
+            ></Image>
             <div className="position-absolute top-50 start-0 ms-3 text-white">
               <span>Sen, 21 April 2020</span>
               <h1>Hai, Mohammad!</h1>
@@ -112,9 +110,9 @@ function Home() {
         </div>
       </div>
 
-      <div className="container mt-5 p-0">
-        <h2 className="fw-bold d-lg-none">Web developer</h2>
-        <div className="shadow-sm p-0 rounded overflow-hidden  mt-3 mt-md-0 mx-md-auto w-auto">
+      <div className="container mt-5 px-2 px-lg-0">
+        <h2 className="fw-bold d-lg-none ">Web developer</h2>
+        <div className="shadow-sm p-0 rounded overflow-hidden mt-3 mt-md-0 mx-md-auto w-auto">
           <Card
             fullName="Louis Tomlinson"
             type="Web Developer"
@@ -124,8 +122,9 @@ function Home() {
           />
         </div>
       </div>
+      <div></div>
       <div className="position-absolute bottom-0 bg-white w-100 shadow p-4 d-block d-md-none">
-        <div></div>
+        <div>asf</div>
       </div>
     </div>
   );

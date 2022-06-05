@@ -18,7 +18,7 @@ export default function Card(props) {
             ></Image>
           </div>
         </div>
-        <div className="flex-grow ms-3">
+        <div className="flex-grow-1 ms-3">
           <h6 className="mt-4 mb-0 fw-bold">{props.fullName}</h6>
           <small className="text-black-50 ">
             {props.type}
@@ -51,6 +51,9 @@ export default function Card(props) {
                 ))
               : ""}
           </div>
+        </div>
+        <div className="d-none d-lg-inline">
+          <button className="btn mt-5 btn-primary px-4">Lihat Profile</button>
         </div>
       </div>
     </div>
