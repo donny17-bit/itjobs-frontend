@@ -2,16 +2,12 @@ import React, { useState, useEffect } from "react";
 
 function Edit() {
   const image = "https://cdn-icons-png.flaticon.com/512/7024/7024005.png";
-  const image1 =
-    "https://cdn.dribbble.com/users/427857/screenshots/14119816/media/9bd7c2bc7a0669d777d76ea5b82d1100.png?compress=1&resize=400x300";
-  const image2 =
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXXdI6zO0en6CF1UT0n1m1G7heKWr4UMIPJHxx2pGKSsLDrFLyIVGHoXP5V5rnddQCfkY&usqp=CAU";
 
   return (
     <>
       <div className="container-fluid profile_container">
         <div className="row m-0">
-          <div className="col col-3 me-4  p-0">
+          <div className="col-md-3 profile_card_container p-0">
             <div className="card pb-1 pt-4 profile_card">
               <div className="text-center">
                 <img
@@ -55,73 +51,75 @@ function Edit() {
           <div className="col">
             <div className="row mb-4 profile_col_container">
               <div className="row m-0 border-bottom ps-2 pt-4">
-                <label className="col-2 profile_menu_active text-center">
+                <label className="col-sm-2 profile_edit_title ps-3">
                   Data diri
                 </label>
               </div>
               <form className="row m-0 g-3 mt-2 p-3">
                 <div className="col-sm-12">
-                  <label for="inputEmail4" className="form-label">
+                  <label className="form-label profile_edit_label">
                     Nama lengkap
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control profile_edit_input"
                     placeholder="Masukkan nama lengkap"
                   />
                 </div>
                 <div className="col-sm-12">
-                  <label for="inputAddress" className="form-label">
+                  <label className="form-label profile_edit_label">
                     Job desk
                   </label>
                   <input
                     type="text"
-                    className="form-control"
-                    id="inputAddress"
+                    className="form-control profile_edit_input"
                     placeholder="Masukkan job desk"
                   />
                 </div>
                 <div className="col-sm-12">
-                  <label for="inputAddress2" className="form-label">
+                  <label className="form-label profile_edit_label">
                     Domisili
                   </label>
                   <input
                     type="text"
-                    className="form-control"
-                    id="inputAddress2"
+                    className="form-control profile_edit_input"
                     placeholder="Masukkan domisili"
                   />
                 </div>
                 <div className="col-md-4">
-                  <label className="form-label">Instagram</label>
+                  <label className="form-label profile_edit_label">
+                    Instagram
+                  </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control profile_edit_input"
                     placeholder="Masukkan username IG"
                   />
                 </div>
                 <div className="col-md-4">
-                  <label className="form-label">Github</label>
+                  <label className="form-label profile_edit_label">
+                    Github
+                  </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control profile_edit_input"
                     placeholder="Masukkan username Github"
                   />
-                  {/* <select id="inputState" className="form-select">
-                  <option selected>Choose...</option>
-                  <option>...</option>
-                </select> */}
                 </div>
                 <div className="col-md-4">
-                  <label className="form-label">Gitlab</label>
+                  <label className="form-label profile_edit_label">
+                    Gitlab
+                  </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control profile_edit_input"
                     placeholder="Masukkan username Gitlab"
                   />
                 </div>
                 <div className="col-md-12">
-                  <label className="form-label">Deskripsi singkat</label>
+                  <label className="form-label profile_edit_label">
+                    Deskripsi singkat
+                  </label>
                   <textarea
                     type="text"
                     className="form-control"
@@ -130,80 +128,104 @@ function Edit() {
                     placeholder="Tulis deskripsi singkat"
                   ></textarea>
                 </div>
-                <div className="col-12 mt-5 text-end">
-                  <button type="submit" className="btn btn-warning">
-                    Simpan
-                  </button>
+                <div className="row m-0 p-0 justify-content-end">
+                  <div className="col-sm-2 mt-5 d-grid ">
+                    <button
+                      type="submit"
+                      className="btn btn-warning profile_edit_submit profile_edit_input"
+                    >
+                      Simpan
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
             <div className="row mb-4 pb-4 profile_col_container">
               <div className="row m-0 border-bottom ps-2 pt-4">
-                <label className="col-2 profile_menu_active ps-3">Skill</label>
+                <label className="col-sm-2 profile_edit_title ps-3">
+                  Skill
+                </label>
               </div>
               <form className="row m-0 g-3 mt-2 p-3">
                 <div className="col-sm-10">
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control profile_edit_input"
                     placeholder="Masukkan skill anda"
                   />
                 </div>
                 <div className="col-sm text-end d-grid">
-                  <button className="btn btn-warning">Submit</button>
+                  <button className="btn btn-warning profile_edit_submit">
+                    Submit
+                  </button>
                 </div>
-                <div className="row m-0 border">
-                  <div className="col-sm border">Javascript </div>
+                <div className="row g-3 mt-3 m-0">
+                  <div className="col-md-auto me-3 ps-2 pe-2 pt-1 pb-1 profile_edit_skill">
+                    Javascripts
+                    <button className="ms-4 btn btn-link p-0">
+                      <i className="bi bi-trash" style={{ color: "#fff" }}></i>
+                    </button>
+                  </div>
+                  <div className="col-md-auto me-3 ps-2 pe-2 pt-1 pb-1 profile_edit_skill">
+                    CSS
+                    <button className="ms-4 btn btn-link p-0">
+                      <i className="bi bi-trash" style={{ color: "#fff" }}></i>
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
             <div className="row mb-4 pb-4 profile_col_container">
               <div className="row m-0 border-bottom ps-3 pt-4">
-                <label className="col-4 profile_menu_active">
+                <label className="col-sm-4 profile_edit_title">
                   Pengalaman kerja
                 </label>
               </div>
               <form className="row m-0 g-3 mt-2 p-3">
                 <div className="col-sm-6">
-                  <label for="inputEmail4" className="form-label">
+                  <label className="form-label profile_edit_label">
                     Nama perusahaan
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control profile_edit_input"
                     placeholder="Masukkan nama perusahaan"
                   />
                 </div>
                 <div className="col-sm-6">
-                  <label for="inputAddress" className="form-label">
+                  <label className="form-label profile_edit_label">
                     Posisi
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control profile_edit_input"
                     placeholder="Masukkan posisi"
                   />
                 </div>
                 <div className="col-sm-6">
-                  <label for="inputAddress2" className="form-label">
+                  <label className="form-label profile_edit_label">
                     Tanggal masuk
                   </label>
                   <input
                     type="date"
-                    className="form-control"
+                    className="form-control profile_edit_input"
                     placeholder="Masukkan tanggal masuk"
                   />
                 </div>
                 <div className="col-md-6">
-                  <label className="form-label">Tanggal keluar</label>
+                  <label className="form-label profile_edit_label">
+                    Tanggal keluar
+                  </label>
                   <input
                     type="date"
-                    className="form-control"
+                    className="form-control profile_edit_input"
                     placeholder="Masukkan username tanggal keluar"
                   />
                 </div>
                 <div className="col-md-12 mb-4">
-                  <label className="form-label">Deskripsi singkat</label>
+                  <label className="form-label profile_edit_label">
+                    Deskripsi singkat
+                  </label>
                   <textarea
                     type="text"
                     className="form-control"
@@ -222,27 +244,36 @@ function Edit() {
             </div>
             <div className="row mb-4 pb-4 profile_col_container">
               <div className="row m-0 border-bottom ps-3 pt-4">
-                <label className="col-4 profile_menu_active">Portofolio</label>
+                <label className="col-sm-4 profile_edit_title">
+                  Portofolio
+                </label>
               </div>
               <form className="row m-0 g-3 mt-2 p-3">
                 <div className="col-sm-12">
-                  <label className="form-label">Nama aplikasi</label>
+                  <label className="form-label profile_edit_label">
+                    Nama aplikasi
+                  </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control profile_edit_input"
                     placeholder="Masukkan nama aplikasi"
                   />
                 </div>
                 <div className="col-sm-12">
-                  <label className="form-label">Link repository</label>
+                  <label className="form-label profile_edit_label">
+                    Link repository
+                  </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control profile_edit_input"
                     placeholder="Masukkan link"
                   />
                 </div>
                 <div className="col-sm-12">
-                  <label for="inputAddress2" className="form-label">
+                  <label
+                    for="inputAddress2"
+                    className="form-label profile_edit_label"
+                  >
                     Upload gambar
                   </label>
                   <input

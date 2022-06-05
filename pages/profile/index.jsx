@@ -52,24 +52,24 @@ function Profile() {
                 </div>
                 <h5 className="card-title">Skill</h5>
                 <div className="row p-1 g-2">
-                  <div className="col p-0 me-1 d-grid">
+                  <div className="col-sm-auto p-0 me-1 d-grid">
                     <button className="btn btn-warning disabled profile_skill_list">
                       Javascript
                     </button>
                   </div>
-                  <div className="col p-0 me-1 d-grid">
+                  <div className="col-sm-auto p-0 me-1 d-grid">
                     <button className="btn btn-warning disabled profile_skill_list">
                       PHP
                     </button>
                   </div>
-                  <div className="col p-0 me-1 d-grid">
+                  <div className="col-sm-auto p-0 me-1 d-grid">
                     <button className="btn btn-warning disabled profile_skill_list">
-                      laravel
+                      CSS
                     </button>
                   </div>
-                  <div className="col p-0 me-1 ">
+                  <div className="col-sm-auto p-0 me-1 d-grid">
                     <button className="btn btn-warning disabled profile_skill_list">
-                      Golang
+                      phyton
                     </button>
                   </div>
                 </div>
