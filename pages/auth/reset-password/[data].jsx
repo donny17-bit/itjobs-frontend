@@ -2,14 +2,61 @@ import React, { useState, useEffect } from "react";
 // import bgImage from "/public/bg-login.png";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { resetPassword } from "../../../store/action/auth";
 
 export default function Login() {
-  const [role, setRole] = useState("");
+  const router = useRouter();
+  const { data } = router.query;
+  // console.log(router);
+  // console.log(data.split("-"));
+  // const pin = data;
+  // const asA = pin.split("-")[0];
+  // console.log(pin);
+  // console.log(asA);
+  console.log(data);
 
-  const handleRole = (e) => {
-    setRole(e.target.value);
+  const [asA, setAsA] = useState("");
+  // console.log(pin);
+
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const [form, setForm] = useState({
+    keyChangePassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+    setForm({ ...form, keyChangePassword: data.split("-")[1] });
+    setAsA(data.split("-")[0]);
+  }, [data]);
+
+  // const pin = data.split("-");
+
+  // const form = () => {};
+
+  const handleChangeForm = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
-  console.log(role);
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      // console.log(form);
+      await dispatch(resetPassword(form, asA));
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  console.log(form);
+  console.log(asA);
+
   return (
     <>
       <div
@@ -77,7 +124,16 @@ export default function Login() {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
                   euismod ipsum et dui rhoncus auctor.
                 </p>
-                <form action="" className="mt-md-5">
+                {!auth.msg ? null : auth.isError ? (
+                  <div className="alert alert-danger" role="alert">
+                    {auth.msg}
+                  </div>
+                ) : (
+                  <div className="alert alert-primary" role="alert">
+                    {auth.msg}
+                  </div>
+                )}
+                <form action="" className="mt-md-5" onSubmit={handleSubmit}>
                   <div className="mb-3">
                     <label
                       htmlFor="formGroupExampleInput"
@@ -90,6 +146,9 @@ export default function Login() {
                       className="form-control p-md-3"
                       id="formGroupExampleInput"
                       placeholder="Masukan Kata Sandi Baru"
+                      name="newPassword"
+                      value={form.newPassword}
+                      onChange={handleChangeForm}
                     />
                   </div>
                   <div className="mb-3">
@@ -104,10 +163,13 @@ export default function Login() {
                       className="form-control p-md-3"
                       id="formGroupExampleInput2"
                       placeholder="Masukan Konfirmasi Kata Sandi Baru"
+                      name="confirmPassword"
+                      value={form.confirmPassword}
+                      onChange={handleChangeForm}
                     />
                   </div>
                   <button
-                    type="button"
+                    type="submit"
                     className="btn btn-warning text-light p-md-3 w-100 mt-md-5 mt-3"
                   >
                     Reset Password

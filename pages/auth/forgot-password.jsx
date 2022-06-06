@@ -3,14 +3,43 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
+import { useDispatch, useSelector } from "react-redux";
+import { forgotPassword } from "../../store/action/auth";
 
 export default function Login() {
-  const [role, setRole] = useState("");
+  // const [role, setRole] = useState("");
 
-  const handleRole = (e) => {
-    setRole(e.target.value);
+  // const handleRole = (e) => {
+  //   setRole(e.target.value);
+  // };
+
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
+  const [asA, setAsA] = useState("");
+
+  const handleAsA = (e) => {
+    setAsA(e.target.value);
   };
-  console.log(role);
+
+  const [form, setForm] = useState({
+    email: "",
+  });
+
+  const handleChangeForm = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      console.log(asA);
+      await dispatch(forgotPassword(form, asA));
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   return (
     <>
       <Head>
@@ -18,16 +47,16 @@ export default function Login() {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div
-        className="bg-light vh-100"
+        className=" position-relative"
         // style={{
         //   backgroundColor: "var(--color-yellow)",
 
         //   minHeight: "100vh",
         // }}
       >
-        <div className="container p-md-5 p-3 h-100">
-          <div className="row h-100">
-            <div className="col-md-6 d-none d-md-block">
+        <div className="p-md-5 p-3 min-vh-100 h-100">
+          <div className="row">
+            <div className="col-md-6 d-none d-md-block bg-light">
               <div
                 // className="col-md-6 d-none d-md-block"
                 style={{
@@ -40,6 +69,7 @@ export default function Login() {
                   boxSizing: "border-box",
                   // border: "1px solid",
                   height: "100%",
+                  minHeight: "89vh",
                   // backgroundColor: "black",
                 }}
               >
@@ -82,7 +112,45 @@ export default function Login() {
                   Enter your user account&apos;s verified email address and we
                   will send you a password reset link.
                 </p>
-                <form action="" className="mt-md-5">
+                <div className="d-flex">
+                  <p className="d-block">Akun : </p>
+                  <div className="form-check form-check-inline ms-md-3 ms-2">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio1"
+                      value="pekerja"
+                      onClick={handleAsA}
+                    />
+                    <label className="form-check-label" htmlFor="inlineRadio1">
+                      Pekerja
+                    </label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio2"
+                      value="company"
+                      onClick={handleAsA}
+                    />
+                    <label className="form-check-label" htmlFor="inlineRadio2">
+                      Company
+                    </label>
+                  </div>
+                </div>
+                {!auth.msg ? null : auth.isError ? (
+                  <div className="alert alert-danger" role="alert">
+                    {auth.msg}
+                  </div>
+                ) : (
+                  <div className="alert alert-primary" role="alert">
+                    {auth.msg}
+                  </div>
+                )}
+                <form action="" className="mt-md-5" onSubmit={handleSubmit}>
                   <div className="mb-3">
                     <label
                       htmlFor="formGroupExampleInput"
@@ -91,14 +159,17 @@ export default function Login() {
                       Email
                     </label>
                     <input
-                      type="text"
+                      type="email"
                       className="form-control p-md-3"
                       id="formGroupExampleInput"
                       placeholder="Masukan Alamat Email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChangeForm}
                     />
                   </div>
                   <button
-                    type="button"
+                    type="submit"
                     className="btn btn-warning text-light p-md-3 w-100 mt-md-4 mt-3"
                   >
                     Send password reset email

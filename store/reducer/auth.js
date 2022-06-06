@@ -57,6 +57,54 @@ const auth = (state = initialState, action) => {
         msg: action.payload.response.data.msg,
       };
 
+    case "FORGOT_PASSWORD_PENDING":
+      return {
+        ...state,
+        isError: false,
+        isLoading: true,
+      };
+
+    case "FORGOT_PASSWORD_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        data: { ...action.payload.data.data },
+        msg: action.payload.data.msg,
+      };
+
+    case "FORGOT_PASSWORD_REJECTED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        msg: action.payload.response.data.msg,
+      };
+
+    case "RESET_PASSWORD_PENDING":
+      return {
+        ...state,
+        isError: false,
+        isLoading: true,
+      };
+
+    case "RESET_PASSWORD_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        data: { ...action.payload.data.data },
+        msg: action.payload.data.msg,
+      };
+
+    case "RESET_PASSWORD_REJECTED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        msg: action.payload.response.data.msg,
+      };
+
     default:
       return state;
   }
