@@ -16,7 +16,10 @@ function Profile(props) {
   const getUserId = async () => {
     const result = await axios.get(`user/${router.query.id}`);
     setData(result.data.data[0]);
-    setSosMed(result.data.data[0].socialMedia.split(","));
+
+    if (result.data.data[0].socialMedia) {
+      setSosMed(result.data.data[0].socialMedia.split(","));
+    }
   };
 
   const getPorto = async () => {
@@ -98,16 +101,24 @@ function Profile(props) {
             </div>
             {menuActive == "porto" ? (
               <div className="row row-cols-sm-3 g-3 mt-4">
-                {porto.map((item) => (
-                  <div key={item.id} className="col p-0 text-center">
-                    <img
-                      src={item.image ? item.image : image1}
-                      className="profile_porto_img"
-                      alt=""
-                    />
-                    <p className="mt-2 profile_porto_text">{item.appName}</p>
-                  </div>
-                ))}
+                {porto
+                  ? porto.map((item) => (
+                      <div key={item.id} className="col p-0 text-center">
+                        <img
+                          src={
+                            item.image
+                              ? `https://res.cloudinary.com/itjobs/image/upload/v1654266716/${item.image}`
+                              : image1
+                          }
+                          className="profile_porto_img"
+                          alt=""
+                        />
+                        <p className="mt-2 profile_porto_text">
+                          {item.appName}
+                        </p>
+                      </div>
+                    ))
+                  : ""}
               </div>
             ) : (
               <div className="row mt-4 m-0">

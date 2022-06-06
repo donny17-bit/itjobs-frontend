@@ -15,7 +15,7 @@ export default function ProfileCard(props) {
         </div>
         <div className="card-body mt-3">
           <h5 className="card-title profile_name pb-0 mb-0">{data.fullName}</h5>
-          <p className="card-title profile_job">Web Developer</p>
+          <p className="card-title profile_job">{data.field}</p>
           <p className="card-title profile_role">{data.role}</p>
           <ul className="list-group list-group-flush">
             <li className="list-group-item border-0 p-2 ps-0 profile_text">

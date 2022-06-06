@@ -2,6 +2,51 @@ import React, { useState, useEffect } from "react";
 
 function Edit() {
   const image = "https://cdn-icons-png.flaticon.com/512/7024/7024005.png";
+  const [dataDiri, setDataDiri] = useState({});
+  const [skill, setSkill] = useState([]);
+  const [tempSkill, setTempSkill] = useState();
+  const [exp, setExp] = useState({});
+  const [app, setApp] = useState({});
+
+  const changeDataDiri = (e) => {
+    setDataDiri({
+      ...dataDiri,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const changeSkill = (e) => {
+    setTempSkill(e.target.value);
+  };
+
+  const changeExp = (e) => {
+    setExp({ ...exp, [e.target.name]: e.target.value });
+  };
+
+  const changeApp = (e) => {
+    setApp({ ...app, [e.target.name]: e.target.value });
+  };
+
+  console.log(app);
+
+  const submitSkill = (e) => {
+    e.preventDefault();
+    setSkill([...skill, tempSkill]);
+    document.getElementsByName("skill")[0].value = "";
+  };
+
+  const deleteSkill = (e, index) => {
+    e.preventDefault();
+    skill.splice(index, 1);
+    setSkill([...skill]);
+  };
+
+  const submitExp = (e) => {
+    e.preventDefault();
+    console.log(exp);
+  };
+  const submitDataDiri = () => {};
+  const submitApp = (e) => {};
 
   return (
     <>
@@ -55,15 +100,18 @@ function Edit() {
                   Data diri
                 </label>
               </div>
-              <form className="row m-0 g-3 mt-2 p-3">
+              <form onSubmit={submitDataDiri} className="row m-0 g-3 mt-2 p-3">
                 <div className="col-sm-12">
                   <label className="form-label profile_edit_label">
                     Nama lengkap
                   </label>
                   <input
                     type="text"
+                    name="fullName"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan nama lengkap"
+                    onChange={(e) => changeDataDiri(e)}
+                    required
                   />
                 </div>
                 <div className="col-sm-12">
@@ -72,8 +120,10 @@ function Edit() {
                   </label>
                   <input
                     type="text"
+                    name="jobDesk"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan job desk"
+                    onChange={(e) => changeDataDiri(e)}
                   />
                 </div>
                 <div className="col-sm-12">
@@ -82,8 +132,10 @@ function Edit() {
                   </label>
                   <input
                     type="text"
+                    name="address"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan domisili"
+                    onChange={(e) => changeDataDiri(e)}
                   />
                 </div>
                 <div className="col-md-4">
@@ -92,8 +144,10 @@ function Edit() {
                   </label>
                   <input
                     type="text"
+                    name="ig"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan username IG"
+                    onChange={(e) => changeDataDiri(e)}
                   />
                 </div>
                 <div className="col-md-4">
@@ -102,8 +156,10 @@ function Edit() {
                   </label>
                   <input
                     type="text"
+                    name="github"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan username Github"
+                    onChange={(e) => changeDataDiri(e)}
                   />
                 </div>
                 <div className="col-md-4">
@@ -112,8 +168,10 @@ function Edit() {
                   </label>
                   <input
                     type="text"
+                    name="gitlab"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan username Gitlab"
+                    onChange={(e) => changeDataDiri(e)}
                   />
                 </div>
                 <div className="col-md-12">
@@ -123,9 +181,10 @@ function Edit() {
                   <textarea
                     type="text"
                     className="form-control"
-                    name="deskripsi"
+                    name="desc"
                     rows="5"
                     placeholder="Tulis deskripsi singkat"
+                    onChange={(e) => changeDataDiri(e)}
                   ></textarea>
                 </div>
                 <div className="row m-0 p-0 justify-content-end">
@@ -146,32 +205,44 @@ function Edit() {
                   Skill
                 </label>
               </div>
-              <form className="row m-0 g-3 mt-2 p-3">
+              <form onSubmit={submitSkill} className="row m-0 g-3 mt-2 p-3">
                 <div className="col-sm-10">
                   <input
                     type="text"
+                    name="skill"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan skill anda"
+                    onChange={(e) => changeSkill(e)}
                   />
                 </div>
                 <div className="col-sm text-end d-grid">
-                  <button className="btn btn-warning profile_edit_submit">
+                  <button
+                    type="submit"
+                    className="btn btn-warning profile_edit_submit"
+                  >
                     Submit
                   </button>
                 </div>
                 <div className="row g-3 mt-3 m-0">
-                  <div className="col-md-auto me-3 ps-2 pe-2 pt-1 pb-1 profile_edit_skill">
-                    Javascripts
-                    <button className="ms-4 btn btn-link p-0">
-                      <i className="bi bi-trash" style={{ color: "#fff" }}></i>
-                    </button>
-                  </div>
-                  <div className="col-md-auto me-3 ps-2 pe-2 pt-1 pb-1 profile_edit_skill">
-                    CSS
-                    <button className="ms-4 btn btn-link p-0">
-                      <i className="bi bi-trash" style={{ color: "#fff" }}></i>
-                    </button>
-                  </div>
+                  {skill
+                    ? skill.map((item, index) => (
+                        <div
+                          key={item}
+                          className="col-md-auto me-3 ps-2 pe-2 pt-1 pb-1 profile_edit_skill"
+                        >
+                          {item}
+                          <button
+                            className="ms-4 btn btn-link p-0"
+                            onClick={(e) => deleteSkill(e, index)}
+                          >
+                            <i
+                              className="bi bi-trash"
+                              style={{ color: "#fff" }}
+                            ></i>
+                          </button>
+                        </div>
+                      ))
+                    : ""}
                 </div>
               </form>
             </div>
@@ -181,15 +252,17 @@ function Edit() {
                   Pengalaman kerja
                 </label>
               </div>
-              <form className="row m-0 g-3 mt-2 p-3">
+              <form onSubmit={submitExp} className="row m-0 g-3 mt-2 p-3">
                 <div className="col-sm-6">
                   <label className="form-label profile_edit_label">
                     Nama perusahaan
                   </label>
                   <input
                     type="text"
+                    name="companyName"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan nama perusahaan"
+                    onChange={(e) => changeExp(e)}
                   />
                 </div>
                 <div className="col-sm-6">
@@ -198,8 +271,10 @@ function Edit() {
                   </label>
                   <input
                     type="text"
+                    name="position"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan posisi"
+                    onChange={(e) => changeExp(e)}
                   />
                 </div>
                 <div className="col-sm-6">
@@ -208,8 +283,10 @@ function Edit() {
                   </label>
                   <input
                     type="date"
+                    name="dateIn"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan tanggal masuk"
+                    onChange={(e) => changeExp(e)}
                   />
                 </div>
                 <div className="col-md-6">
@@ -218,8 +295,10 @@ function Edit() {
                   </label>
                   <input
                     type="date"
+                    name="dateOut"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan username tanggal keluar"
+                    onChange={(e) => changeExp(e)}
                   />
                 </div>
                 <div className="col-md-12 mb-4">
@@ -229,9 +308,10 @@ function Edit() {
                   <textarea
                     type="text"
                     className="form-control"
-                    name="deskripsi"
+                    name="descExp"
                     rows="5"
                     placeholder="Tulis deskripsi singkat"
+                    onChange={(e) => changeExp(e)}
                   ></textarea>
                 </div>
                 <hr className="ms-2 me-2 col-sm" />
@@ -248,15 +328,17 @@ function Edit() {
                   Portofolio
                 </label>
               </div>
-              <form className="row m-0 g-3 mt-2 p-3">
+              <form onSubmit={submitApp} className="row m-0 g-3 mt-2 p-3">
                 <div className="col-sm-12">
                   <label className="form-label profile_edit_label">
                     Nama aplikasi
                   </label>
                   <input
                     type="text"
+                    name="appName"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan nama aplikasi"
+                    onChange={(e) => changeApp(e)}
                   />
                 </div>
                 <div className="col-sm-12">
@@ -265,8 +347,10 @@ function Edit() {
                   </label>
                   <input
                     type="text"
+                    name="linkRepo"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan link"
+                    onChange={(e) => changeApp(e)}
                   />
                 </div>
                 <div className="col-sm-12">
@@ -278,6 +362,7 @@ function Edit() {
                   </label>
                   <input
                     type="file"
+                    name="appImage"
                     className="form-control"
                     placeholder="Masukkan tanggal masuk"
                   />
