@@ -31,15 +31,18 @@ a {
 .fw-semibold {
   font-weight: 600;
 }
+.bg-background {
+  background-color: var(--color-background);
+}
 
-.home_notif-dropdown {
+.navbar_notif-dropdown {
   width: 200px;
   height: 250px;
-  background: white;
+  background-color: white;
   position: relative;
   border-radius: 8px;
 }
-.home_notif-dropdown::before {
+.navbar_notif-dropdown::before {
   content: "";
   position: absolute;
   left: 50%;
@@ -51,13 +54,13 @@ a {
   border-bottom: 20px solid white;
   border-left: 13px solid transparent;
 }
-.home_profile-dropdown {
+.navbar_profile-dropdown {
   width: 160px;
-  background: white;
+  background-color: white;
   position: relative;
   border-radius: 8px;
 }
-.home_profile-dropdown::before {
+.navbar_profile-dropdown::before {
   content: "";
   position: absolute;
   right: 0;
@@ -69,7 +72,7 @@ a {
   border-left: 20px solid transparent;
 }
 
-.home_mailist {
+.landing_mailist {
   background-image: url("../public/image/wave.png");
   background-position: bottom;
   border-radius: 40px 8px;
