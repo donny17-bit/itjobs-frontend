@@ -62,7 +62,9 @@ export default function Login() {
       await dispatch(getUserById(result.value.data.data.id, asA));
 
       // navigate
-      asA === "company" ? router.push("/home") : router.push("/profile");
+      asA === "company"
+        ? router.push("/home")
+        : router.push(`/profile/${result.value.data.data.id}`);
       // console.log(form);
       // console.log(asA);
       // resetForm();
@@ -213,8 +215,12 @@ export default function Login() {
                     </label>
                     <input
                       type="text"
-                      className="form-control p-md-3"
-                      id="formGroupExampleInput"
+                      // className="form-control p-md-3 border-2 border-danger"
+                      className={
+                        auth.isError
+                          ? "form-control p-md-3 border-2 border-danger"
+                          : "form-control p-md-3"
+                      }
                       placeholder="Masukan Alamat Email"
                       name="email"
                       value={form.email}
@@ -231,7 +237,12 @@ export default function Login() {
                     </label>
                     <input
                       type="password"
-                      className="form-control p-md-3"
+                      // className="form-control p-md-3"
+                      className={
+                        auth.isError
+                          ? "form-control p-md-3 border-2 border-danger"
+                          : "form-control p-md-3"
+                      }
                       id="formGroupExampleInput2"
                       placeholder="Masukan Kata Sandi"
                       name="password"
