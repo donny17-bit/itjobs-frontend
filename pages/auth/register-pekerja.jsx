@@ -2,16 +2,63 @@ import React, { useState, useEffect } from "react";
 // import bgImage from "/public/bg-login.png";
 import Image from "next/image";
 import Link from "next/link";
+import { registerPekerja } from "../../store/action/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import Head from "next/head";
 
 export default function Login() {
-  const [role, setRole] = useState("");
+  // const [role, setRole] = useState("");
 
-  const handleRole = (e) => {
-    setRole(e.target.value);
+  // const handleRole = (e) => {
+  //   setRole(e.target.value);
+  // };
+  // console.log(role);
+
+  const router = useRouter();
+
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    noTelp: "",
+  });
+
+  const handleChangeForm = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
-  console.log(role);
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      await dispatch(registerPekerja(form));
+      router.push("/auth/login");
+      resetForm();
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const resetForm = () => {
+    setForm({
+      fullName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      noTelp: "",
+    });
+  };
+
   return (
     <>
+      <Head>
+        <title>Register-Pekerja</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div
         className="bg-light"
         // style={{
@@ -77,7 +124,16 @@ export default function Login() {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
                   euismod ipsum et dui rhoncus auctor.
                 </p>
-                <form action="" className="">
+                {!auth.msg ? null : auth.isError ? (
+                  <div className="alert alert-danger" role="alert">
+                    {auth.msg}
+                  </div>
+                ) : (
+                  <div className="alert alert-primary" role="alert">
+                    {auth.msg}
+                  </div>
+                )}
+                <form action="" className="" onSubmit={handleSubmit}>
                   <div className="mb-3">
                     <label
                       htmlFor="formGroupExampleInput"
@@ -90,6 +146,9 @@ export default function Login() {
                       className="form-control p-md-3"
                       id="formGroupExampleInput"
                       placeholder="Masukan Nama Panjang"
+                      name="fullName"
+                      value={form.fullName}
+                      onChange={handleChangeForm}
                     />
                   </div>
                   <div className="mb-3">
@@ -100,10 +159,13 @@ export default function Login() {
                       Email
                     </label>
                     <input
-                      type="text"
+                      type="email"
                       className="form-control p-md-3"
                       id="formGroupExampleInput"
                       placeholder="Masukan Alamat Email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChangeForm}
                     />
                   </div>
                   <div className="mb-3">
@@ -114,10 +176,13 @@ export default function Login() {
                       No HandPhone
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       className="form-control p-md-3"
                       id="formGroupExampleInput2"
                       placeholder="Masukan No HandPhone"
+                      name="noTelp"
+                      value={form.noTelp}
+                      onChange={handleChangeForm}
                     />
                   </div>
                   <div className="mb-3">
@@ -128,10 +193,13 @@ export default function Login() {
                       Kata Sandi
                     </label>
                     <input
-                      type="text"
+                      type="password"
                       className="form-control p-md-3"
                       id="formGroupExampleInput2"
                       placeholder="Masukan Kata Sandi"
+                      name="password"
+                      value={form.password}
+                      onChange={handleChangeForm}
                     />
                   </div>
                   <div className="mb-3">
@@ -142,14 +210,17 @@ export default function Login() {
                       Konfirmasi Kata Sandi
                     </label>
                     <input
-                      type="text"
+                      type="password"
                       className="form-control p-md-3"
                       id="formGroupExampleInput2"
                       placeholder="Masukan Konfirmasi Kata Sandi"
+                      name="confirmPassword"
+                      value={form.confirmPassword}
+                      onChange={handleChangeForm}
                     />
                   </div>
                   <button
-                    type="button"
+                    type="submit"
                     className="btn btn-warning text-light p-md-3 w-100 mt-md-5 mt-3"
                   >
                     Daftar

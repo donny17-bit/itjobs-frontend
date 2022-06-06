@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 // import bgImage from "/public/bg-login.png";
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function Login() {
   const [role, setRole] = useState("");
@@ -12,6 +13,10 @@ export default function Login() {
   console.log(role);
   return (
     <>
+      <Head>
+        <title>Forgot Password</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div
         className="bg-light vh-100"
         // style={{
