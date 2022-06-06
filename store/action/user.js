@@ -6,6 +6,8 @@ export const getUserById = (id, asA) => {
     type: "GET_USER_BY_ID",
     // payload: axios.get(`user/${id}`),
     payload:
-      asA === "pekerja" ? axios.get(`user/${id}`) : axios.get(`company/${id}`),
+      asA === "pekerja"
+        ? axios.get(`/user/${id}`)
+        : axios.get(`/company/${id}`),
   };
 };

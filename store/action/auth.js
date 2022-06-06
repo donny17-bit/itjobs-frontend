@@ -6,8 +6,8 @@ export const login = (form, asA) => {
     type: "LOGIN",
     payload:
       asA === "pekerja"
-        ? axios.post(`auth/user/login`, form)
-        : axios.post(`auth/company/login`, form),
+        ? axios.post(`/auth/user/login`, form)
+        : axios.post(`/auth/company/login`, form),
     data: asA,
   };
 };
@@ -15,13 +15,13 @@ export const login = (form, asA) => {
 export const registerPekerja = (form) => {
   return {
     type: "REGISTER",
-    payload: axios.post(`auth/user/register`, form),
+    payload: axios.post(`/auth/user/register`, form),
   };
 };
 
 export const registerCompany = (form) => {
   return {
     type: "REGISTER",
-    payload: axios.post(`auth/company/register`, form),
+    payload: axios.post(`/auth/company/register`, form),
   };
 };
