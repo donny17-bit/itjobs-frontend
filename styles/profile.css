@@ -1,0 +1,333 @@
+.profile_container {
+  /* height for temporary, as long as there's no content inside*/
+  /* height: 800px; */
+
+  background: linear-gradient(
+    to bottom,
+    #5e50a1 0px,
+    #5e50a1 300px,
+    #e5e5e5 300px,
+    #e5e5e5 300px
+  );
+  padding: 80px 150px !important;
+}
+
+.profile_card_container {
+  margin-right: 30px;
+}
+
+.profile_company_container {
+  /* height for temporary, as long as there's no content inside*/
+  /* height: 800px; */
+
+  background: #e5e5e5;
+  padding: 80px 150px !important;
+}
+
+.profile_company_card {
+  background: linear-gradient(
+    to bottom,
+    #5e50a1 0%,
+    #5e50a1 18%,
+    #ffffff 18%,
+    #ffffff 100%
+  );
+
+  height: 1000px;
+  border-radius: 8px;
+}
+
+.profile_company_img {
+  margin-top: 50px;
+  width: 150px !important;
+  border-radius: 75px !important;
+}
+
+.profile_company_sosmed {
+  padding-left: 10% !important;
+}
+
+.profile_company_btn {
+  width: 300px;
+}
+
+.profile_text {
+  font-family: "Nunito", sans-serif;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 20px !important;
+  /* identical to box height, or 143% */
+
+  color: #9ea0a5 !important;
+}
+
+.profile_name {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 56px;
+  /* identical to box height, or 255% */
+
+  color: #1f2a36 !important;
+}
+
+.profile_job {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  /* identical to box height, or 171% */
+
+  color: #1f2a36 !important;
+}
+
+.profile_role {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height, or 143% */
+
+  color: #9ea0a5 !important;
+}
+
+.profile_skill_title {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 24px;
+  /* identical to box height, or 109% */
+
+  color: #1f2a36 !important;
+}
+
+.profile_skill_list {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+  /* identical to box height, or 167% */
+
+  color: #ffffff !important;
+}
+
+.profile_edit_skill {
+  background: rgba(251, 176, 23, 0.6);
+  border: 1px solid #fbb017;
+  border-radius: 4px;
+
+  font-family: "Nunito", sans-serif;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  line-height: 20px !important;
+  /* identical to box height, or 167% */
+
+  color: #ffffff;
+}
+
+.profile_edit_submit {
+  font-family: "Nunito", sans-serif !important;
+  font-style: normal;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 19px !important;
+  /* identical to box height */
+
+  color: #ffffff !important;
+}
+
+.profile_menu_btn_active {
+  text-decoration: none !important;
+  color: #1f2a36 !important;
+}
+
+.profile_menu_btn_disable {
+  text-decoration: none !important;
+  color: #9ea0a5 !important;
+}
+
+.profile_menu_btn_disable:hover {
+  cursor: pointer;
+}
+
+.profile_menu_btn_active:hover {
+  cursor: pointer;
+}
+
+.profile_edit_title {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 56px;
+  /* identical to box height, or 255% */
+}
+
+.profile_menu_active {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 56px;
+  /* identical to box height, or 255% */
+
+  border-bottom: 4px solid #5e50a1;
+}
+
+.profile_menu_disable {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 56px;
+  /* identical to box height, or 255% */
+}
+
+.profile_porto_text {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  /* identical to box height, or 171% */
+
+  color: #1f2a36 !important;
+}
+
+.profile_img {
+  width: 150px !important;
+  border-radius: 75px !important;
+}
+
+.profile_card {
+  border-radius: 8px !important;
+}
+
+.profile_col_container {
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.profile_porto_img {
+  width: 219px;
+  height: 148px;
+}
+
+/* .profile_active {
+  border-bottom: 4px solid #5e50a1;
+} */
+
+.profile_expKerja_img {
+  width: 65px;
+}
+
+.profile_exp_job {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+
+  color: #1f2a36 !important;
+}
+
+.profile_exp_place {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  /* identical to box height */
+
+  color: #46505c !important;
+}
+
+.profile_exp_time {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  /* identical to box height */
+
+  color: #9ea0a5 !important;
+}
+
+.profile_exp_desc {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  /* or 171% */
+
+  color: #1f2a36 !important;
+}
+
+.profile_edit_btn {
+  text-decoration: none !important;
+
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 600 !important;
+  font-size: 22px !important;
+  line-height: 56px !important;
+  /* identical to box height, or 255% */
+
+  color: #9ea0a5 !important;
+}
+
+.profile_edit_label {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #9ea0a5;
+}
+
+.profile_edit_input {
+  height: 50px;
+
+  border: 1px solid #e2e5ed;
+  border-radius: 4px;
+}
+
+@media (max-width: 425px) {
+  .profile_container {
+    background: #e5e5e5;
+    padding: 80px 10px !important;
+  }
+
+  .profile_company_container {
+    /* background: #e5e5e5; */
+    padding: 80px 10px !important;
+  }
+
+  .profile_company_btn {
+    width: 100%;
+  }
+
+  .profile_company_sosmed {
+    padding-top: 10% !important;
+    padding-left: 0% !important;
+  }
+
+  .profile_card_container {
+    margin-bottom: 50px;
+    margin-right: 0;
+  }
+
+  .profile_col_container {
+    background: #ffffff;
+    border-radius: 8px;
+  }
+}
