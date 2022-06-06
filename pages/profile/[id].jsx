@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import axios from "../../utils/axios";
 import ProfileCard from "../../components/profileCard";
 
-function Profile(props) {
+function Profile() {
   const router = useRouter();
 
   const { id } = router.query;
