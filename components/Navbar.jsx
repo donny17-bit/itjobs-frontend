@@ -41,139 +41,236 @@ export default function Navbar() {
     };
   }, [isNotifOpen, isProfileMenuOpen]);
 
-  console.log(router);
-
   return (
-    <nav className="container-fluid bg-white py-3 fixed-top">
-      <div className="container-lg d-flex justify-content-between align-items-center">
-        <h1 className="fs-3 fw-bold text-primary mb-0">
-          <i className="bi bi-stack text-primary fs-4 me-2"></i>itJobs
-        </h1>
-        {path === "/" ? (
-          Object.keys(userData).length === 0 ? (
-            // Navbar on landing page before login
-            <div className="d-flex">
-              <button type="button" className="btn btn-outline-primary me-2">
-                Masuk
-              </button>
-              <div className="dropdown">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  id="dropdownDaftar"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  data-bs-offset="10,20"
-                >
-                  Daftar
+    <>
+      {/* Navbar for screen sm+ */}
+      <nav className="container-fluid bg-white py-3 fixed-top d-none d-sm-block">
+        <div className="container-lg d-flex justify-content-between align-items-center">
+          <h1 className="fs-3 fw-bold text-primary mb-0">
+            <i className="bi bi-stack text-primary fs-4 me-2"></i>itJobs
+          </h1>
+          {path === "/" ? (
+            Object.keys(userData).length === 0 ? (
+              // Navbar on landing page before login size sm+
+              <div className="d-flex">
+                <button type="button" className="btn btn-outline-primary me-2">
+                  Masuk
                 </button>
-                <ul
-                  className="dropdown-menu dropdown-menu-end shadow"
-                  aria-labelledby="dropdownDaftar"
-                >
-                  <li>
-                    <button type="button" className="dropdown-item py-2">
-                      Sebagai Pekerja
+                <div className="dropdown">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    id="dropdownDaftar"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    data-bs-offset="10,20"
+                  >
+                    Daftar
+                  </button>
+                  <ul
+                    className="dropdown-menu dropdown-menu-end shadow"
+                    aria-labelledby="dropdownDaftar"
+                  >
+                    <li>
+                      <button type="button" className="dropdown-item py-2">
+                        Sebagai Pekerja
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" className="dropdown-item py-2">
+                        Sebagai Perusahaan
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            ) : (
+              // Navbar on landing page after login size sm+
+              <button type="button" className="btn btn-primary">
+                Profile
+              </button>
+            )
+          ) : (
+            // Navbar on any page other than lading page after login size sm+
+            <div className="d-flex align-items-center">
+              <div
+                role="button"
+                className="px-2 me-4 position-relative"
+                style={{ cursor: "pointer" }}
+                ref={notifRef}
+                onClick={() => setIsNotifOpen((currentState) => !currentState)}
+              >
+                {isNotifOpen ? (
+                  <i className="bi bi-bell-fill text-warning fs-5"></i>
+                ) : (
+                  <i className="bi bi-bell fs-5"></i>
+                )}
+
+                {/* Notif Dropdown */}
+                {isNotifOpen && (
+                  <div
+                    className="navbar_notif-dropdown shadow d-flex flex-column justify-content-center align-items-center position-absolute start-50 translate-middle-x"
+                    style={{ top: "200%" }}
+                  >
+                    <div>
+                      <Image
+                        src="/image/emptyNotif.png"
+                        alt="empty notification"
+                        width={100}
+                        height={80}
+                        objectFit="contain"
+                      />
+                    </div>
+                    <span className="d-block fs-7">Belum ada notifikasi</span>
+                  </div>
+                )}
+              </div>
+
+              <div
+                role="button"
+                className="position-relative"
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  cursor: "pointer",
+                }}
+                ref={profileRef}
+                onClick={() =>
+                  setIsProfileMenuOpen((currentState) => !currentState)
+                }
+              >
+                <Image
+                  src={
+                    "https://res.cloudinary.com/itjobs/image/upload/v1654266716/profiles/profile-placeholder_zpfgnr.png"
+                  }
+                  alt="profile"
+                  width={36}
+                  height={36}
+                  objectFit="cover"
+                  style={{ borderRadius: "50%" }}
+                />
+
+                {/* Profile Dropdown */}
+                {isProfileMenuOpen && (
+                  <div
+                    className="navbar_profile-dropdown shadow d-flex flex-column justify-content-center align-items-center position-absolute end-0"
+                    style={{ top: "180%" }}
+                  >
+                    <button
+                      type="button"
+                      className="dropdown-item py-2 rounded-top"
+                    >
+                      Profile
                     </button>
-                  </li>
-                  <li>
-                    <button type="button" className="dropdown-item py-2">
-                      Sebagai Perusahaan
+                    <button
+                      type="button"
+                      className="dropdown-item py-2 rounded-bottom"
+                    >
+                      Logout
                     </button>
-                  </li>
-                </ul>
+                  </div>
+                )}
               </div>
             </div>
-          ) : (
-            // Navbar on landing page after login
-            <button type="button" className="btn btn-primary">
-              Profile
-            </button>
-          )
-        ) : (
-          // Navbar on any page other than lading page after login
-          <div className="d-flex align-items-center">
-            <div
-              role="button"
-              className="px-2 me-4 position-relative"
-              style={{ cursor: "pointer" }}
-              ref={notifRef}
-              onClick={() => setIsNotifOpen((currentState) => !currentState)}
-            >
-              {isNotifOpen ? (
-                <i className="bi bi-bell-fill text-warning fs-5"></i>
-              ) : (
-                <i className="bi bi-bell fs-5"></i>
-              )}
+          )}
+        </div>
+      </nav>
 
-              {/* Notif Dropdown */}
-              {isNotifOpen && (
-                <div
-                  className="navbar_notif-dropdown shadow d-flex flex-column justify-content-center align-items-center position-absolute start-50 translate-middle-x"
-                  style={{ top: "200%" }}
-                >
-                  <div>
-                    <Image
-                      src="/image/emptyNotif.png"
-                      alt="empty notification"
-                      width={100}
-                      height={80}
-                      objectFit="contain"
-                    />
-                  </div>
-                  <span className="d-block fs-7">Belum ada notifikasi</span>
-                </div>
-              )}
-            </div>
-
-            <div
-              role="button"
-              className="position-relative"
-              style={{
-                width: "36px",
-                height: "36px",
-                cursor: "pointer",
-              }}
-              ref={profileRef}
-              onClick={() =>
-                setIsProfileMenuOpen((currentState) => !currentState)
-              }
-            >
-              <Image
-                src={
-                  "https://res.cloudinary.com/itjobs/image/upload/v1654266716/profiles/profile-placeholder_zpfgnr.png"
-                }
-                alt="profile"
-                width={36}
-                height={36}
-                objectFit="cover"
-                style={{ borderRadius: "50%" }}
-              />
-
-              {/* Profile Dropdown */}
-              {isProfileMenuOpen && (
-                <div
-                  className="navbar_profile-dropdown shadow d-flex flex-column justify-content-center align-items-center position-absolute end-0"
-                  style={{ top: "180%" }}
-                >
+      {/* Navbar on screen xs */}
+      {path !== "/" ? (
+        <nav className="container-fluid bg-white py-3 fixed-top d-block d-sm-none">
+          <div className="container-lg d-flex justify-content-between align-items-center">
+            <h1 className="fs-3 fw-bold text-primary mb-0">
+              <i className="bi bi-stack text-primary fs-4 me-2"></i>itJobs
+            </h1>
+            {Object.keys(userData).length === 0 ? (
+              // Navbar on landing page before login
+              <div className="d-flex">
+                <button type="button" className="btn btn-outline-primary me-2">
+                  Masuk
+                </button>
+                <div className="dropdown">
                   <button
                     type="button"
-                    className="dropdown-item py-2 rounded-top"
+                    className="btn btn-primary"
+                    id="dropdownDaftar"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    data-bs-offset="10,20"
                   >
-                    Profile
+                    Daftar
                   </button>
-                  <button
-                    type="button"
-                    className="dropdown-item py-2 rounded-bottom"
+                  <ul
+                    className="dropdown-menu dropdown-menu-end shadow"
+                    aria-labelledby="dropdownDaftar"
                   >
-                    Logout
-                  </button>
+                    <li>
+                      <button type="button" className="dropdown-item py-2">
+                        Sebagai Pekerja
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" className="dropdown-item py-2">
+                        Sebagai Perusahaan
+                      </button>
+                    </li>
+                  </ul>
                 </div>
-              )}
+              </div>
+            ) : (
+              // Navbar on landing page after login
+              <button type="button" className="btn btn-primary">
+                Profile
+              </button>
+            )}
+          </div>
+        </nav>
+      ) : (
+        // Navbar on any page other than landing page
+        <nav
+          className="container-fluid bg-white py-4 fixed-bottom d-block d-sm-none"
+          style={{}}
+        >
+          <div className="container">
+            <div className="row">
+              <div
+                className="col-3 d-flex justify-content-center align-items-center"
+                role="button"
+              >
+                <i className="d-block bi bi-grid fs-4"></i>
+              </div>
+              <div
+                className="col-3 d-flex justify-content-center align-items-center"
+                role="button"
+              >
+                <i className="d-block bi bi-search fs-4"></i>
+              </div>
+              <div
+                className="col-3 d-flex justify-content-center align-items-center"
+                role="button"
+              >
+                <i className="d-block bi bi-chat fs-4"></i>
+              </div>
+              <div
+                className="col-3 d-flex justify-content-center align-items-center"
+                role="button"
+              >
+                <Image
+                  d-block
+                  src={
+                    "https://res.cloudinary.com/itjobs/image/upload/v1654266716/profiles/profile-placeholder_zpfgnr.png"
+                  }
+                  alt="profile"
+                  width={28}
+                  height={28}
+                  objectFit="cover"
+                  style={{ borderRadius: "50%" }}
+                />
+              </div>
             </div>
           </div>
-        )}
-      </div>
-    </nav>
+        </nav>
+      )}
+    </>
   );
 }
