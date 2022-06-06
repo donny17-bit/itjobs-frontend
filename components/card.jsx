@@ -8,7 +8,11 @@ export default function Card(props) {
         <div className="mt-4 my-md-3 col-3 col-md-1">
           <div className="position-relative">
             <Image
-              src={"/vercel.svg"}
+              src={
+                props?.image
+                  ? `${process.env.URL_CLOUDINARY}${props.image}`
+                  : `${process.env.URL_CLOUDINARY}profiles/profile-placeholder_zpfgnr.png`
+              }
               layout="responsive"
               objectFit="cover"
               className="rounded-circle"
@@ -41,7 +45,7 @@ export default function Card(props) {
           </small>
           <div className="d-flex mt-3">
             {props.skills
-              ? props.skills.map((v) => (
+              ? props.skills.slice(0, 3).map((v) => (
                   <button
                     className="btn btn-sm bg-warning text-white p-1 px-md-3 py-1 me-2 bg-opacity-50 border border-warning"
                     key={v}
