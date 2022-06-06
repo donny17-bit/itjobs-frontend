@@ -11,10 +11,11 @@ function Profile(props) {
   const [data, setData] = useState({});
   const [sosMed, setSosMed] = useState();
   const [porto, setPorto] = useState();
+  const [exp, setExp] = useState();
 
   // belum disimpan di state
   const getUserId = async () => {
-    const result = await axios.get(`user/${router.query.id}`);
+    const result = await axios.get(`user/${id}`);
     setData(result.data.data[0]);
 
     if (result.data.data[0].socialMedia) {
@@ -23,11 +24,16 @@ function Profile(props) {
   };
 
   const getPorto = async () => {
-    const result = await axios.get(`portfolio/${router.query.id}`);
+    const result = await axios.get(`portfolio/${id}`);
     setPorto(result.data.data);
   };
 
-  console.log(porto);
+  const getExp = async () => {
+    const result = await axios.get(`experience/${id}`);
+    setExp(result.data.data);
+  };
+
+  console.log(exp);
 
   // make sure id loaded
   useEffect(() => {
@@ -36,6 +42,7 @@ function Profile(props) {
     }
     getUserId();
     getPorto();
+    getExp();
   }, [id]);
 
   const image1 =
@@ -120,53 +127,35 @@ function Profile(props) {
                     ))
                   : ""}
               </div>
+            ) : exp ? (
+              exp.map((item) => (
+                <div className="row mt-4 m-0">
+                  <div className="row border-bottom m-2 mb-4">
+                    <div className="col-md-2 text-center">
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/512/2910/2910795.png"
+                        alt=""
+                        className="profile_expKerja_img"
+                      />
+                    </div>
+                    <div className="col-sm">
+                      <h6 className="m-0 profile_exp_job">{item.position}</h6>
+                      <p className="m-0 profile_exp_place">
+                        {item.companyName}
+                      </p>
+                      <p className="profile_exp_time">
+                        {`${item.dateIn.slice(0, 10)} s/d ${item.dateOut.slice(
+                          0,
+                          10
+                        )}, - months`}
+                      </p>
+                      <p className="profile_exp_desc">{item.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))
             ) : (
-              <div className="row mt-4 m-0">
-                <div className="row border-bottom m-2 mb-4">
-                  <div className="col-md-2 text-center">
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2910/2910795.png"
-                      alt=""
-                      className="profile_expKerja_img"
-                    />
-                  </div>
-                  <div className="col-sm">
-                    <h6 className="m-0 profile_exp_job">Engineer</h6>
-                    <p className="m-0 profile_exp_place">Tokopedia</p>
-                    <p className="profile_exp_time">
-                      July 2019 - January 2020, 6 months
-                    </p>
-                    <p className="profile_exp_desc">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Quos perferendis adipisci eligendi asperiores velit harum,
-                      est quaerat enim laboriosam qui repellendus magnam a
-                      voluptates fugit repellat sapiente at? Magni, similique.
-                    </p>
-                  </div>
-                </div>
-                <div className="row border-bottom m-2 mb-4">
-                  <div className="col-md-2 text-center">
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2910/2910795.png"
-                      alt=""
-                      className="profile_expKerja_img"
-                    />
-                  </div>
-                  <div className="col-sm">
-                    <h6 className="m-0 profile_exp_job">Engineer</h6>
-                    <p className="m-0 profile_exp_place">Tokopedia</p>
-                    <p className="profile_exp_time">
-                      July 2019 - January 2020, 6 months
-                    </p>
-                    <p className="profile_exp_desc">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Quos perferendis adipisci eligendi asperiores velit harum,
-                      est quaerat enim laboriosam qui repellendus magnam a
-                      voluptates fugit repellat sapiente at? Magni, similique.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              ""
             )}
           </div>
         </div>
