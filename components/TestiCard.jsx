@@ -5,7 +5,7 @@ export default function TestiCard(props) {
   const { image, name, job, testimonial } = props.data;
 
   return (
-    <div className="card p-4 border-0 shadow text-center">
+    <div className="card px-4 py-5 border-0 shadow text-center">
       <div className="mb-3">
         <Image
           src={image}
