@@ -13,7 +13,7 @@ function Hire() {
     subject: "",
     description: "",
     file: null,
-    userId: router.query.id,
+    userId: "",
   });
   const [data, setData] = useState({});
 
@@ -22,7 +22,7 @@ function Hire() {
   useEffect(() => {
     if (router.isReady) {
       getData();
-      console.log("object");
+      setForm({ ...form, userId: router.query.id });
     }
   }, [router.isReady]);
 
@@ -30,7 +30,7 @@ function Hire() {
 
   const getData = () => {
     try {
-      dispatch(getUserById(router.query.id))
+      dispatch(getUserById(router.query.id, "pekerja"))
         .then((res) => {
           const dataUser = res.value.data.data[0];
 
@@ -124,7 +124,7 @@ function Hire() {
               ? data.skill.map((v, i) => (
                   <React.Fragment key={i}>
                     <div>
-                      <button className=" btn btn-sm bg-warning text-white p-1 px-md-3 py-1 me-2 bg-opacity-50 border border-warning">
+                      <button className=" btn btn-sm bg-warning text-white p-1 px-md-3 py-1 me-2 mt-1 bg-opacity-50 border border-warning">
                         {console.log((i + 1) / 3 == 1 ? true : false)}
                         {v}
                       </button>
@@ -169,11 +169,11 @@ function Hire() {
               onChange={handleChangeForm}
             ></textarea>
             <label
-              className="btn position-absolute end-0 "
-              style={{ bottom: "6px" }}
+              className="btn position-absolute end-0 p-1"
+              style={{ bottom: "3px" }}
               htmlFor="inputFile"
             >
-              icon
+              <i class="btn btn-secondary p-1  bi bi-paperclip"></i>
             </label>
           </div>
           <input
