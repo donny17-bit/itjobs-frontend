@@ -1,7 +1,45 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { postHire } from "../../store/action/hire";
 
-function Home() {
+function Hire() {
+  const dispatch = useDispatch();
+  const [form, setForm] = useState({
+    subject: "",
+    description: "",
+    file: null,
+    userId: "73e8deec-9504-4916-aa1b-c522cedd2aeb",
+  });
+
+  useEffect(() => {}, []);
+
+  const handleChangeForm = ({ target }) => {
+    if (target.name == "file") {
+      setForm({ ...form, [target.name]: target.files[0] });
+    } else {
+      setForm({ ...form, [target.name]: target.value });
+    }
+  };
+  console.log(form);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    for (const data in form) {
+      formData.append(data, form[data]);
+    }
+
+    for (const data of formData.entries()) {
+      console.log(data[0] + ": " + data[1]);
+    }
+
+    dispatch(postHire("86640e72-9499-44ab-aa15-f9eea4511de9", formData))
+      .then((res) => alert("success"))
+      .catch((err) => alert(err));
+  };
+
   return (
     <div style={{ backgroundColor: "#F6F7F8", minHeight: "100vh" }}>
       <div className="container row mx-auto pt-4 ">
@@ -46,19 +84,22 @@ function Home() {
           <h4>Skill</h4>
           <div className="d-flex flex-wrap" style={{}}>
             {["python", "javascript", "C#", "php"].map((v, i) => (
-              <>
-                <div key={i}>
+              <React.Fragment key={i}>
+                <div>
                   <button className=" btn btn-sm bg-warning text-white p-1 px-md-3 py-1 me-2 bg-opacity-50 border border-warning">
                     {console.log((i + 1) / 3 == 1 ? true : false)}
                     {v}
                   </button>
                 </div>
                 {(i + 1) % 3 == 0 ? <div className="w-100 mt-2"></div> : ""}
-              </>
+              </React.Fragment>
             ))}
           </div>
         </div>
-        <div className="col-12 col-md-8 mt-4 mt-md-0 ms-md-5 ">
+        <form
+          onSubmit={(event) => handleSubmit(event)}
+          className="col-12 col-md-8 mt-4 mt-md-0 ms-md-5 "
+        >
           <h2 className="fw-bold">Hubungi Louis TOmlinson</h2>
           <small className="fw-light">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod
@@ -74,30 +115,43 @@ function Home() {
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
+              name="subject"
+              onChange={handleChangeForm}
             />
           </div>
 
           <div className="mt-3 form-group position-relative">
-            <label className="form-label fw-light">Example textarea</label>
+            <label className="form-label fw-light">Pesan</label>
             <textarea
               className="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
+              name="description"
+              onChange={handleChangeForm}
             ></textarea>
             <label
-              className="position-absolute end-0 me-3"
+              className="btn position-absolute end-0 "
               style={{ bottom: "6px" }}
+              htmlFor="inputFile"
             >
               icon
             </label>
           </div>
-          <button className="btn btn-lg btn-warning w-100 mt-5 text-white">
+          <input
+            type="file"
+            name="file"
+            id="inputFile"
+            className="d-none"
+            accept="application/pdf"
+            onChange={handleChangeForm}
+          />
+          <button className="btn btn-lg btn-warning w-100 my-5 text-white">
             Kirim
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
 }
 
-export default Home;
+export default Hire;
