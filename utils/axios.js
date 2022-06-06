@@ -10,9 +10,7 @@ axiosApiInstance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
     config.headers = {
-      // Authorization: `Bearer ${Cookies.get("token")}`,
-      // for temporary, as long as cookies not set
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc0MmFmM2QyLTdmNDEtNDU3ZC05NWIyLWVjMGQ5NGFmMDAxYyIsImZ1bGxOYW1lIjoiRG9uaSBXYWh5dSIsImVtYWlsIjoiZG9uaXdhaHl1MTRAZ21haWwuY29tIiwibm9UZWxwIjo5ODc2NTQzMjEsImFkZHJlc3MiOm51bGwsInJvbGUiOiJudWxsIiwiZGVzY3JpcHRpb24iOm51bGwsImZpZWxkIjpudWxsLCJpbWFnZSI6bnVsbCwic29jaWFsTWVkaWEiOm51bGwsInN0YXR1cyI6ImFjdGl2ZSIsIlVzZXJPVFAiOm51bGwsImNyZWF0ZWRBdCI6IjIwMjItMDYtMDZUMDI6MTU6NTguMDAwWiIsInVwZGF0ZWRBdCI6bnVsbCwiaWF0IjoxNjU0NDkwMTE2LCJleHAiOjE2NTQ0OTM3MTZ9.mFkwb98VwPiNzlhYWJ2_jDyOg9Sx3c7E6Sw2QrKlvxw`,
+      Authorization: `Bearer ${Cookies.get("token")}`,
     };
     return config;
   },
