@@ -10,9 +10,9 @@ axiosApiInstance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
     config.headers = {
-      // Authorization: `Bearer ${Cookies.get("token")}`,
+      Authorization: `Bearer ${Cookies.get("token")}`,
       // for temporary, as long as cookies not set
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc0MmFmM2QyLTdmNDEtNDU3ZC05NWIyLWVjMGQ5NGFmMDAxYyIsImZ1bGxOYW1lIjoiZG9uaSIsImVtYWlsIjoiZG9uaXdhaHl1MTRAZ21haWwuY29tIiwibm9UZWxwIjo5ODc2NTQzMjEsImFkZHJlc3MiOiJiYW50ZSIsInJvbGUiOiJmdWxsdGltZSIsImRlc2NyaXB0aW9uIjoia3l1dSIsImZpZWxkIjoid2ViIiwiaW1hZ2UiOm51bGwsInNvY2lhbE1lZGlhIjoibGlpLDkwLGt5YWEiLCJzdGF0dXMiOiJhY3RpdmUiLCJVc2VyT1RQIjpudWxsLCJjcmVhdGVkQXQiOiIyMDIyLTA2LTA2VDAyOjE1OjU4LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIyLTA2LTA2VDA2OjQ2OjI0LjAwMFoiLCJpYXQiOjE2NTQ0OTkzMDMsImV4cCI6MTY1NDUwMjkwM30.IyBjEGOWD0BmSvQAtYy4Aqk8aE51HoWErHJm5t-not0`,
+      // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc0MmFmM2QyLTdmNDEtNDU3ZC05NWIyLWVjMGQ5NGFmMDAxYyIsImZ1bGxOYW1lIjoiZG9uaSIsImVtYWlsIjoiZG9uaXdhaHl1MTRAZ21haWwuY29tIiwibm9UZWxwIjo5ODc2NTQzMjEsImFkZHJlc3MiOiJiYW50ZSIsInJvbGUiOiJmdWxsdGltZSIsImRlc2NyaXB0aW9uIjoia3l1dSIsImZpZWxkIjoid2ViIiwiaW1hZ2UiOm51bGwsInNvY2lhbE1lZGlhIjoibGlpLDkwLGt5YWEiLCJzdGF0dXMiOiJhY3RpdmUiLCJVc2VyT1RQIjpudWxsLCJjcmVhdGVkQXQiOiIyMDIyLTA2LTA2VDAyOjE1OjU4LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIyLTA2LTA2VDA2OjQ2OjI0LjAwMFoiLCJpYXQiOjE2NTQ0OTkzMDMsImV4cCI6MTY1NDUwMjkwM30.IyBjEGOWD0BmSvQAtYy4Aqk8aE51HoWErHJm5t-not0`,
     };
     return config;
   },

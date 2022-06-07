@@ -2,8 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "../../../utils/axios";
 
-function Company(props) {
+import { useDispatch, useSelector } from "react-redux";
+import { getCompanyById } from "../../../store/action/company";
+
+function Company() {
   const defaultImg = "https://cdn-icons-png.flaticon.com/512/7024/7024005.png";
+
+  const dispatch = useDispatch();
+  const company = useSelector((state) => state.company);
 
   const router = useRouter();
   const { idCompany } = router.query;
@@ -11,23 +17,24 @@ function Company(props) {
   const [sosMed, setSosMed] = useState();
 
   const getCompanyId = async () => {
-    const result = await axios.get(`company/${idCompany}`);
-    console.log(result);
-    setData(result.data.data[0]);
+    const result = await dispatch(getCompanyById(idCompany));
+    setData(result.value.data.data[0]);
 
-    if (result.data.data[0].socialMedia) {
-      setSosMed(result.data.data[0].socialMedia.split(","));
+    if (result.value.data.data[0].socialMedia) {
+      setSosMed(result.value.data.data[0].socialMedia.split(","));
     }
   };
-
-  console.log(data);
+  // console.log(data);
 
   // make sure id loaded
   useEffect(() => {
     if (!idCompany) {
       return;
     }
-    getCompanyId();
+    if (company.data == []) {
+      getCompanyId();
+    }
+    setData(company.data[0]);
   }, [idCompany]);
 
   return (
@@ -53,25 +60,34 @@ function Company(props) {
               <p className="pe-0 profile_text">{data.description}</p>
             </div>
           </div>
-          <button className="btn btn-primary profile_company_btn">
+          <button
+            className="btn btn-primary profile_company_btn"
+            onClick={() => router.push(`edit/${data.id}`)}
+          >
             Edit profile
           </button>
           <div className="row justify-content-center mt-3">
-            <div className="col col-sm-4 text-start profile_company_sosmed">
-              <ul className="list-group border-0 list-group-flush">
+            <div className="col col-sm-4 text-center">
+              <ul className="list-group list-group-flush">
                 <li className="list-group-item border-0 profile_text">
-                  <i className="bi bi-envelope"></i> Loust@gmail.com
+                  <i className="bi bi-envelope"></i> {data.email}
                 </li>
                 <li className="list-group-item border-0 profile_text">
-                  <i className="bi bi-instagram"></i> @Louis
-                </li>
-                <li className="list-group-item border-0 profile_text">
-                  <i className="bi bi-github"></i> @LousOMMO
-                </li>
-                <li className="list-group-item border-0 profile_text">
-                  @LoiustGithub
+                  <i className="bi bi-telephone"></i> {data.noTelp}
                 </li>
               </ul>
+              {sosMed ? (
+                <ul className="list-group border-0 list-group-flush">
+                  <li className="list-group-item border-0 profile_text">
+                    <i className="bi bi-instagram"></i> {sosMed[0]}
+                  </li>
+                  <li className="list-group-item border-0 profile_text">
+                    <i className="bi bi-linkedin"></i> {sosMed[1]}
+                  </li>
+                </ul>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
