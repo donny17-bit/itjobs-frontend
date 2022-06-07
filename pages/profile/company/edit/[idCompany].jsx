@@ -15,7 +15,7 @@ function EditCompany() {
   const dispatch = useDispatch();
   const company = useSelector((state) => state.company);
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState(company.data[0]);
   const [form, setForm] = useState({});
 
   const getCompanyId = async (id) => {
@@ -29,8 +29,6 @@ function EditCompany() {
   const formChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
-  // console.log(form);
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -46,13 +44,14 @@ function EditCompany() {
     // socialMedia: `${dataDiri.ig},${dataDiri.github},${dataDiri.gitlab}`,
   };
   // make sure id loaded
-  useEffect(() => {
-    if (!idCompany) {
-      return;
-    }
-
-    getCompanyId(idCompany);
-  }, [idCompany]);
+  // useEffect(() => {
+  //   if (!idCompany) {
+  //     return;
+  //   }
+  //   if (company.data.length == 0) {
+  //     getCompanyId(idCompany);
+  //   }
+  // }, [idCompany]);
 
   return (
     <>
@@ -95,6 +94,7 @@ function EditCompany() {
               </div>
               <div className="d-grid mt-3 mb-3">
                 <button
+                  type="reset"
                   className="btn btn-outline-primary"
                   onClick={() => router.push(`/profile/company/${idCompany}`)}
                 >
@@ -118,7 +118,7 @@ function EditCompany() {
                       type="text"
                       className="form-control profile_edit_input"
                       placeholder="Masukkan nama perusahaan"
-                      name="commpanyName"
+                      name="companyName"
                       onChange={(e) => formChange(e)}
                     />
                   </div>
@@ -130,7 +130,7 @@ function EditCompany() {
                       type="text"
                       className="form-control profile_edit_input"
                       placeholder="Masukan bidang perusahaan ex : Financial"
-                      name="commpanyField"
+                      name="companyField"
                       onChange={(e) => formChange(e)}
                     />
                   </div>
