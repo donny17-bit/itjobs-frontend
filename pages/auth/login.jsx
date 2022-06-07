@@ -15,16 +15,11 @@ export default function Login() {
 
   const auth = useSelector((state) => state.auth);
 
-  const [msg, setMsg] = useState(auth.msg);
   const [asA, setAsA] = useState("");
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-
-  useEffect(() => {
-    setMsg("");
-  }, []);
 
   const handleChangeForm = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -157,13 +152,13 @@ export default function Login() {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
                   euismod ipsum et dui rhoncus auctor.
                 </p>
-                {!msg ? null : auth.isError ? (
+                {!auth.msg ? null : auth.isError ? (
                   <div className="alert alert-danger" role="alert">
-                    {msg}
+                    {auth.msg}
                   </div>
                 ) : (
                   <div className="alert alert-primary" role="alert">
-                    {msg}
+                    {auth.msg}
                   </div>
                 )}
                 <div className="d-flex">
