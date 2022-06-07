@@ -6,3 +6,10 @@ export const postHire = (id, form) => {
     payload: axios.post(`/hire/${id}`, form),
   };
 };
+
+export const getHire = (id) => {
+  return {
+    type: "GET_HIRE",
+    payload: axios.get(`/hire/${id}`),
+  };
+};

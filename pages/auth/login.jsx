@@ -84,67 +84,68 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>Login</title>
+        <title>Login | itJobs</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div
-        className="bg-light"
+        className="bg-light position-relative"
         // style={{
         //   backgroundColor: "var(--color-yellow)",
 
         //   minHeight: "100vh",
         // }}
       >
-        <div className="container h-100 p-md-5 p-3">
-          <div className="row">
-            <div className="col-md-6 d-none d-md-block">
-              <div
-                // className="col-md-6 d-none d-md-block"
-                style={{
-                  // backgroundImage: `url(/bg-login.png)`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  // background: `linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%),url(/bg-login.png)`,
-                  backgroundImage: `linear-gradient(rgba(94, 80, 161, 0.8)100%, rgba(94, 80, 161, 0.5)100%),url(/bg-login.png)`,
-                  boxSizing: "border-box",
-                  // border: "1px solid",
-                  minHeight: "100%",
-                  // backgroundColor: "black",
-                }}
-              >
-                <div className="p-5">
-                  <Image
-                    src="/logo_login.png"
-                    width={150}
-                    height={50}
-                    alt="logo"
-                  />
+        <div className="container-fluid min-vh-100 h-100 p-md-5 p-3">
+          <div className="row g-0">
+            <div
+              className="col-md-6 d-none d-md-block"
+              // className="col-md-6 d-none d-md-block"
+              style={{
+                // backgroundImage: `url(/bg-login.png)`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                // background: `linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%),url(/bg-login.png)`,
+                backgroundImage: `linear-gradient(rgba(94, 80, 161, 0.8)100%, rgba(94, 80, 161, 0.5)100%),url(/bg-login.png)`,
+                boxSizing: "border-box",
+                // border: "1px solid",
+                // minHeight: "100%",
+                height: "100%",
+                minHeight: "89vh",
+                // backgroundColor: "black",
+              }}
+            >
+              <div className="p-5">
+                {/* <Image
+                  src="/logo_login.png"
+                  width={150}
+                  height={50}
+                  alt="logo"
+                /> */}
 
-                  <div
-                    // className="d-flex justify-content-center align-items-center border"
-                    style={{ marginTop: "50%" }}
-                  >
-                    <div className="">
-                      {/* <Image src="/logo_login.png" width={150} height={50} /> */}
-                    </div>
-
-                    <h1 className="text-light">
-                      Temukan developer berbakat & terbaik di berbagai bidang
-                      keahlian
-                    </h1>
+                <h1 className="text-light fw-bold">
+                  <i className="bi bi-stack me-2 text-light"></i> itJobs
+                </h1>
+                <div
+                  // className="d-flex justify-content-center align-items-center border"
+                  style={{ marginTop: "50%" }}
+                >
+                  <div className="">
+                    {/* <Image src="/logo_login.png" width={150} height={50} /> */}
                   </div>
+
+                  <h1 className="text-light">
+                    Temukan developer berbakat & terbaik di berbagai bidang
+                    keahlian
+                  </h1>
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-6 h-100">
               <div className="d-md-none pb-5">
-                <Image
-                  src="/logo_login_mobile.png"
-                  width={100}
-                  height={30}
-                  alt="logo"
-                />
+                <h1 className="text-primary fw-bold">
+                  <i className="bi bi-stack me-2 "></i> itJobs
+                </h1>
               </div>
               <div className="p-md-5">
                 <h2>Hello, PewPeople </h2>
@@ -208,14 +209,12 @@ export default function Login() {
                 </div> */}
                 <form action="" className="mt-md-4" onSubmit={handleSubmit}>
                   <div className="mb-3">
-                    <label
-                      htmlFor="formGroupExampleInput"
-                      className="form-label"
-                    >
+                    <label htmlFor="formEmail" className="form-label">
                       Email
                     </label>
                     <input
                       type="text"
+                      id="formEmail"
                       // className="form-control p-md-3 border-2 border-danger"
                       className={
                         auth.isError
@@ -230,10 +229,7 @@ export default function Login() {
                     />
                   </div>
                   <div className="mb-3">
-                    <label
-                      htmlFor="formGroupExampleInput2"
-                      className="form-label"
-                    >
+                    <label htmlFor="formPassword" className="form-label">
                       Kata Sandi
                     </label>
                     <input
@@ -244,7 +240,7 @@ export default function Login() {
                           ? "form-control p-md-3 border-2 border-danger"
                           : "form-control p-md-3"
                       }
-                      id="formGroupExampleInput2"
+                      id="formPassword"
                       placeholder="Masukan Kata Sandi"
                       name="password"
                       value={form.password}
@@ -267,13 +263,68 @@ export default function Login() {
                   </button>
                   <p className="text-center mt-md-3 mt-2 ">
                     Anda Belum Punya Akun?
-                    <Link href={`/auth/register`}>
-                      <a style={{ textDecoration: "none", marginLeft: "2px" }}>
-                        Daftar Disini
-                      </a>
-                    </Link>
+                    {/* <Link href={`/auth/register`}> */}
+                    <a
+                      data-bs-toggle="modal"
+                      data-bs-target="#staticBackdrop"
+                      style={{ textDecoration: "none", marginLeft: "2px" }}
+                      className="pe-auto"
+                      href=""
+                    >
+                      Daftar Disini
+                    </a>
+                    {/* </Link> */}
                   </p>
                 </form>
+
+                <div
+                  className="modal fade"
+                  id="staticBackdrop"
+                  data-bs-backdrop="static"
+                  data-bs-keyboard="false"
+                  tabIndex="-1"
+                  aria-labelledby="staticBackdropLabel"
+                  aria-hidden="true"
+                >
+                  <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title" id="staticBackdropLabel">
+                          Daftar Sebagai
+                        </h5>
+                        <button
+                          type="button"
+                          className="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div className="modal-body d-flex justify-content-center">
+                        <button
+                          type="button"
+                          className="btn btn-warning mx-3 w-50 text-light"
+                          data-bs-dismiss="modal"
+                          onClick={() => {
+                            router.push("/auth/register-pekerja");
+                          }}
+                        >
+                          Pekerja
+                        </button>
+                        <button
+                          type="button"
+                          data-bs-dismiss="modal"
+                          className="btn btn-warning mx-3 w-50 text-light"
+                          onClick={() => {
+                            router.push("/auth/register-company");
+                          }}
+                        >
+                          Perekrut
+                        </button>
+                      </div>
+                      <div className="modal-footer"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
