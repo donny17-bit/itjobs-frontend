@@ -78,5 +78,5 @@ a {
 .landing_mailist {
   background-image: url("../public/image/wave.png");
   background-position: bottom;
-  border-radius: 40px 8px;
+  border-radius: 40px 0;
 }
