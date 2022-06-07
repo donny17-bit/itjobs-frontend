@@ -47,3 +47,10 @@ export const resetPassword = (form, asA) => {
     // data: asA,
   };
 };
+
+export const logout = (refreshToken) => {
+  return {
+    type: "LOGOUT",
+    payload: axios.post("/auth/logout", refreshToken),
+  };
+};
