@@ -1,7 +1,9 @@
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function Card(props) {
+  const router = useRouter();
   return (
     <div>
       <div className="d-flex px-3 bg-white pb-3 border border-light ">
@@ -45,19 +47,27 @@ export default function Card(props) {
           </small>
           <div className="d-flex mt-3">
             {props.skills
-              ? props.skills.slice(0, 3).map((v) => (
-                  <button
-                    className="btn btn-sm bg-warning text-white p-1 px-md-3 py-1 me-2 bg-opacity-50 border border-warning"
-                    key={v}
-                  >
-                    {v}
-                  </button>
-                ))
+              ? props.skills
+                  .split(",")
+                  .slice(0, 3)
+                  .map((v) => (
+                    <button
+                      className="btn btn-sm bg-warning text-white p-1 px-md-3 py-1 me-2 bg-opacity-50 border border-warning"
+                      key={v}
+                    >
+                      {v}
+                    </button>
+                  ))
               : ""}
           </div>
         </div>
         <div className="d-none d-lg-inline">
-          <button className="btn mt-5 btn-primary px-4">Lihat Profile</button>
+          <button
+            className="btn mt-5 btn-primary px-4"
+            onClick={() => router.push(`/profile/${props.id}`)}
+          >
+            Lihat Profile
+          </button>
         </div>
       </div>
     </div>
