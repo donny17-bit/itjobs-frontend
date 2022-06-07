@@ -71,9 +71,9 @@ function Home() {
   return (
     <Layout title="Home|itJobs">
       <div
+        className="home_main"
         style={{
           backgroundColor: "#F6F7F8",
-          minHeight: "90vh",
           position: "relative",
         }}
       >
@@ -197,7 +197,7 @@ function Home() {
         </div>
 
         <div className="container mt-5 px-2 px-lg-0">
-          <h2 className="fw-bold d-lg-none ">Web developer</h2>
+          {/* <h2 className="fw-bold d-lg-none ">Web developer</h2> */}
           <div className="shadow-sm p-0 rounded overflow-hidden mt-3 mt-md-0 mx-md-auto w-auto">
             {userData.length &&
               userData.map((v) => (
@@ -209,6 +209,7 @@ function Home() {
                   address={v.address}
                   skills={v.skill}
                   image={v.image}
+                  id={v.id}
                 />
               ))}
           </div>

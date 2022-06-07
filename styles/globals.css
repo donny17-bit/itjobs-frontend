@@ -80,3 +80,12 @@ a {
   background-position: bottom;
   border-radius: 40px 0;
 }
+
+.home_main {
+  min-height: 100vh;
+}
+@media (min-width: 768px) {
+  .home_main {
+    min-height: 90vh;
+  }
+}
