@@ -17,6 +17,7 @@ export default function Navbar() {
   const userData = useSelector((state) => state.user.data[0]);
   const id = Cookies.get("id");
   const asA = Cookies.get("asA");
+  const refreshToken = Cookies.get("refreshToken");
 
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -68,15 +69,15 @@ export default function Navbar() {
     );
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
-    getUserData();
+  const handleLogout = async () => {
+    await dispatch(logout(refreshToken));
     Cookies.remove("asA");
     Cookies.remove("id");
     Cookies.remove("token");
-    // Cookies.remove("refreshToken");
+    Cookies.remove("refreshToken");
     localStorage.clear();
     router.push("/");
+    location.reload();
   };
 
   return (
@@ -248,7 +249,7 @@ export default function Navbar() {
             <h1 className="fs-3 fw-bold text-primary mb-0">
               <i className="bi bi-stack text-primary fs-4 me-2"></i>itJobs
             </h1>
-            {Object.keys(userData).length === 0 ? (
+            {userData ? (
               // Navbar on landing page before login
               <div className="d-flex">
                 <button
