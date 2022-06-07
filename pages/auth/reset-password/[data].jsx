@@ -49,6 +49,7 @@ export default function Login() {
       e.preventDefault();
       // console.log(form);
       await dispatch(resetPassword(form, asA));
+      router.push("/auth/login");
     } catch (error) {
       console.log(error.response);
     }
