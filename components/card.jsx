@@ -8,7 +8,11 @@ export default function Card(props) {
         <div className="mt-4 my-md-3 col-3 col-md-1">
           <div className="position-relative">
             <Image
-              src={"/vercel.svg"}
+              src={
+                props?.image
+                  ? `${process.env.URL_CLOUDINARY}${props.image}`
+                  : `${process.env.URL_CLOUDINARY}profiles/profile-placeholder_zpfgnr.png`
+              }
               layout="responsive"
               objectFit="cover"
               className="rounded-circle"
@@ -18,7 +22,7 @@ export default function Card(props) {
             ></Image>
           </div>
         </div>
-        <div className="flex-grow ms-3">
+        <div className="flex-grow-1 ms-3">
           <h6 className="mt-4 mb-0 fw-bold">{props.fullName}</h6>
           <small className="text-black-50 ">
             {props.type}
@@ -41,7 +45,7 @@ export default function Card(props) {
           </small>
           <div className="d-flex mt-3">
             {props.skills
-              ? props.skills.map((v) => (
+              ? props.skills.slice(0, 3).map((v) => (
                   <button
                     className="btn btn-sm bg-warning text-white p-1 px-md-3 py-1 me-2 bg-opacity-50 border border-warning"
                     key={v}
@@ -51,6 +55,9 @@ export default function Card(props) {
                 ))
               : ""}
           </div>
+        </div>
+        <div className="d-none d-lg-inline">
+          <button className="btn mt-5 btn-primary px-4">Lihat Profile</button>
         </div>
       </div>
     </div>
