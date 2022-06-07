@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "../../../utils/axios";
 import EditCard from "../../../components/editCard";
+import { getUserById } from "../../../store/action/user";
+import { useDispatch, useSelector } from "react-redux";
+import Cookies from "js-cookie";
 
 function Edit() {
   const image = "https://cdn-icons-png.flaticon.com/512/7024/7024005.png";
 
+  const dispatch = useDispatch();
   const router = useRouter();
+  const asA = Cookies.get("asA");
   const { id } = router.query;
   const [data, setData] = useState({});
   const [dataDiri, setDataDiri] = useState({});
@@ -41,24 +46,43 @@ function Edit() {
 
   // belum disimpan di state
   const getUserId = async () => {
-    const result = await axios.get(`user/${router.query.id}`);
-    setData(result.data.data[0]);
+    const result = await dispatch(getUserById(id, asA));
+    setData(result.value.data.data[0]);
 
-    if (result.data.data[0].socialMedia) {
-      setSosMed(result.data.data[0].socialMedia.split(","));
+    if (result.value.data.data[0].socialMedia) {
+      setSosMed(result.value.data.data[0].socialMedia.split(","));
     }
   };
 
-  const submitSkill = (e) => {
+  const submitSkill = async (e) => {
     e.preventDefault();
-    setSkill([...skill, tempSkill]);
+    const result = await axios.post(`skill/${router.query.id}`, {
+      skill: tempSkill,
+    });
+
     document.getElementsByName("skill")[0].value = "";
+
+    alert("sukses add skill");
+    getSkill();
   };
 
-  const deleteSkill = (e, index) => {
+  const getSkill = async () => {
+    const result = await axios.get(`skill/${router.query.id}`);
+    // console.log(result);
+    if (result.data.data) {
+      setSkill(result.data.data);
+    }
+  };
+
+  console.log(skill);
+
+  const deleteSkill = async (e, id) => {
     e.preventDefault();
-    skill.splice(index, 1);
-    setSkill([...skill]);
+    const result = await axios.delete(`skill/${id}`);
+    console.log(result);
+
+    alert("Sukses delete skill");
+    getSkill();
   };
 
   const submitExp = async (e) => {
@@ -93,6 +117,7 @@ function Edit() {
       return;
     }
     getUserId();
+    getSkill();
   }, [id]);
 
   return (
@@ -105,7 +130,12 @@ function Edit() {
               <button className="btn btn-primary">Ubah Password</button>
             </div>
             <div className="d-grid mt-3 mb-3">
-              <button className="btn btn-outline-primary">Kembali</button>
+              <button
+                className="btn btn-outline-primary"
+                onClick={() => router.push(`/profile/${data.id}`)}
+              >
+                Kembali
+              </button>
             </div>
           </div>
           <div className="col">
@@ -280,15 +310,15 @@ function Edit() {
                 </div>
                 <div className="row g-3 mt-3 m-0">
                   {skill
-                    ? skill.map((item, index) => (
+                    ? skill.map((item) => (
                         <div
-                          key={item}
+                          key={item.id}
                           className="col-md-auto me-3 ps-2 pe-2 pt-1 pb-1 profile_edit_skill"
                         >
-                          {item}
+                          {item.skill}
                           <button
                             className="ms-4 btn btn-link p-0"
-                            onClick={(e) => deleteSkill(e, index)}
+                            onClick={(e) => deleteSkill(e, item.id)}
                           >
                             <i
                               className="bi bi-trash"
@@ -298,14 +328,6 @@ function Edit() {
                         </div>
                       ))
                     : ""}
-                </div>
-                <div className="row p-0 mt-3">
-                  <div className="col-12 pe-0 d-grid">
-                    <hr className="ms-2 me-2 col-sm" />
-                    <button type="submit" className="btn btn-outline-warning">
-                      Simpan
-                    </button>
-                  </div>
                 </div>
               </form>
             </div>
@@ -406,11 +428,47 @@ function Edit() {
                 </div>
                 <div className="col-sm-12">
                   <label className="form-label profile_edit_label">
+                    Link publikasi
+                  </label>
+                  <input
+                    type="text"
+                    name="linkPublic"
+                    className="form-control profile_edit_input"
+                    placeholder="Masukkan link"
+                    onChange={(e) => changeApp(e)}
+                  />
+                </div>
+                <div className="col-sm-12">
+                  <label className="form-label profile_edit_label">
                     Link repository
                   </label>
                   <input
                     type="text"
                     name="linkRepo"
+                    className="form-control profile_edit_input"
+                    placeholder="Masukkan link"
+                    onChange={(e) => changeApp(e)}
+                  />
+                </div>
+                <div className="col-sm-12">
+                  <label className="form-label profile_edit_label">
+                    Tempat kerja terkait
+                  </label>
+                  <input
+                    type="text"
+                    name="linkPublic"
+                    className="form-control profile_edit_input"
+                    placeholder="Masukkan tempat kerja"
+                    onChange={(e) => changeApp(e)}
+                  />
+                </div>
+                <div className="col-sm-12">
+                  <label className="form-label profile_edit_label">
+                    Tipe portofolio
+                  </label>
+                  <input
+                    type="text"
+                    name="linkPublic"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan link"
                     onChange={(e) => changeApp(e)}
