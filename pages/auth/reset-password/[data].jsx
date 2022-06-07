@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPassword } from "../../../store/action/auth";
+import Head from "next/head";
 
 export default function Login() {
   const router = useRouter();
@@ -60,17 +61,21 @@ export default function Login() {
 
   return (
     <>
+      <Head>
+        <title>Reset Password | itJobs</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div
-        className="bg-light"
+        className="bg-light position-relative"
         // style={{
         //   backgroundColor: "var(--color-yellow)",
 
         //   minHeight: "100vh",
         // }}
       >
-        <div className="container p-md-5 p-3 ">
-          <div className="row ">
-            <div className="col-md-6 d-none d-md-block">
+        <div className="p-md-5 p-3 min-vh-100 h-100">
+          <div className="row g-0">
+            <div className="col-md-6 d-none d-md-block bg-light">
               <div
                 // className="col-md-6 d-none d-md-block"
                 style={{
@@ -82,17 +87,15 @@ export default function Login() {
                   backgroundImage: `linear-gradient(rgba(94, 80, 161, 0.8)100%, rgba(94, 80, 161, 0.5)100%),url(/bg-login.png)`,
                   boxSizing: "border-box",
                   // border: "1px solid",
-                  minHeight: "100%",
+                  height: "100%",
+                  minHeight: "89vh",
                   // backgroundColor: "black",
                 }}
               >
                 <div className="p-5">
-                  <Image
-                    src="/logo_login.png"
-                    width={150}
-                    height={50}
-                    alt="logo"
-                  />
+                  <h1 className="text-light fw-bold">
+                    <i className="bi bi-stack me-2 text-light"></i> itJobs
+                  </h1>
 
                   <div
                     // className="d-flex justify-content-center align-items-center border"
@@ -110,14 +113,11 @@ export default function Login() {
                 </div>
               </div>
             </div>
-            <div className="col-md-6 ">
+            <div className="col-md-6 h-100">
               <div className="d-md-none pb-5">
-                <Image
-                  src="/logo_login_mobile.png"
-                  width={100}
-                  height={30}
-                  alt="logo"
-                />
+                <h1 className="text-primary fw-bold">
+                  <i className="bi bi-stack me-2"></i> itJobs
+                </h1>
               </div>
               <div className="p-md-5">
                 <h2>Hello, PewPeople </h2>
