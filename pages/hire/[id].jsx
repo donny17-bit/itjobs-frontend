@@ -4,7 +4,7 @@ import Cookie from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { postHire } from "../../store/action/hire";
 import { useRouter } from "next/router";
-import { getSkill, getUserById } from "../../store/action/user";
+import { getUserById } from "../../store/action/user";
 import Layout from "../../components/Layout/MainLayout";
 
 function Hire() {
@@ -30,21 +30,14 @@ function Hire() {
       dispatch(getUserById(router.query.id, "pekerja"))
         .then((res) => {
           const dataUser = res.value.data.data[0];
-
-          dispatch(getSkill(router.query.id))
-            .then((res) =>
-              setData({
-                ...dataUser,
-                skill: res.value.data.data.map((v) => v.skill),
-              })
-            )
-            .catch((err) => alert(err));
+          setData(dataUser);
         })
         .catch((err) => alert(err));
     } catch (error) {
       console.log(error);
     }
   };
+  console.log(data);
 
   const handleChangeForm = ({ target }) => {
     if (target.name == "file") {
@@ -126,7 +119,7 @@ function Hire() {
             <h4>Skill</h4>
             <div className="d-flex flex-wrap fw-light" style={{}}>
               {data?.skill
-                ? data.skill.map((v, i) => (
+                ? data.skill.split(",").map((v, i) => (
                     <React.Fragment key={i}>
                       <div>
                         <button className=" btn btn-sm bg-warning text-white p-1 px-md-3 py-1 me-2 mt-1 bg-opacity-50 border border-warning">
@@ -196,7 +189,7 @@ function Hire() {
 
             {form?.file && (
               <div className=" align-items-center">
-                <div className="d-flex bg-white mt-3 col-6 rounded overflow-hidden">
+                <div className="d-flex bg-white mt-3 col-12 col-md-6 rounded overflow-hidden">
                   <div className="bg-danger text-white p-0 fs-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
