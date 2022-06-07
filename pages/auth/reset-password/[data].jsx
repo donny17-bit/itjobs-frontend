@@ -143,7 +143,7 @@ export default function Login() {
                       Kata Sandi Baru
                     </label>
                     <input
-                      type="text"
+                      type="password"
                       className="form-control p-md-3"
                       id="formGroupExampleInput"
                       placeholder="Masukan Kata Sandi Baru"
@@ -160,7 +160,7 @@ export default function Login() {
                       Konfirmasi Kata Sandi Baru
                     </label>
                     <input
-                      type="text"
+                      type="password"
                       className="form-control p-md-3"
                       id="formGroupExampleInput2"
                       placeholder="Masukan Konfirmasi Kata Sandi Baru"
