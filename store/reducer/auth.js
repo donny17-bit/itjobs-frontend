@@ -118,7 +118,7 @@ const auth = (state = initialState, action) => {
         isLoading: false,
         isError: false,
         data: [],
-        msg: action.payload.data.msg,
+        msg: "",
       };
 
     case "LOGOUT_REJECTED":
