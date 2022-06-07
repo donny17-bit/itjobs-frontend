@@ -53,6 +53,7 @@ export default function Login() {
 
       // setCookies
       Cookies.set("token", result.value.data.data.token);
+      Cookies.set("refreshToken", result.value.data.data.refreshToken);
       Cookies.set("id", result.value.data.data.id);
       Cookies.set("asA", asA);
 
