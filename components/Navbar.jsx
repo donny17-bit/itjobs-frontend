@@ -1,17 +1,30 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Cookies from "js-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { getHire } from "../store/action/hire";
+import { logout } from "../store/action/auth";
+import { getUserById } from "../store/action/user";
 
 export default function Navbar() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const notifRef = useRef();
   const profileRef = useRef();
   const path = router.pathname;
 
-  const userData = {};
+  const userData = useSelector((state) => state.user.data[0]);
+  const id = Cookies.get("id");
+  const asA = Cookies.get("asA");
 
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [menu, setMenu] = useState("home");
+
+  useEffect(() => {
+    getHireNotif();
+  }, []);
 
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
@@ -41,6 +54,31 @@ export default function Navbar() {
     };
   }, [isNotifOpen, isProfileMenuOpen]);
 
+  const getUserData = () => {
+    dispatch(getUserById(id, asA));
+  };
+
+  const getHireNotif = () => {
+    dispatch(getHire(id));
+  };
+
+  const handleProfileBtn = () => {
+    router.push(
+      asA === "pekerja" ? `/profile/${id}` : `/profile/company/${id}`
+    );
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    getUserData();
+    Cookies.remove("asA");
+    Cookies.remove("id");
+    Cookies.remove("token");
+    // Cookies.remove("refreshToken");
+    localStorage.clear();
+    router.push("/");
+  };
+
   return (
     <>
       {/* Navbar for screen sm+ */}
@@ -50,10 +88,14 @@ export default function Navbar() {
             <i className="bi bi-stack text-primary fs-4 me-2"></i>itJobs
           </h1>
           {path === "/" ? (
-            Object.keys(userData).length === 0 ? (
+            !userData ? (
               // Navbar on landing page before login size sm+
               <div className="d-flex">
-                <button type="button" className="btn btn-outline-primary me-2">
+                <button
+                  type="button"
+                  className="btn btn-outline-primary me-2"
+                  onClick={() => router.push("/auth/login")}
+                >
                   Masuk
                 </button>
                 <div className="dropdown">
@@ -63,7 +105,7 @@ export default function Navbar() {
                     id="dropdownDaftar"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
-                    data-bs-offset="10,20"
+                    data-bs-offset="0,10"
                   >
                     Daftar
                   </button>
@@ -72,12 +114,20 @@ export default function Navbar() {
                     aria-labelledby="dropdownDaftar"
                   >
                     <li>
-                      <button type="button" className="dropdown-item py-2">
+                      <button
+                        type="button"
+                        className="dropdown-item py-2"
+                        onClick={() => router.push("auth/register-pekerja")}
+                      >
                         Sebagai Pekerja
                       </button>
                     </li>
                     <li>
-                      <button type="button" className="dropdown-item py-2">
+                      <button
+                        type="button"
+                        className="dropdown-item py-2"
+                        onClick={() => router.push("auth/register-company")}
+                      >
                         Sebagai Perusahaan
                       </button>
                     </li>
@@ -86,9 +136,22 @@ export default function Navbar() {
               </div>
             ) : (
               // Navbar on landing page after login size sm+
-              <button type="button" className="btn btn-primary">
-                Profile
-              </button>
+              <div>
+                <button
+                  type="button"
+                  className="btn btn-primary me-2"
+                  onClick={handleProfileBtn}
+                >
+                  Profile
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-primary"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </div>
             )
           ) : (
             // Navbar on any page other than lading page after login size sm+
@@ -159,12 +222,14 @@ export default function Navbar() {
                     <button
                       type="button"
                       className="dropdown-item py-2 rounded-top"
+                      onClick={handleProfileBtn}
                     >
                       Profile
                     </button>
                     <button
                       type="button"
                       className="dropdown-item py-2 rounded-bottom"
+                      onClick={handleLogout}
                     >
                       Logout
                     </button>
@@ -177,7 +242,7 @@ export default function Navbar() {
       </nav>
 
       {/* Navbar on screen xs */}
-      {path !== "/" ? (
+      {path === "/" ? (
         <nav className="container-fluid bg-white py-3 fixed-top d-block d-sm-none">
           <div className="container-lg d-flex justify-content-between align-items-center">
             <h1 className="fs-3 fw-bold text-primary mb-0">
@@ -186,7 +251,11 @@ export default function Navbar() {
             {Object.keys(userData).length === 0 ? (
               // Navbar on landing page before login
               <div className="d-flex">
-                <button type="button" className="btn btn-outline-primary me-2">
+                <button
+                  type="button"
+                  className="btn btn-outline-primary me-2"
+                  onClick={() => router.push("/auth/login")}
+                >
                   Masuk
                 </button>
                 <div className="dropdown">
@@ -205,12 +274,20 @@ export default function Navbar() {
                     aria-labelledby="dropdownDaftar"
                   >
                     <li>
-                      <button type="button" className="dropdown-item py-2">
+                      <button
+                        type="button"
+                        className="dropdown-item py-2"
+                        onClick={() => router.push("/auth/register-pekerja")}
+                      >
                         Sebagai Pekerja
                       </button>
                     </li>
                     <li>
-                      <button type="button" className="dropdown-item py-2">
+                      <button
+                        type="button"
+                        className="dropdown-item py-2"
+                        onClick={() => router.push("/auth/register-company")}
+                      >
                         Sebagai Perusahaan
                       </button>
                     </li>
@@ -219,9 +296,22 @@ export default function Navbar() {
               </div>
             ) : (
               // Navbar on landing page after login
-              <button type="button" className="btn btn-primary">
-                Profile
-              </button>
+              <div>
+                <button
+                  type="button"
+                  className="btn btn-primary me-2"
+                  onClick={handleProfileBtn}
+                >
+                  Profile
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-primary"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </div>
             )}
           </div>
         </nav>
@@ -229,31 +319,66 @@ export default function Navbar() {
         // Navbar on any page other than landing page
         <nav
           className="container-fluid bg-white py-4 fixed-bottom d-block d-sm-none"
-          style={{}}
+          style={{
+            borderRadius: "24px 24px 0 0",
+            boxShadow: "0 -0.5rem 1rem rgba(0, 0, 0, 0.15)",
+          }}
         >
           <div className="container">
             <div className="row">
               <div
                 className="col-3 d-flex justify-content-center align-items-center"
                 role="button"
+                onClick={() => {
+                  setMenu("home");
+                  router.push("/home");
+                }}
               >
-                <i className="d-block bi bi-grid fs-4"></i>
+                {menu === "home" ? (
+                  <i className="d-block bi bi-grid-fill fs-4 text-primary"></i>
+                ) : (
+                  <i className="d-block bi bi-grid fs-4"></i>
+                )}
               </div>
               <div
                 className="col-3 d-flex justify-content-center align-items-center"
                 role="button"
+                onClick={() => {
+                  setMenu("search");
+                  // router.push("/search");
+                }}
               >
-                <i className="d-block bi bi-search fs-4"></i>
+                {menu === "search" ? (
+                  <i className="d-block bi bi-search fs-4 text-primary"></i>
+                ) : (
+                  <i className="d-block bi bi-search fs-4"></i>
+                )}
               </div>
               <div
                 className="col-3 d-flex justify-content-center align-items-center"
                 role="button"
+                onClick={() => {
+                  setMenu("chat");
+                  // router.push("/chat");
+                }}
               >
-                <i className="d-block bi bi-chat fs-4"></i>
+                {menu === "chat" ? (
+                  <i className="d-block bi bi-chat-fill fs-4 text-primary"></i>
+                ) : (
+                  <i className="d-block bi bi-chat fs-4"></i>
+                )}
               </div>
               <div
                 className="col-3 d-flex justify-content-center align-items-center"
                 role="button"
+                onClick={() => {
+                  setMenu("profile");
+                  router.push(
+                    asA === "pekerja"
+                      ? `/profile/${id}`
+                      : `/profile/company/${id}`
+                  );
+                }}
               >
                 <Image
                   d-block
@@ -264,7 +389,9 @@ export default function Navbar() {
                   width={28}
                   height={28}
                   objectFit="cover"
-                  style={{ borderRadius: "50%" }}
+                  style={{
+                    borderRadius: "50%",
+                  }}
                 />
               </div>
             </div>
