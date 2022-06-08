@@ -16,11 +16,11 @@ function EditCompany() {
   const company = useSelector((state) => state.company);
 
   const [data, setData] = useState(company.data[0]);
-  const [form, setForm] = useState({});
+  const [sosMed, setSosMed] = useState(data.socialMedia.split(","));
+  const [form, setForm] = useState(data);
   const [simpan, setSimpan] = useState(false);
-  // const [userImg, setUserImg] = useState();
   const [profileImg, setProfileImg] = useState({});
-  const [image, setImage] = useState(data.image);
+  const [image, setImage] = useState(process.env.URL_CLOUDINARY + data.image);
 
   const getCompanyId = async (id) => {
     const result = await dispatch(getCompanyById(id));
@@ -51,21 +51,11 @@ function EditCompany() {
     getCompanyId(idCompany);
     // socialMedia: `${dataDiri.ig},${dataDiri.github},${dataDiri.gitlab}`,
   };
-  // make sure id loaded
-  // useEffect(() => {
-  //   if (!idCompany) {
-  //     return;
-  //   }
-  //   if (company.data.length == 0) {
-  //     getCompanyId(idCompany);
-  //   }
-  // }, [idCompany]);
 
   const imgChange = (e) => {
     const { name, value, files } = e.target;
 
     setProfileImg({ ...profileImg, image: files[0] });
-    // setUserImg(URL.createObjectURL(files[0]));
     setImage(URL.createObjectURL(files[0]));
   };
 
@@ -81,7 +71,6 @@ function EditCompany() {
       formData
     );
     console.log(result);
-    // setUserImg(null);
     setSimpan(false);
 
     alert("sukses update profile image");
@@ -176,6 +165,7 @@ function EditCompany() {
                       placeholder="Masukkan nama perusahaan"
                       name="companyName"
                       onChange={(e) => formChange(e)}
+                      value={form.companyName}
                     />
                   </div>
                   <div className="col-sm-12">
@@ -188,6 +178,7 @@ function EditCompany() {
                       placeholder="Masukan bidang perusahaan ex : Financial"
                       name="companyField"
                       onChange={(e) => formChange(e)}
+                      value={form.companyField}
                     />
                   </div>
                   <div className="col-sm-12">
@@ -200,6 +191,7 @@ function EditCompany() {
                       placeholder="Masukkan domisili"
                       name="address"
                       onChange={(e) => formChange(e)}
+                      value={form.address}
                     />
                   </div>
                   <div className="col-md-12">
@@ -213,6 +205,7 @@ function EditCompany() {
                       rows="5"
                       placeholder="Tulis deskripsi singkat"
                       onChange={(e) => formChange(e)}
+                      value={form.description}
                     ></textarea>
                   </div>
                   <div className="col-md-12">
@@ -225,6 +218,7 @@ function EditCompany() {
                       placeholder="Masukkan email"
                       name="email"
                       onChange={(e) => formChange(e)}
+                      value={form.email}
                     />
                   </div>
                   <div className="col-md-12">
@@ -237,6 +231,7 @@ function EditCompany() {
                       placeholder="Masukkan nomor telepon"
                       name="noTelp"
                       onChange={(e) => formChange(e)}
+                      value={form.noTelp}
                     />
                   </div>
                   <div className="col-md-12">
@@ -249,6 +244,7 @@ function EditCompany() {
                       placeholder="Masukkan username IG"
                       name="ig"
                       onChange={(e) => formChange(e)}
+                      value={sosMed[0]}
                     />
                   </div>
 
@@ -262,6 +258,7 @@ function EditCompany() {
                       placeholder="Masukkan LinkedIn"
                       name="linkedin"
                       onChange={(e) => formChange(e)}
+                      value={sosMed[1]}
                     />
                   </div>
                 </div>
