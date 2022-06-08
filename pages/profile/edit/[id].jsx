@@ -5,6 +5,7 @@ import EditCard from "../../../components/editCard";
 import { getUserById } from "../../../store/action/user";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
+import Layout from "../../../components/Layout/MainLayout";
 
 function Edit() {
   const image = "https://cdn-icons-png.flaticon.com/512/7024/7024005.png";
@@ -172,7 +173,7 @@ function Edit() {
   }, [id]);
 
   return (
-    <>
+    <Layout title={"Edit Profile | itJobs"}>
       <div className="container-fluid profile_container">
         <div className="row m-0">
           <div className="col-md-3 profile_card_container p-0">
@@ -540,7 +541,7 @@ function Edit() {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 

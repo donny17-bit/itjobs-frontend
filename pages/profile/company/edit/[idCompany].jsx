@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "../../../../utils/axios";
-
+import Layout from "../../../../components/Layout/MainLayout";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCompanyById,
@@ -54,7 +54,7 @@ function EditCompany() {
   // }, [idCompany]);
 
   return (
-    <>
+    <Layout title={"Edit Profile | itJobs"}>
       <div className="container-fluid profile_container">
         <form onSubmit={submitForm}>
           <div className="row m-0">
@@ -88,7 +88,7 @@ function EditCompany() {
                 </div>
               </div>
               <div className="d-grid mt-3 mb-3">
-                <button type="submit" className="btn btn-outline-primary">
+                <button type="submit" className="btn btn-primary">
                   Simpan
                 </button>
               </div>
@@ -214,7 +214,7 @@ function EditCompany() {
           </div>
         </form>
       </div>
-    </>
+    </Layout>
   );
 }
 

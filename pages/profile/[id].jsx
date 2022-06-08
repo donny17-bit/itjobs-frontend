@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "../../utils/axios";
 import ProfileCard from "../../components/profileCard";
-
+import Layout from "../../components/Layout/MainLayout";
 import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../store/action/user";
@@ -69,7 +69,7 @@ function Profile() {
   };
 
   return (
-    <>
+    <Layout title={"Profile | itJobs"}>
       <div className="container-fluid profile_container">
         <div className="row m-0">
           <div className="col-md-3 profile_card_container p-0">
@@ -170,7 +170,7 @@ function Profile() {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 
