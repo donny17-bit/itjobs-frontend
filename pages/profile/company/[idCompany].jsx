@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "../../../utils/axios";
-
+import Layout from "../../../components/Layout/MainLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { getCompanyById } from "../../../store/action/company";
+import { logout } from "../../../store/action/auth";
+import Cookies from "js-cookie";
 
 function Company() {
   const defaultImg = "https://cdn-icons-png.flaticon.com/512/7024/7024005.png";
@@ -38,13 +40,27 @@ function Company() {
     setData(company.data[0]);
   }, [idCompany]);
 
+  const handleLogout = async () => {
+    await dispatch(logout(Cookies.get("refreshToken")));
+    Cookies.remove("asA");
+    Cookies.remove("id");
+    Cookies.remove("token");
+    Cookies.remove("refreshToken");
+    localStorage.clear();
+    window.location.href = "/";
+  };
+
   return (
-    <>
+    <Layout title={"Profile | itJobs"}>
       <div className="container-fluid profile_company_container">
         <div className="col-sm text-center profile_company_card p-5">
           <div className="text-center">
             <img
-              src={data.image ? data.image : defaultImg}
+              src={
+                data.image
+                  ? process.env.URL_CLOUDINARY + data.image
+                  : defaultImg
+              }
               className=" border profile_company_img"
               alt="..."
             />
@@ -66,6 +82,12 @@ function Company() {
             onClick={() => router.push(`edit/${data.id}`)}
           >
             Edit profile
+          </button>
+          <button
+            className="d-block d-sm-none btn btn-outline-primary w-100 mt-2"
+            onClick={handleLogout}
+          >
+            Logout
           </button>
           <div className="row justify-content-center mt-3">
             <div className="col col-sm-4 text-center">
@@ -122,7 +144,7 @@ function Company() {
           </div> */}
       </div>
       {/* </div> */}
-    </>
+    </Layout>
   );
 }
 
