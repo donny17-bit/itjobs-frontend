@@ -66,7 +66,7 @@ function Home() {
   };
 
   return (
-    <Layout title="Home|itJobs">
+    <Layout title="Home | itJobs">
       <div
         className="home_main"
         style={{

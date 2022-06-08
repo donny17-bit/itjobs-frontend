@@ -15,6 +15,7 @@ export default function Navbar() {
   const path = router.pathname;
 
   const userData = useSelector((state) => state.user.data[0]);
+  const [notifData, setNotifData] = useState([]);
   const id = Cookies.get("id");
   const asA = Cookies.get("asA");
   const refreshToken = Cookies.get("refreshToken");
@@ -60,7 +61,9 @@ export default function Navbar() {
   };
 
   const getHireNotif = () => {
-    dispatch(getHire(id));
+    dispatch(getHire(id)).then((res) =>
+      setNotifData(res.value.data.data.map((v) => v))
+    );
   };
 
   const handleProfileBtn = () => {
@@ -76,8 +79,7 @@ export default function Navbar() {
     Cookies.remove("token");
     Cookies.remove("refreshToken");
     localStorage.clear();
-    router.push("/");
-    location.reload();
+    window.location = "/";
   };
 
   return (
@@ -350,11 +352,20 @@ export default function Navbar() {
                 }}
               >
                 {menu === "search" ? (
-                  <i className="d-block bi bi-search fs-4 text-primary"></i>
+                  <i
+                    className="d-block bi bi-bell fs-4 text-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  ></i>
                 ) : (
-                  <i className="d-block bi bi-search fs-4"></i>
+                  <i
+                    className="d-block bi bi-bell fs-4"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  ></i>
                 )}
               </div>
+
               <div
                 className="col-3 d-flex justify-content-center align-items-center"
                 role="button"
@@ -399,6 +410,62 @@ export default function Navbar() {
           </div>
         </nav>
       )}
+
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-fullscreen">
+          <div className="modal-content">
+            <div className="modal-header border-0 mt-3">
+              <button
+                type="button"
+                className="modal-title btn me-auto ms-0 ps-0"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <i class="bi bi-chevron-left fs-2"></i>
+              </button>
+              <h5 id="exampleModalLabel" className="me-auto">
+                Notifikasi
+              </h5>
+            </div>
+            <div className="modal-body p-3">
+              {notifData.length && (
+                <button className="btn text-primary">
+                  Tandai sudah dibaca ({notifData.length})
+                </button>
+              )}
+              {notifData.length ? (
+                notifData.map((v) => (
+                  <div className=" border border-light p-3">
+                    <div>
+                      Dari: {v.companyName}
+                      <br />
+                      Subject: {v.subject}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="col d-flex flex-column align-items-center justify-content-center h-100">
+                  <Image
+                    src="/image/emptyNotif.png"
+                    alt="empty notification"
+                    width={118}
+                    height={76}
+                    objectFit="contain"
+                    className=""
+                  />
+                  Belum ada notifikasi
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
