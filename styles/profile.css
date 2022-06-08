@@ -273,6 +273,30 @@
   color: #1f2a36 !important;
 }
 
+.profile_outline_btn {
+  /* color: #5e50a1 !important; */
+  /* background-color: #8678c9 !important; */
+  border-color: #8678c9 !important;
+  color: #8678c9 !important;
+}
+
+.profile_outline_btn:hover {
+  background-color: #5e50a1 !important;
+  border-color: #5e50a1 !important;
+  color: #ffffff !important;
+}
+
+.profile_btn {
+  /* color: #5e50a1 !important; */
+  background-color: #8678c9 !important;
+  border-color: #8678c9 !important;
+}
+
+.profile_btn:hover {
+  background-color: #5e50a1 !important;
+  border-color: #5e50a1 !important;
+}
+
 .profile_edit_btn {
   text-decoration: none !important;
 

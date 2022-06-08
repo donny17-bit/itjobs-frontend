@@ -35,7 +35,7 @@ export default function ProfileCard(props) {
           <div className="d-grid mb-3">
             {asA == "pekerja" ? (
               <button
-                className="btn btn-primary"
+                className="btn btn-primary profile_btn"
                 onClick={() => router.push(`/profile/edit/${data.id}`)}
               >
                 Edit

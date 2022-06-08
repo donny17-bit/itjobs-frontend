@@ -45,7 +45,10 @@ export default function EditCard(props) {
             </label>
           </p>
           {simpan ? (
-            <button className="btn btn-primary" onClick={props.saveImg}>
+            <button
+              className="btn btn-primary profile_btn"
+              onClick={props.saveImg}
+            >
               Simpan
             </button>
           ) : (
