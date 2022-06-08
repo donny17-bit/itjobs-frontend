@@ -90,13 +90,12 @@ a {
 }
 
 .home_main {
-  min-height: 100vh;
+  min-height: 90vh;
 }
 
 @media (min-width: 768px) {
   .home_main {
     min-height: 100vh;
-    padding-bottom: 120px;
   }
 }
 
