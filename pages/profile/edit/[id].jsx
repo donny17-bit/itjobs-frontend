@@ -2,14 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "../../../utils/axios";
 import EditCard from "../../../components/editCard";
+import ChangePass from "../../../components/changePass";
 import { getUserById } from "../../../store/action/user";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
+import Layout from "../../../components/Layout/MainLayout";
 
 function Edit() {
   const image = "https://cdn-icons-png.flaticon.com/512/7024/7024005.png";
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   console.log(user);
 
@@ -69,6 +75,11 @@ function Edit() {
     setSimpan(true);
   };
 
+  const handleChangePass = (e) => {
+    e.preventDefault();
+    setShow(true);
+  };
+
   const getUserId = async () => {
     const result = await dispatch(getUserById(id, asA));
     setData(result.value.data.data[0]);
@@ -109,13 +120,9 @@ function Edit() {
 
   const submitExp = async (e) => {
     e.preventDefault();
-    console.log(exp);
 
     const result = await axios.post(`experience/${id}`, exp);
 
-    console.log(result);
-
-    alert("sukses create experience");
     setExp({});
   };
 
@@ -172,7 +179,7 @@ function Edit() {
   }, [id]);
 
   return (
-    <>
+    <Layout title={"Edit Profile | itJobs"}>
       <div className="container-fluid profile_container">
         <div className="row m-0">
           <div className="col-md-3 profile_card_container p-0">
@@ -185,11 +192,22 @@ function Edit() {
               editBtn={editBtn}
             />
             <div className="d-grid mt-3 mb-3">
-              <button className="btn btn-primary">Ubah Password</button>
+              <button
+                className="btn btn-primary profile_btn"
+                onClick={(e) => handleChangePass(e)}
+              >
+                Ubah Password
+              </button>
+              <ChangePass
+                show={show}
+                handleShow={handleShow}
+                handleClose={handleClose}
+                data={data}
+              />
             </div>
             <div className="d-grid mt-3 mb-3">
               <button
-                className="btn btn-outline-primary"
+                className="btn btn-outline-primary profile_outline_btn"
                 onClick={() => router.push(`/profile/${data.id}`)}
               >
                 Kembali
@@ -540,7 +558,7 @@ function Edit() {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 

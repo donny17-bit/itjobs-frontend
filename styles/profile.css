@@ -40,6 +40,7 @@
 .profile_company_img {
   margin-top: 50px;
   width: 150px !important;
+  height: 150px !important;
   border-radius: 75px !important;
 }
 
@@ -52,7 +53,6 @@
 }
 
 .profile_text {
-  font-family: "Nunito", sans-serif;
   font-style: normal !important;
   font-weight: 400 !important;
   font-size: 14px !important;
@@ -63,7 +63,6 @@
 }
 
 .profile_name {
-  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 22px;
@@ -74,7 +73,6 @@
 }
 
 .profile_job {
-  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -85,7 +83,6 @@
 }
 
 .profile_role {
-  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -96,7 +93,6 @@
 }
 
 .profile_skill_title {
-  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 22px;
@@ -107,7 +103,6 @@
 }
 
 .profile_skill_list {
-  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
@@ -122,7 +117,6 @@
   border: 1px solid #fbb017;
   border-radius: 4px;
 
-  font-family: "Nunito", sans-serif;
   font-style: normal !important;
   font-weight: 600 !important;
   font-size: 12px !important;
@@ -162,7 +156,6 @@
 }
 
 .profile_edit_title {
-  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 22px;
@@ -171,7 +164,6 @@
 }
 
 .profile_menu_active {
-  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 22px;
@@ -182,7 +174,6 @@
 }
 
 .profile_menu_disable {
-  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 22px;
@@ -191,7 +182,6 @@
 }
 
 .profile_porto_text {
-  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -230,7 +220,6 @@
 }
 
 .profile_exp_job {
-  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -240,7 +229,6 @@
 }
 
 .profile_exp_place {
-  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -251,7 +239,6 @@
 }
 
 .profile_exp_time {
-  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -262,7 +249,6 @@
 }
 
 .profile_exp_desc {
-  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -272,10 +258,33 @@
   color: #1f2a36 !important;
 }
 
+.profile_outline_btn {
+  /* color: #5e50a1 !important; */
+  /* background-color: #8678c9 !important; */
+  border-color: #8678c9 !important;
+  color: #8678c9 !important;
+}
+
+.profile_outline_btn:hover {
+  background-color: #5e50a1 !important;
+  border-color: #5e50a1 !important;
+  color: #ffffff !important;
+}
+
+.profile_btn {
+  /* color: #5e50a1 !important; */
+  background-color: #8678c9 !important;
+  border-color: #8678c9 !important;
+}
+
+.profile_btn:hover {
+  background-color: #5e50a1 !important;
+  border-color: #5e50a1 !important;
+}
+
 .profile_edit_btn {
   text-decoration: none !important;
 
-  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 600 !important;
   font-size: 22px !important;
@@ -286,7 +295,6 @@
 }
 
 .profile_edit_label {
-  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;

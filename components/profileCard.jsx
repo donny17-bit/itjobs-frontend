@@ -1,20 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
+import { logout } from "../store/action/auth";
 
 export default function ProfileCard(props) {
   const router = useRouter();
+  const dispatch = useDispatch();
+
   const { data, sosMed, skill, asA } = props;
   const defaultImg = "https://cdn-icons-png.flaticon.com/512/7024/7024005.png";
+
+  const handleLogout = async () => {
+    await dispatch(logout(Cookies.get("refreshToken")));
+    Cookies.remove("asA");
+    Cookies.remove("id");
+    Cookies.remove("token");
+    Cookies.remove("refreshToken");
+    localStorage.clear();
+    window.location.href = "/";
+  };
+  const image = process.env.URL_CLOUDINARY + data.image;
+
   return (
     <>
       <div className="card pb-5 pt-4 profile_card">
         <div className="text-center">
           <img
-            src={
-              data.image
-                ? `${process.env.URL_CLOUDINARY}/${data.image}`
-                : defaultImg
-            }
+            src={data.image ? image : defaultImg}
             className="card-img-top border profile_img"
             alt=".."
           />
@@ -35,12 +48,20 @@ export default function ProfileCard(props) {
 
           <div className="d-grid mb-3">
             {asA == "pekerja" ? (
-              <button
-                className="btn btn-primary"
-                onClick={() => router.push(`/profile/edit/${data.id}`)}
-              >
-                Edit
-              </button>
+              <>
+                <button
+                  className="btn btn-primary profile_btn"
+                  onClick={() => router.push(`/profile/edit/${data.id}`)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="d-block d-sm-none mt-2 btn btn-outline-primary"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </>
             ) : (
               <button
                 className="btn btn-primary"

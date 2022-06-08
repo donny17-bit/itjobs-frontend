@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "../../../../utils/axios";
-
+import Layout from "../../../../components/Layout/MainLayout";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCompanyById,
@@ -16,7 +16,11 @@ function EditCompany() {
   const company = useSelector((state) => state.company);
 
   const [data, setData] = useState(company.data[0]);
-  const [form, setForm] = useState({});
+  const [sosMed, setSosMed] = useState(data.socialMedia.split(","));
+  const [form, setForm] = useState(data);
+  const [simpan, setSimpan] = useState(false);
+  const [profileImg, setProfileImg] = useState({});
+  const [image, setImage] = useState(process.env.URL_CLOUDINARY + data.image);
 
   const getCompanyId = async (id) => {
     const result = await dispatch(getCompanyById(id));
@@ -28,6 +32,10 @@ function EditCompany() {
 
   const formChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const editBtn = (e) => {
+    setSimpan(true);
   };
 
   const submitForm = async (e) => {
@@ -43,18 +51,34 @@ function EditCompany() {
     getCompanyId(idCompany);
     // socialMedia: `${dataDiri.ig},${dataDiri.github},${dataDiri.gitlab}`,
   };
-  // make sure id loaded
-  // useEffect(() => {
-  //   if (!idCompany) {
-  //     return;
-  //   }
-  //   if (company.data.length == 0) {
-  //     getCompanyId(idCompany);
-  //   }
-  // }, [idCompany]);
+
+  const imgChange = (e) => {
+    const { name, value, files } = e.target;
+
+    setProfileImg({ ...profileImg, image: files[0] });
+    setImage(URL.createObjectURL(files[0]));
+  };
+
+  const saveImg = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    for (const dataForm in profileImg) {
+      formData.append(dataForm, profileImg[dataForm]);
+    }
+
+    const result = await axios.patch(
+      `company/updateCompanyImage/${idCompany}`,
+      formData
+    );
+    console.log(result);
+    setSimpan(false);
+
+    alert("sukses update profile image");
+    getCompanyId(idCompany);
+  };
 
   return (
-    <>
+    <Layout title={"Edit Profile | itJobs"}>
       <div className="container-fluid profile_container">
         <form onSubmit={submitForm}>
           <div className="row m-0">
@@ -62,15 +86,36 @@ function EditCompany() {
               <div className="card pb-1 pt-4 profile_card">
                 <div className="text-center">
                   <img
-                    src={data.image ? data.image : defaultImage}
+                    src={data.image ? image : defaultImage}
                     className="card-img-top border profile_img"
                     alt="..."
                   />
                   <p>
-                    <button className="btn btn-link profile_edit_btn">
+                    <input
+                      type="file"
+                      id="actual-btn"
+                      name="userImg"
+                      onChange={(e) => imgChange(e)}
+                      hidden
+                    />
+                    <label
+                      for="actual-btn"
+                      className="btn btn-link profile_edit_btn mb-0 pb-0"
+                      onClick={(e) => editBtn(e)}
+                    >
                       <i className="bi bi-pencil"></i> Edit
-                    </button>
+                    </label>
                   </p>
+                  {simpan ? (
+                    <button
+                      className="btn btn-primary"
+                      onClick={(e) => saveImg(e)}
+                    >
+                      Simpan
+                    </button>
+                  ) : (
+                    ``
+                  )}
                 </div>
                 <div className="card-body mt-2">
                   <h5 className="card-title profile_name pb-0 mb-0">
@@ -88,7 +133,7 @@ function EditCompany() {
                 </div>
               </div>
               <div className="d-grid mt-3 mb-3">
-                <button type="submit" className="btn btn-outline-primary">
+                <button type="submit" className="btn btn-primary">
                   Simpan
                 </button>
               </div>
@@ -120,6 +165,7 @@ function EditCompany() {
                       placeholder="Masukkan nama perusahaan"
                       name="companyName"
                       onChange={(e) => formChange(e)}
+                      value={form.companyName}
                     />
                   </div>
                   <div className="col-sm-12">
@@ -132,6 +178,7 @@ function EditCompany() {
                       placeholder="Masukan bidang perusahaan ex : Financial"
                       name="companyField"
                       onChange={(e) => formChange(e)}
+                      value={form.companyField}
                     />
                   </div>
                   <div className="col-sm-12">
@@ -144,6 +191,7 @@ function EditCompany() {
                       placeholder="Masukkan domisili"
                       name="address"
                       onChange={(e) => formChange(e)}
+                      value={form.address}
                     />
                   </div>
                   <div className="col-md-12">
@@ -157,6 +205,7 @@ function EditCompany() {
                       rows="5"
                       placeholder="Tulis deskripsi singkat"
                       onChange={(e) => formChange(e)}
+                      value={form.description}
                     ></textarea>
                   </div>
                   <div className="col-md-12">
@@ -169,6 +218,7 @@ function EditCompany() {
                       placeholder="Masukkan email"
                       name="email"
                       onChange={(e) => formChange(e)}
+                      value={form.email}
                     />
                   </div>
                   <div className="col-md-12">
@@ -181,6 +231,7 @@ function EditCompany() {
                       placeholder="Masukkan nomor telepon"
                       name="noTelp"
                       onChange={(e) => formChange(e)}
+                      value={form.noTelp}
                     />
                   </div>
                   <div className="col-md-12">
@@ -193,6 +244,7 @@ function EditCompany() {
                       placeholder="Masukkan username IG"
                       name="ig"
                       onChange={(e) => formChange(e)}
+                      value={sosMed[0]}
                     />
                   </div>
 
@@ -206,6 +258,7 @@ function EditCompany() {
                       placeholder="Masukkan LinkedIn"
                       name="linkedin"
                       onChange={(e) => formChange(e)}
+                      value={sosMed[1]}
                     />
                   </div>
                 </div>
@@ -214,7 +267,7 @@ function EditCompany() {
           </div>
         </form>
       </div>
-    </>
+    </Layout>
   );
 }
 

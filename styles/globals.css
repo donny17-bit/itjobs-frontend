@@ -47,40 +47,17 @@ a {
 }
 
 .navbar_notif-dropdown {
-  width: 200px;
-  height: 250px;
+  width: 400px;
+  height: 450px;
   background-color: white;
   position: relative;
   border-radius: 8px;
-}
-.navbar_notif-dropdown::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 0px;
-  transform: translate(-50%, -100%);
-  width: 0;
-  height: 0;
-  border-right: 13px solid transparent;
-  border-bottom: 20px solid white;
-  border-left: 13px solid transparent;
 }
 .navbar_profile-dropdown {
   width: 160px;
   background-color: white;
   position: relative;
   border-radius: 8px;
-}
-.navbar_profile-dropdown::before {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0px;
-  transform: translate(-50%, -100%);
-  width: 0;
-  height: 0;
-  border-bottom: 20px solid white;
-  border-left: 20px solid transparent;
 }
 
 .landing_mailist {
@@ -90,13 +67,12 @@ a {
 }
 
 .home_main {
-  min-height: 100vh;
+  min-height: 90vh;
 }
 
 @media (min-width: 768px) {
   .home_main {
     min-height: 100vh;
-    padding-bottom: 120px;
   }
 }
 
