@@ -55,9 +55,9 @@ export default function Navbar() {
     };
   }, [isNotifOpen, isProfileMenuOpen]);
 
-  const getUserData = () => {
-    dispatch(getUserById(id, asA));
-  };
+  // const getUserData = () => {
+  //   dispatch(getUserById(id, asA));
+  // };
 
   const getHireNotif = () => {
     dispatch(getHire(id));

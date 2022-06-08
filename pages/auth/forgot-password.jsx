@@ -160,6 +160,7 @@ export default function Login() {
                       name="email"
                       value={form.email}
                       onChange={handleChangeForm}
+                      required
                     />
                   </div>
                   <button
