@@ -44,7 +44,11 @@ function Company() {
         <div className="col-sm text-center profile_company_card p-5">
           <div className="text-center">
             <img
-              src={data.image ? data.image : defaultImg}
+              src={
+                data.image
+                  ? process.env.URL_CLOUDINARY + data.image
+                  : defaultImg
+              }
               className=" border profile_company_img"
               alt="..."
             />

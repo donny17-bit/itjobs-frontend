@@ -17,6 +17,10 @@ function EditCompany() {
 
   const [data, setData] = useState(company.data[0]);
   const [form, setForm] = useState({});
+  const [simpan, setSimpan] = useState(false);
+  // const [userImg, setUserImg] = useState();
+  const [profileImg, setProfileImg] = useState({});
+  const [image, setImage] = useState(data.image);
 
   const getCompanyId = async (id) => {
     const result = await dispatch(getCompanyById(id));
@@ -28,6 +32,10 @@ function EditCompany() {
 
   const formChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const editBtn = (e) => {
+    setSimpan(true);
   };
 
   const submitForm = async (e) => {
@@ -53,6 +61,33 @@ function EditCompany() {
   //   }
   // }, [idCompany]);
 
+  const imgChange = (e) => {
+    const { name, value, files } = e.target;
+
+    setProfileImg({ ...profileImg, image: files[0] });
+    // setUserImg(URL.createObjectURL(files[0]));
+    setImage(URL.createObjectURL(files[0]));
+  };
+
+  const saveImg = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    for (const dataForm in profileImg) {
+      formData.append(dataForm, profileImg[dataForm]);
+    }
+
+    const result = await axios.patch(
+      `company/updateCompanyImage/${idCompany}`,
+      formData
+    );
+    console.log(result);
+    // setUserImg(null);
+    setSimpan(false);
+
+    alert("sukses update profile image");
+    getCompanyId(idCompany);
+  };
+
   return (
     <>
       <div className="container-fluid profile_container">
@@ -62,15 +97,36 @@ function EditCompany() {
               <div className="card pb-1 pt-4 profile_card">
                 <div className="text-center">
                   <img
-                    src={data.image ? data.image : defaultImage}
+                    src={data.image ? image : defaultImage}
                     className="card-img-top border profile_img"
                     alt="..."
                   />
                   <p>
-                    <button className="btn btn-link profile_edit_btn">
+                    <input
+                      type="file"
+                      id="actual-btn"
+                      name="userImg"
+                      onChange={(e) => imgChange(e)}
+                      hidden
+                    />
+                    <label
+                      for="actual-btn"
+                      className="btn btn-link profile_edit_btn mb-0 pb-0"
+                      onClick={(e) => editBtn(e)}
+                    >
                       <i className="bi bi-pencil"></i> Edit
-                    </button>
+                    </label>
                   </p>
+                  {simpan ? (
+                    <button
+                      className="btn btn-primary"
+                      onClick={(e) => saveImg(e)}
+                    >
+                      Simpan
+                    </button>
+                  ) : (
+                    ``
+                  )}
                 </div>
                 <div className="card-body mt-2">
                   <h5 className="card-title profile_name pb-0 mb-0">
@@ -88,7 +144,7 @@ function EditCompany() {
                 </div>
               </div>
               <div className="d-grid mt-3 mb-3">
-                <button type="submit" className="btn btn-outline-primary">
+                <button type="submit" className="btn btn-primary">
                   Simpan
                 </button>
               </div>

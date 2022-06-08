@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ChangePass from "./changePass";
 
 export default function EditCard(props) {
   const { data, userImg, simpan } = props;
@@ -7,7 +8,7 @@ export default function EditCard(props) {
   //   `${process.env.URL_CLOUDINARY}/${data.image}`
   // );
 
-  let image = `${process.env.URL_CLOUDINARY}/${data.image}`;
+  let image = process.env.URL_CLOUDINARY + data.image;
   let defaultImg = "https://cdn-icons-png.flaticon.com/512/7024/7024005.png";
 
   console.log(userImg);
