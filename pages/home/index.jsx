@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Card from "../../components/card";
 import Layout from "../../components/Layout/MainLayout";
 import { getAllUser, getUserById } from "../../store/action/user";
+import { getCompanyById } from "../../store/action/company";
 import Cookie from "js-cookie";
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/router";
+import privateRouteCompany from "../../components/privateRouteCompany";
 
 function Home() {
   const router = useRouter();
@@ -16,19 +18,14 @@ function Home() {
   const [currentUser, setCurrentUser] = useState({});
 
   const [params, setParams] = useState({
-    page: 1,
+    page: router.query.page || 1,
     limit: 4,
-    searchSkill: "",
-    sort: "",
+    searchSkill: router.query.searchSkill || "",
+    sort: router.query.sort || "",
   });
   useEffect(() => {
-    if (router.isReady)
-      setParams({
-        page: router.query.page || 1,
-        limit: 4,
-        searchSkill: router.query.searchSkill || "",
-        sort: router.query.sort || "",
-      });
+    router.isReady;
+    console.log(router.query);
     getData();
   }, []);
 
@@ -50,7 +47,7 @@ function Home() {
           console.log(res.value.data.pagination);
         })
         .catch((err) => alert(err));
-      dispatch(getUserById(Cookie.get("id"), "company"))
+      dispatch(getCompanyById(Cookie.get("id")))
         .then((res) => setCurrentUser(res.value.data.data[0]))
         .catch((err) => alert(err));
     } catch (error) {
@@ -59,7 +56,8 @@ function Home() {
   };
 
   const handleSearch = (event) => {
-    let data = { ...params };
+    setParams({ ...params, page: 1 });
+    let data = { ...params, page: 1 };
     delete data["limit"];
     for (let v in data) !data[v] && delete data[v];
     console.log(data);
@@ -69,11 +67,11 @@ function Home() {
   };
 
   return (
-    <Layout title="Home|itJobs">
+    <Layout title="Home | itJobs">
       <div
+        className="home_main"
         style={{
           backgroundColor: "#F6F7F8",
-          minHeight: "90vh",
           position: "relative",
         }}
       >
@@ -124,7 +122,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="container my-4 p-0 d-none d-lg-block">
+        <div className="container my-4 p-0  d-block px-2 px-lg-0">
           <div className="input-group mb-3 bg-white shadow-sm rounded p-1">
             <input
               type="text"
@@ -196,20 +194,22 @@ function Home() {
           </div>
         </div>
 
-        <div className="container mt-5 px-2 px-lg-0">
-          <h2 className="fw-bold d-lg-none ">Web developer</h2>
+        <div className="container  px-2 px-lg-0">
+          {/* <h2 className="fw-bold d-lg-none ">Web developer</h2> */}
           <div className="shadow-sm p-0 rounded overflow-hidden mt-3 mt-md-0 mx-md-auto w-auto">
             {userData.length &&
               userData.map((v) => (
-                <Card
-                  key={v.id}
-                  fullName={v.fullName}
-                  type={v.field}
-                  role={v.role}
-                  address={v.address}
-                  skills={v.skill}
-                  image={v.image}
-                />
+                <div key={v.id} onTouchEnd={() => alert("touched")}>
+                  <Card
+                    fullName={v.fullName}
+                    type={v.field}
+                    role={v.role}
+                    address={v.address}
+                    skills={v.skill}
+                    image={v.image}
+                    id={v.id}
+                  />
+                </div>
               ))}
           </div>
         </div>
@@ -232,7 +232,7 @@ function Home() {
             }
             containerClassName="pagination"
             activeClassName="active"
-            initialPage={router.query.page || 0}
+            initialPage={params.page - 1 || 0}
           />
         </div>
       </div>
@@ -240,4 +240,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default privateRouteCompany(Home);

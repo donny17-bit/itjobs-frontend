@@ -43,9 +43,9 @@
   border-radius: 75px !important;
 }
 
-.profile_company_sosmed {
+/* .profile_company_sosmed {
   padding-left: 10% !important;
-}
+} */
 
 .profile_company_btn {
   width: 300px;
@@ -203,6 +203,7 @@
 
 .profile_img {
   width: 150px !important;
+  height: 150px !important;
   border-radius: 75px !important;
 }
 

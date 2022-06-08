@@ -3,23 +3,35 @@ import { useRouter } from "next/router";
 import axios from "../../utils/axios";
 import ProfileCard from "../../components/profileCard";
 
+import Cookies from "js-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserById } from "../../store/action/user";
+import privateRoutePekerja from "../../components/privateRoutePekerja";
+
 function Profile() {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
+  const asA = Cookies.get("asA");
   const { id } = router.query;
   const [menuActive, setMenuActive] = useState("porto");
   const [data, setData] = useState({});
   const [sosMed, setSosMed] = useState();
+  const [skill, setSkill] = useState([]);
   const [porto, setPorto] = useState();
   const [exp, setExp] = useState();
 
-  // belum disimpan di state
   const getUserId = async () => {
-    const result = await axios.get(`user/${id}`);
-    setData(result.data.data[0]);
+    const result = await dispatch(getUserById(id, asA));
+    setData(result.value.data.data[0]);
 
-    if (result.data.data[0].socialMedia) {
-      setSosMed(result.data.data[0].socialMedia.split(","));
+    if (result.value.data.data[0].socialMedia) {
+      setSosMed(result.value.data.data[0].socialMedia.split(","));
+    }
+
+    if (result.value.data.data[0].skill) {
+      setSkill(result.value.data.data[0].skill.split(","));
     }
   };
 
@@ -32,8 +44,6 @@ function Profile() {
     const result = await axios.get(`experience/${id}`);
     setExp(result.data.data);
   };
-
-  console.log(exp);
 
   // make sure id loaded
   useEffect(() => {
@@ -63,7 +73,7 @@ function Profile() {
       <div className="container-fluid profile_container">
         <div className="row m-0">
           <div className="col-md-3 profile_card_container p-0">
-            <ProfileCard data={data} sosMed={sosMed} />
+            <ProfileCard data={data} sosMed={sosMed} skill={skill} asA={asA} />
           </div>
           <div className="col col-sm p-4 profile_col_container">
             <div className="row ms-2">
@@ -129,7 +139,7 @@ function Profile() {
               </div>
             ) : exp ? (
               exp.map((item) => (
-                <div className="row mt-4 m-0">
+                <div className="row mt-4 m-0" key={item.id}>
                   <div className="row border-bottom m-2 mb-4">
                     <div className="col-md-2 text-center">
                       <img
@@ -164,4 +174,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default privateRoutePekerja(Profile);

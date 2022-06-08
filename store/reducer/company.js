@@ -1,20 +1,21 @@
 const initialState = {
   data: [],
+  // otherData: [], //other data if needed
   isLoading: false,
   isError: false,
   msg: "",
 };
 
-const hire = (state = initialState, action) => {
+const company = (state = initialState, action) => {
   switch (action.type) {
-    case "POST_HIRE_PENDING":
+    case "GET_COMPANY_BY_ID_PENDING":
       return {
         ...state,
         isError: false,
         isLoading: true,
       };
 
-    case "POST_HIRE_FULFILLED":
+    case "GET_COMPANY_BY_ID_FULFILLED":
       return {
         ...state,
         isLoading: false,
@@ -23,33 +24,7 @@ const hire = (state = initialState, action) => {
         msg: action.payload.data.msg,
       };
 
-    case "POST_HIRE_REJECTED":
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-        data: [],
-        pageInfo: {},
-        msg: action.payload.response.data,
-      };
-
-    case "GET_HIRE_PENDING":
-      return {
-        ...state,
-        isError: false,
-        isLoading: true,
-      };
-
-    case "GET_HIRE_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        isError: false,
-        data: action.payload.data.data,
-        msg: action.payload.data.msg,
-      };
-
-    case "GET_HIRE_REJECTED":
+    case "GET_COMPANY_BY_ID_REJECTED":
       return {
         ...state,
         isLoading: false,
@@ -58,14 +33,14 @@ const hire = (state = initialState, action) => {
         msg: action.payload.response.data,
       };
 
-    case "DELETE_HIRE_PENDING":
+    case "UPDATE_PROFILE_COMPANY_PENDING":
       return {
         ...state,
-        isError: false,
         isLoading: true,
+        isError: false,
       };
 
-    case "DELETE_HIRE_FULFILLED":
+    case "UPDATE_PROFILE_COMPANY_FULFILLED":
       return {
         ...state,
         isLoading: false,
@@ -73,12 +48,12 @@ const hire = (state = initialState, action) => {
         msg: action.payload.data.msg,
       };
 
-    case "DELETE_HIRE_REJECTED":
+    case "UPDATE_PROFILE_COMPANY_REJECTED":
       return {
         ...state,
         isLoading: false,
         isError: true,
-        msg: action.payload.response.data,
+        // msg: action.payload.response.data,
       };
 
     default:
@@ -86,4 +61,4 @@ const hire = (state = initialState, action) => {
   }
 };
 
-export default hire;
+export default company;
