@@ -55,7 +55,29 @@ const hire = (state = initialState, action) => {
         isLoading: false,
         isError: true,
         data: [],
-        pageInfo: {},
+        msg: action.payload.response.data,
+      };
+
+    case "DELETE_HIRE_PENDING":
+      return {
+        ...state,
+        isError: false,
+        isLoading: true,
+      };
+
+    case "DELETE_HIRE_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        msg: action.payload.data.msg,
+      };
+
+    case "DELETE_HIRE_REJECTED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
         msg: action.payload.response.data,
       };
 

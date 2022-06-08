@@ -126,6 +126,7 @@ export default function Login() {
                       name="fullName"
                       value={form.fullName}
                       onChange={handleChangForm}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -140,6 +141,7 @@ export default function Login() {
                       name="email"
                       value={form.email}
                       onChange={handleChangForm}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -154,6 +156,7 @@ export default function Login() {
                       name="companyName"
                       value={form.companyName}
                       onChange={handleChangForm}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -168,6 +171,7 @@ export default function Login() {
                       name="companyField"
                       value={form.companyField}
                       onChange={handleChangForm}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -182,6 +186,7 @@ export default function Login() {
                       name="noTelp"
                       value={form.noTelp}
                       onChange={handleChangForm}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -196,6 +201,7 @@ export default function Login() {
                       name="password"
                       value={form.password}
                       onChange={handleChangForm}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -210,6 +216,7 @@ export default function Login() {
                       name="confirmPassword"
                       value={form.confirmPassword}
                       onChange={handleChangForm}
+                      required
                     />
                   </div>
                   <button

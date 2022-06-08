@@ -24,14 +24,15 @@ function Company() {
       setSosMed(result.value.data.data[0].socialMedia.split(","));
     }
   };
-  // console.log(data);
+
+  console.log(data);
 
   // make sure id loaded
   useEffect(() => {
     if (!idCompany) {
       return;
     }
-    if (company.data == []) {
+    if (company.data.length == 0) {
       getCompanyId();
     }
     setData(company.data[0]);
