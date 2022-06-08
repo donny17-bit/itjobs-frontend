@@ -32,19 +32,25 @@ axiosApiInstance.interceptors.response.use(
     // Do something with response error
     if (error.response.status === 403) {
       if (error.response.data.msg !== "jwt expired") {
-        Cookies.clear();
+        Cookies.remove("asA");
+        Cookies.remove("id");
+        Cookies.remove("token");
+        Cookies.remove("refreshToken");
         window.location.href = "/auth/login";
       } else {
-        const refreshToken = localStorage.getItem("refreshToken");
+        const refreshToken = Cookies.get("refreshToken");
         axiosApiInstance
-          .post("auth/refresh", { refreshToken })
+          .post("/auth/user/refresh", { refreshToken })
           .then((res) => {
             Cookies.set("token", res.data.data.token);
             Cookies.set("refreshToken", res.data.data.refreshToken);
             window.location.reload();
           })
           .catch(() => {
-            Cookies.clear();
+            Cookies.remove("asA");
+            Cookies.remove("id");
+            Cookies.remove("token");
+            Cookies.remove("refreshToken");
             window.location.href = "/auth/login";
           });
       }

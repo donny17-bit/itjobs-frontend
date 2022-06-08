@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { getHire } from "../store/action/hire";
 import { logout } from "../store/action/auth";
-import { getUserById } from "../store/action/user";
+import NotifCard from "./NotifCard";
 
 export default function Navbar() {
   const router = useRouter();
@@ -14,10 +14,13 @@ export default function Navbar() {
   const profileRef = useRef();
   const path = router.pathname;
 
-  const userData = useSelector((state) => state.user.data[0]);
   const id = Cookies.get("id");
   const asA = Cookies.get("asA");
   const refreshToken = Cookies.get("refreshToken");
+  const userData = useSelector((state) =>
+    asA === "pekerja" ? state.user.data[0] : state.company.data[0]
+  );
+  const hireNotif = useSelector((state) => state.hire.data);
 
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -55,10 +58,6 @@ export default function Navbar() {
     };
   }, [isNotifOpen, isProfileMenuOpen]);
 
-  // const getUserData = () => {
-  //   dispatch(getUserById(id, asA));
-  // };
-
   const getHireNotif = () => {
     dispatch(getHire(id));
   };
@@ -76,8 +75,7 @@ export default function Navbar() {
     Cookies.remove("token");
     Cookies.remove("refreshToken");
     localStorage.clear();
-    router.push("/");
-    location.reload();
+    window.location.href = "/";
   };
 
   return (
@@ -85,7 +83,12 @@ export default function Navbar() {
       {/* Navbar for screen sm+ */}
       <nav className="container-fluid bg-white py-3 fixed-top d-none d-sm-block">
         <div className="container-lg d-flex justify-content-between align-items-center">
-          <h1 className="fs-3 fw-bold text-primary mb-0">
+          <h1
+            className="fs-3 fw-bold text-primary mb-0"
+            role="button"
+            onClick={() => router.push(asA === "pekerja" ? "/" : "/home")}
+            style={{ cursor: "pointer" }}
+          >
             <i className="bi bi-stack text-primary fs-4 me-2"></i>itJobs
           </h1>
           {path === "/" ? (
@@ -173,19 +176,36 @@ export default function Navbar() {
                 {/* Notif Dropdown */}
                 {isNotifOpen && (
                   <div
-                    className="navbar_notif-dropdown shadow d-flex flex-column justify-content-center align-items-center position-absolute start-50 translate-middle-x"
+                    className="navbar_notif-dropdown p-3 shadow position-absolute start-50 translate-middle-x"
                     style={{ top: "200%" }}
                   >
-                    <div>
-                      <Image
-                        src="/image/emptyNotif.png"
-                        alt="empty notification"
-                        width={100}
-                        height={80}
-                        objectFit="contain"
-                      />
-                    </div>
-                    <span className="d-block fs-7">Belum ada notifikasi</span>
+                    {!hireNotif ? (
+                      <div className="h-100 d-flex flex-column justify-content-center align-items-center">
+                        <div>
+                          <Image
+                            src="/image/emptyNotif.png"
+                            alt="empty notification"
+                            width={100}
+                            height={80}
+                            objectFit="contain"
+                          />
+                        </div>
+                        <span className="d-block fs-7">
+                          Belum ada notifikasi
+                        </span>
+                      </div>
+                    ) : (
+                      <>
+                        {hireNotif.map((notif, index) => (
+                          <div key={index}>
+                            <NotifCard notif={notif} />
+                          </div>
+                        ))}
+                        <button className="btn">
+                          <span className="fs-8">Hapus semua notifikasi</span>
+                        </button>
+                      </>
+                    )}
                   </div>
                 )}
               </div>
@@ -246,7 +266,12 @@ export default function Navbar() {
       {path === "/" ? (
         <nav className="container-fluid bg-white py-3 fixed-top d-block d-sm-none">
           <div className="container-lg d-flex justify-content-between align-items-center">
-            <h1 className="fs-3 fw-bold text-primary mb-0">
+            <h1
+              className="fs-3 fw-bold text-primary mb-0"
+              role="button"
+              onClick={() => router.push(asA === "pekerja" ? "/" : "/home")}
+              style={{ cursor: "pointer" }}
+            >
               <i className="bi bi-stack text-primary fs-4 me-2"></i>itJobs
             </h1>
             {userData ? (
