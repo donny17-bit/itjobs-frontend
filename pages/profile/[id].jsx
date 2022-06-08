@@ -6,6 +6,7 @@ import ProfileCard from "../../components/profileCard";
 import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../store/action/user";
+import privateRoutePekerja from "../../components/privateRoutePekerja";
 
 function Profile() {
   const router = useRouter();
@@ -174,4 +175,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default privateRoutePekerja(Profile);
