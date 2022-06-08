@@ -8,18 +8,26 @@ import Cookies from "js-cookie";
 
 function Edit() {
   const image = "https://cdn-icons-png.flaticon.com/512/7024/7024005.png";
-
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  console.log(user);
+
   const router = useRouter();
   const asA = Cookies.get("asA");
   const { id } = router.query;
   const [data, setData] = useState({});
-  const [dataDiri, setDataDiri] = useState({});
+  const [dataDiri, setDataDiri] = useState(user.data[0]);
   const [sosMed, setSosMed] = useState();
   const [skill, setSkill] = useState([]);
   const [tempSkill, setTempSkill] = useState();
   const [exp, setExp] = useState({});
   const [app, setApp] = useState({});
+  const [appImage, setAppImage] = useState();
+  const [userImg, setUserImg] = useState({
+    image: "",
+  });
+  const [profileImg, setProfileImg] = useState({});
 
   const changeDataDiri = (e) => {
     setDataDiri({
@@ -41,10 +49,24 @@ function Edit() {
   };
 
   const changeApp = (e) => {
-    setApp({ ...app, [e.target.name]: e.target.value });
+    const { name, value, files } = e.target;
+
+    if (name == "image") {
+      setApp({ ...app, [name]: files[0] });
+      setAppImage(URL.createObjectURL(files[0]));
+    } else {
+      setApp({ ...app, [name]: value });
+    }
   };
 
-  // belum disimpan di state
+  const imgChange = (e) => {
+    const { name, value, files } = e.target;
+    console.log(e.target);
+    console.log(files);
+    setProfileImg({ ...profileImg, image: files[0] });
+    setUserImg(URL.createObjectURL(files[0]));
+  };
+
   const getUserId = async () => {
     const result = await dispatch(getUserById(id, asA));
     setData(result.value.data.data[0]);
@@ -73,8 +95,6 @@ function Edit() {
       setSkill(result.data.data);
     }
   };
-
-  console.log(skill);
 
   const deleteSkill = async (e, id) => {
     e.preventDefault();
@@ -110,7 +130,35 @@ function Edit() {
     // setDataDiri({});
   };
 
-  const submitApp = (e) => {};
+  const submitApp = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    for (const dataForm in app) {
+      formData.append(dataForm, app[dataForm]);
+    }
+
+    const result = await axios.post(`portfolio/${id}`, formData);
+    console.log(result);
+    setAppImage(null);
+
+    alert("sukses tambah portofolio");
+    getUserId();
+  };
+
+  const saveImg = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    for (const dataForm in profileImg) {
+      formData.append(dataForm, profileImg[dataForm]);
+    }
+
+    const result = await axios.patch(`user/updateImage/${id}`, formData);
+    console.log(result);
+    setUserImg(null);
+
+    alert("sukses update profile image");
+    getUserId();
+  };
 
   useEffect(() => {
     if (!id) {
@@ -125,7 +173,12 @@ function Edit() {
       <div className="container-fluid profile_container">
         <div className="row m-0">
           <div className="col-md-3 profile_card_container p-0">
-            <EditCard data={data} />
+            <EditCard
+              data={data}
+              imgChange={imgChange}
+              userImg={userImg}
+              saveImg={saveImg}
+            />
             <div className="d-grid mt-3 mb-3">
               <button className="btn btn-primary">Ubah Password</button>
             </div>
@@ -154,11 +207,10 @@ function Edit() {
                     type="text"
                     name="fullName"
                     className="form-control profile_edit_input"
-                    placeholder={
-                      data.fullName ? data.fullName : "Masukkan nama lengkap"
-                    }
+                    placeholder={"Masukkan nama lengkap"}
+                    value={dataDiri.fullName}
                     onChange={(e) => changeDataDiri(e)}
-                    required
+                    // required
                   />
                 </div>
                 <div className="col-sm-12">
@@ -169,7 +221,8 @@ function Edit() {
                     type="text"
                     name="field"
                     className="form-control profile_edit_input"
-                    placeholder={data.field ? data.field : `Masukkan job desk`}
+                    placeholder={`Masukkan job desk`}
+                    value={dataDiri.field}
                     onChange={(e) => changeDataDiri(e)}
                   />
                 </div>
@@ -181,9 +234,8 @@ function Edit() {
                     type="text"
                     name="role"
                     className="form-control profile_edit_input"
-                    placeholder={
-                      data.role ? data.role : "ex freelancer / fulltime"
-                    }
+                    placeholder={"ex freelancer / fulltime"}
+                    value={dataDiri.role}
                     onChange={(e) => changeDataDiri(e)}
                   />
                 </div>
@@ -195,9 +247,8 @@ function Edit() {
                     type="text"
                     name="address"
                     className="form-control profile_edit_input"
-                    placeholder={
-                      data.address ? data.address : "Masukkan domisili"
-                    }
+                    placeholder={"Masukkan domisili"}
+                    value={dataDiri.address}
                     onChange={(e) => changeDataDiri(e)}
                   />
                 </div>
@@ -239,7 +290,7 @@ function Edit() {
                 </div>
                 <div className="col-md-4">
                   <label className="form-label profile_edit_label">
-                    Gitlab
+                    LinkedIn
                   </label>
                   <input
                     type="text"
@@ -264,11 +315,8 @@ function Edit() {
                     className="form-control"
                     name="description"
                     rows="5"
-                    placeholder={
-                      data.description
-                        ? data.description
-                        : "Tulis deskripsi singkat"
-                    }
+                    placeholder={"Tulis deskripsi singkat"}
+                    value={dataDiri.description}
                     onChange={(e) => changeDataDiri(e)}
                   ></textarea>
                 </div>
@@ -432,7 +480,7 @@ function Edit() {
                   </label>
                   <input
                     type="text"
-                    name="linkPublic"
+                    name="publicalitionLink"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan link"
                     onChange={(e) => changeApp(e)}
@@ -456,21 +504,9 @@ function Edit() {
                   </label>
                   <input
                     type="text"
-                    name="linkPublic"
+                    name="workPlace"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan tempat kerja"
-                    onChange={(e) => changeApp(e)}
-                  />
-                </div>
-                <div className="col-sm-12">
-                  <label className="form-label profile_edit_label">
-                    Tipe portofolio
-                  </label>
-                  <input
-                    type="text"
-                    name="linkPublic"
-                    className="form-control profile_edit_input"
-                    placeholder="Masukkan link"
                     onChange={(e) => changeApp(e)}
                   />
                 </div>
@@ -483,9 +519,9 @@ function Edit() {
                   </label>
                   <input
                     type="file"
-                    name="appImage"
+                    name="image"
                     className="form-control"
-                    placeholder="Masukkan tanggal masuk"
+                    onChange={(e) => changeApp(e)}
                   />
                 </div>
                 <hr className="ms-2 me-2 col-sm mt-5" />

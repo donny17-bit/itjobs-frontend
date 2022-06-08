@@ -21,7 +21,6 @@ function Profile() {
   const [porto, setPorto] = useState();
   const [exp, setExp] = useState();
 
-  // belum disimpan di state
   const getUserId = async () => {
     const result = await dispatch(getUserById(id, asA));
     setData(result.value.data.data[0]);

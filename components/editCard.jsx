@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 export default function EditCard(props) {
-  const { data, sosMed } = props;
-  const defaultImg = "https://cdn-icons-png.flaticon.com/512/7024/7024005.png";
+  const { data, userImg } = props;
+  let defaultImg = "https://cdn-icons-png.flaticon.com/512/7024/7024005.png";
+
+  if (userImg) {
+    defaultImg = userImg;
+  }
 
   return (
     <>
@@ -14,10 +18,23 @@ export default function EditCard(props) {
             alt="..."
           />
           <p>
-            <button className="btn btn-link profile_edit_btn">
+            <input
+              type="file"
+              id="actual-btn"
+              name="userImg"
+              onChange={props.imgChange}
+              hidden
+            />
+            <label
+              for="actual-btn"
+              className="btn btn-link profile_edit_btn mb-0 pb-0"
+            >
               <i className="bi bi-pencil"></i> Edit
-            </button>
+            </label>
           </p>
+          <button className=" btn btn-primary" onClick={props.saveImg}>
+            Simpan
+          </button>
         </div>
         <div className="card-body mt-2">
           <h5 className="card-title profile_name pb-0 mb-0">{data.fullName}</h5>
