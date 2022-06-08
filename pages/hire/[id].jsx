@@ -6,6 +6,7 @@ import { postHire } from "../../store/action/hire";
 import { useRouter } from "next/router";
 import { getUserById } from "../../store/action/user";
 import Layout from "../../components/Layout/MainLayout";
+import privateRouteCompany from "../../components/privateRouteCompany";
 
 function Hire() {
   const router = useRouter();
@@ -225,4 +226,4 @@ function Hire() {
   );
 }
 
-export default Hire;
+export default privateRouteCompany(Hire);
