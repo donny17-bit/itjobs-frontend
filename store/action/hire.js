@@ -17,6 +17,6 @@ export const getHire = (userId) => {
 export const deleteHire = (hireId) => {
   return {
     type: "DELETE_HIRE",
-    payload: axios.delete(hireId),
+    payload: axios.delete(`/hire/${hireId}`),
   };
 };

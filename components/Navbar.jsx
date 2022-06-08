@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
-import { getHire } from "../store/action/hire";
+import { deleteHire, getHire } from "../store/action/hire";
 import { logout } from "../store/action/auth";
 import NotifCard from "./NotifCard";
 
@@ -60,7 +60,7 @@ export default function Navbar() {
 
   const getHireNotif = () => {
     dispatch(getHire(id)).then((res) =>
-      setNotifData(res.value.data.data.map((v) => v))
+      setNotifData((res.value.data.data || []).map((v) => v))
     );
   };
 
@@ -459,14 +459,27 @@ export default function Navbar() {
               </h5>
             </div>
             <div className="modal-body p-3">
-              {notifData.length && (
-                <button className="btn text-primary">
-                  Tandai sudah dibaca ({notifData.length})
-                </button>
-              )}
+              <button
+                className={`btn text-primary ${notifData.length || "d-none"}`}
+                onClick={() => {
+                  notifData.map((v) =>
+                    dispatch(deleteHire(v.id)).then((res) => getHireNotif())
+                  );
+                }}
+              >
+                Tandai sudah dibaca ({notifData.length})
+              </button>
+
               {notifData.length ? (
                 notifData.map((v) => (
-                  <div className=" border border-light p-3">
+                  <div
+                    className=" border border-light p-3"
+                    onClick={() =>
+                      dispatch(deleteHire(v.id))
+                        .then((res) => getHireNotif())
+                        .catch((err) => console.log(err))
+                    }
+                  >
                     <div>
                       Dari: {v.companyName}
                       <br />
