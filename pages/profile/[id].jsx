@@ -23,10 +23,6 @@ function Profile() {
 
   // belum disimpan di state
   const getUserId = async () => {
-    // const result =
-    //   asA === "company"
-    //     ? await dispatch(getUserById(id, "pekerja"))
-    //     : await dispatch(getUserById(id, asA));
     const result = await dispatch(getUserById(id, asA));
     setData(result.value.data.data[0]);
 
