@@ -6,6 +6,7 @@ import { postHire } from "../../store/action/hire";
 import { useRouter } from "next/router";
 import { getUserById } from "../../store/action/user";
 import Layout from "../../components/Layout/MainLayout";
+import privateRouteCompany from "../../components/privateRouteCompany";
 
 function Hire() {
   const router = useRouter();
@@ -23,6 +24,7 @@ function Hire() {
     msg: "",
   });
 
+  const hire = useSelector((state) => state.hire);
   useEffect(() => {
     if (router.isReady) {
       getData();
@@ -231,8 +233,15 @@ function Hire() {
               </div>
             )}
 
-            <button className="btn btn-lg btn-warning w-100 my-5 text-white">
-              Kirim
+            <button
+              className="btn btn-lg btn-warning w-100 my-5 text-white"
+              disabled={hire.isLoading}
+            >
+              {hire.isLoading ? (
+                <div className="spinner-border text-light " />
+              ) : (
+                "Kirim"
+              )}
             </button>
           </form>
         </div>
@@ -241,4 +250,4 @@ function Hire() {
   );
 }
 
-export default Hire;
+export default privateRouteCompany(Hire);
