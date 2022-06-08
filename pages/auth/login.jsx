@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/action/auth";
 import { getUserById } from "../../store/action/user";
 import Head from "next/head";
+import { getCompanyById } from "../../store/action/company";
 
 export default function Login() {
   const router = useRouter();
@@ -57,10 +58,14 @@ export default function Login() {
       Cookies.set("id", result.value.data.data.id);
       Cookies.set("asA", asA);
 
-      // get userbyid
-      // asA === "company" ? dispatch("getCompany") : dispatch("getUser");
+      console.log(asA);
 
-      await dispatch(getUserById(result.value.data.data.id, asA));
+      // get userbyid
+      asA === "company"
+        ? dispatch(getCompanyById(result.value.data.data.id))
+        : dispatch(getUserById(result.value.data.data.token));
+
+      // await dispatch(getCompanyById(result.value.data.data.id));
 
       // navigate
       asA === "company"

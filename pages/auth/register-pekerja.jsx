@@ -141,6 +141,7 @@ export default function Login() {
                       name="fullName"
                       value={form.fullName}
                       onChange={handleChangeForm}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -155,6 +156,7 @@ export default function Login() {
                       name="email"
                       value={form.email}
                       onChange={handleChangeForm}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -169,6 +171,7 @@ export default function Login() {
                       name="noTelp"
                       value={form.noTelp}
                       onChange={handleChangeForm}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -183,6 +186,7 @@ export default function Login() {
                       name="password"
                       value={form.password}
                       onChange={handleChangeForm}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -197,6 +201,7 @@ export default function Login() {
                       name="confirmPassword"
                       value={form.confirmPassword}
                       onChange={handleChangeForm}
+                      required
                     />
                   </div>
                   <button
