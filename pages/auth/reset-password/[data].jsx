@@ -10,16 +10,8 @@ import Head from "next/head";
 export default function Login() {
   const router = useRouter();
   const { data } = router.query;
-  // console.log(router);
-  // console.log(data.split("-"));
-  // const pin = data;
-  // const asA = pin.split("-")[0];
-  // console.log(pin);
-  // console.log(asA);
-  console.log(data);
 
   const [asA, setAsA] = useState("");
-  // console.log(pin);
 
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
@@ -48,16 +40,12 @@ export default function Login() {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      // console.log(form);
       await dispatch(resetPassword(form, asA));
       router.push("/auth/login");
     } catch (error) {
       console.log(error.response);
     }
   };
-
-  console.log(form);
-  console.log(asA);
 
   return (
     <>

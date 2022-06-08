@@ -1,7 +1,6 @@
 import axios from "../../utils/axios";
 
 export const login = (form, asA) => {
-  console.log(asA);
   return {
     type: "LOGIN",
     payload:

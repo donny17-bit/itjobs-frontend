@@ -17,8 +17,6 @@ function Edit() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(user);
-
   const router = useRouter();
   const asA = Cookies.get("asA");
   const { id } = router.query;
@@ -125,7 +123,7 @@ function Edit() {
 
   const getSkill = async () => {
     const result = await axios.get(`skill/${router.query.id}`);
-    // console.log(result);
+
     if (result.data.data) {
       setSkill(result.data.data);
     }
@@ -134,7 +132,6 @@ function Edit() {
   const deleteSkill = async (e, id) => {
     e.preventDefault();
     const result = await axios.delete(`skill/${id}`);
-    console.log(result);
 
     alert("Sukses delete skill");
     getSkill();
@@ -144,7 +141,7 @@ function Edit() {
     e.preventDefault();
 
     const result = await axios.post(`experience/${id}`, exp);
-    console.log(result);
+
     alert(`${result.data.msg}`);
     // setExp({});
     resetFormExp();
@@ -191,15 +188,7 @@ function Edit() {
 
     alert("sukses update data");
     getUserId();
-    // auto reset form bellum implement
-    // setDataDiri({});
   };
-  console.log(sosMed.ig);
-
-  // console.log({
-  //   ...dataDiri,
-  //   socialMedia: `${sosMed.ig},${sosMed.github},${sosMed.gitlab}`,
-  // });
 
   const submitApp = async (e) => {
     e.preventDefault();
@@ -209,7 +198,7 @@ function Edit() {
     }
 
     const result = await axios.post(`portfolio/${id}`, formData);
-    console.log(result);
+
     setAppImage(null);
 
     alert("sukses tambah portofolio");
@@ -226,7 +215,7 @@ function Edit() {
     }
 
     const result = await axios.patch(`user/updateImage/${id}`, formData);
-    console.log(result);
+
     setUserImg(null);
     setSimpan(false);
 

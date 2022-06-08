@@ -8,9 +8,7 @@ export default (WrappedComponent) => {
   const hocComponent = ({ ...props }) => <WrappedComponent {...props} />;
 
   hocComponent.getInitialProps = async (context) => {
-    // console.log(context);
     let dataCookie = cookies(context);
-    // console.log(!dataCookie);
     if (!dataCookie?.token) {
       if (context.res) {
         context.res?.writeHead(302, {

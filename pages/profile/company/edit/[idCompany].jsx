@@ -70,7 +70,6 @@ function EditCompany() {
       `company/updateCompanyImage/${idCompany}`,
       formData
     );
-    console.log(result);
     setSimpan(false);
 
     alert("sukses update profile image");

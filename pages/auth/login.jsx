@@ -29,10 +29,8 @@ export default function Login() {
   const handleAsA = (e) => {
     setAsA(e.target.value);
   };
-  // console.log(asA);
 
   const handleSubmit = async (e) => {
-    // console.log(asA);
     try {
       e.preventDefault();
 
@@ -40,17 +38,7 @@ export default function Login() {
         return alert("Silahkan pilih masuk sebagai !");
       }
 
-      // if (asA === "company") {
-      //   //post table company
-      //   const result = "pekera";
-      // }
-      // //post table user
-      // // router.push("/profile");
-
-      // post login
-      // const result = asA === "company" ? "company" : "pekerja";
       const result = await dispatch(login(form, asA));
-      console.log(result);
 
       // setCookies
       Cookies.set("token", result.value.data.data.token);
@@ -58,22 +46,15 @@ export default function Login() {
       Cookies.set("id", result.value.data.data.id);
       Cookies.set("asA", asA);
 
-      console.log(asA);
-
       // get userbyid
       asA === "company"
         ? dispatch(getCompanyById(result.value.data.data.id))
         : dispatch(getUserById(result.value.data.data.token));
 
-      // await dispatch(getCompanyById(result.value.data.data.id));
-
       // navigate
       asA === "company"
         ? router.push("/home")
         : router.push(`/profile/${result.value.data.data.id}`);
-      // console.log(form);
-      // console.log(asA);
-      // resetForm();
     } catch (error) {
       console.log(error.response);
     }

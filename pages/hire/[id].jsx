@@ -44,7 +44,6 @@ function Hire() {
       console.log(error);
     }
   };
-  console.log(data);
 
   const handleChangeForm = ({ target }) => {
     if (target.name == "file") {
@@ -70,7 +69,6 @@ function Hire() {
       .catch((err) => setMsg({ type: "danger", msg: err.message }));
   };
 
-  console.log(form);
   return (
     <Layout>
       <div

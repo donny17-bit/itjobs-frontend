@@ -68,9 +68,8 @@ function Profile() {
   }, [id]);
 
   const handlePorto = (e) => {
-    // e.preventDefault();
     setPortoModal({ ...e });
-    console.log(e);
+
     setShow(true);
   };
 

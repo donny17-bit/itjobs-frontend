@@ -8,13 +8,6 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 export default function Login() {
-  // const [role, setRole] = useState("");
-
-  // const handleRole = (e) => {
-  //   setRole(e.target.value);
-  // };
-  // console.log(role);
-
   const router = useRouter();
 
   const dispatch = useDispatch();

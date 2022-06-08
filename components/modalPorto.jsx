@@ -5,7 +5,6 @@ import axios from "../utils/axios";
 
 export default function ModalPorto(props) {
   const { appName, image, publicationLink, linkRepo, workPlace } = props.data;
-  console.log(props.data);
 
   const hanldeLink = () => {
     window.open(`https://${linkRepo}`, "_blank");

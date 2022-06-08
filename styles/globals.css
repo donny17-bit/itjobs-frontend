@@ -79,6 +79,6 @@ a {
 @media (max-width: 576px) {
   .main {
     padding-top: 0;
-    padding-bottom: 120px;
+    padding-bottom: 70px;
   }
 }

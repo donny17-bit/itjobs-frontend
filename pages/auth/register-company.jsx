@@ -30,7 +30,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      console.log(form);
+
       await dispatch(registerCompany(form));
       router.push("/auth/login");
     } catch (error) {

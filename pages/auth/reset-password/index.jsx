@@ -1,25 +1,10 @@
 import React, { useState, useEffect } from "react";
-// import bgImage from "/public/bg-login.png";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Login() {
-  const [role, setRole] = useState("");
-
-  const handleRole = (e) => {
-    setRole(e.target.value);
-  };
-  console.log(role);
   return (
     <>
-      <div
-        className="bg-light vh-100"
-        // style={{
-        //   backgroundColor: "var(--color-yellow)",
-
-        //   minHeight: "100vh",
-        // }}
-      >
+      <div className="bg-light vh-100">
         <div className="container p-5 h-100">
           <div className="row h-100">
             <div className="col-md-6 d-none d-md-block">

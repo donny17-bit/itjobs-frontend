@@ -45,17 +45,17 @@ export default function Card(props) {
               {props.address}
             </div>
           </small>
-          <div className="d-flex mt-3">
+          <div className="d-flex overflow-auto mt-2 flex-wrap">
             {props.skills
               ? props.skills
                   .split(",")
                   .slice(0, 3)
                   .map((v) => (
                     <button
-                      className="btn btn-sm bg-warning text-white p-1 px-md-3 py-1 me-2 bg-opacity-50 border border-warning"
+                      className="btn btn-sm bg-warning text-white p-1 px-md-3 py-1 me-2 bg-opacity-50 border border-warning text-truncate fs-8 mb-2"
                       key={v}
                     >
-                      {v}
+                      <small>{v}</small>
                     </button>
                   ))
               : ""}

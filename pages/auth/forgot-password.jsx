@@ -33,7 +33,6 @@ export default function Login() {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      console.log(asA);
       await dispatch(forgotPassword(form, asA));
     } catch (error) {
       console.log(error.response);

@@ -27,8 +27,6 @@ function Company() {
     }
   };
 
-  console.log(data);
-
   // make sure id loaded
   useEffect(() => {
     if (!idCompany) {

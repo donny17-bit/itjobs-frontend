@@ -35,7 +35,7 @@ function Home() {
     let data = { ...params };
     delete data["limit"];
     for (let v in data) !data[v] && delete data[v];
-    console.log(data);
+
     router.push({ pathname: `/home`, query: data });
     getData();
   }, [params.page]);
@@ -62,7 +62,6 @@ function Home() {
     let data = { ...params, page: 1 };
     delete data["limit"];
     for (let v in data) !data[v] && delete data[v];
-    console.log(data);
 
     router.push({ pathname: `/home`, query: data });
     getData();
