@@ -178,36 +178,56 @@ export default function Navbar() {
                 {/* Notif Dropdown */}
                 {isNotifOpen && (
                   <div
-                    className="navbar_notif-dropdown p-3 shadow position-absolute start-50 translate-middle-x"
-                    style={{ top: "200%" }}
+                    className="navbar_notif-dropdown p-3 shadow position-absolute end-0"
+                    style={{ top: "140%" }}
                   >
-                    {!hireNotif ? (
-                      <div className="h-100 d-flex flex-column justify-content-center align-items-center">
-                        <div>
+                    <div className="h-100 overflow-auto">
+                      <button
+                        className={`btn text-primary ${
+                          notifData.length || "d-none"
+                        }`}
+                        onClick={() => {
+                          notifData.map((v) =>
+                            dispatch(deleteHire(v.id)).then((res) =>
+                              getHireNotif()
+                            )
+                          );
+                        }}
+                      >
+                        Tandai sudah dibaca ({notifData.length})
+                      </button>
+
+                      {notifData.length ? (
+                        notifData.map((v) => (
+                          <div
+                            className=" border border-light p-3"
+                            onClick={() =>
+                              dispatch(deleteHire(v.id))
+                                .then((res) => getHireNotif())
+                                .catch((err) => console.log(err))
+                            }
+                          >
+                            <div>
+                              Dari: {v.companyName}
+                              <br />
+                              Subject: {v.subject}
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="col d-flex flex-column align-items-center justify-content-center h-100">
                           <Image
                             src="/image/emptyNotif.png"
                             alt="empty notification"
-                            width={100}
-                            height={80}
+                            width={118}
+                            height={76}
                             objectFit="contain"
+                            className=""
                           />
-                        </div>
-                        <span className="d-block fs-7">
                           Belum ada notifikasi
-                        </span>
-                      </div>
-                    ) : (
-                      <>
-                        {hireNotif.map((notif, index) => (
-                          <div key={index}>
-                            <NotifCard notif={notif} />
-                          </div>
-                        ))}
-                        <button className="btn">
-                          <span className="fs-8">Hapus semua notifikasi</span>
-                        </button>
-                      </>
-                    )}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
@@ -227,7 +247,9 @@ export default function Navbar() {
               >
                 <Image
                   src={
-                    "https://res.cloudinary.com/itjobs/image/upload/v1654266716/profiles/profile-placeholder_zpfgnr.png"
+                    userData?.image
+                      ? process.env.URL_CLOUDINARY + userData.image
+                      : "/image/profile-placeholder.png"
                   }
                   alt="profile"
                   width={36}
@@ -240,7 +262,7 @@ export default function Navbar() {
                 {isProfileMenuOpen && (
                   <div
                     className="navbar_profile-dropdown shadow d-flex flex-column justify-content-center align-items-center position-absolute end-0"
-                    style={{ top: "180%" }}
+                    style={{ top: "140%" }}
                   >
                     <button
                       type="button"
@@ -276,8 +298,8 @@ export default function Navbar() {
             >
               <i className="bi bi-stack text-primary fs-4 me-2"></i>itJobs
             </h1>
-            {userData ? (
-              // Navbar on landing page before login
+            {!userData ? (
+              // Navbar on landing page before login screen xs
               <div className="d-flex">
                 <button
                   type="button"
@@ -323,7 +345,7 @@ export default function Navbar() {
                 </div>
               </div>
             ) : (
-              // Navbar on landing page after login
+              // Navbar on landing page after login screen xs
               <div>
                 <button
                   type="button"
@@ -344,7 +366,7 @@ export default function Navbar() {
           </div>
         </nav>
       ) : (
-        // Navbar on any page other than landing page
+        // Navbar on any page other than landing page screen xs
         <nav
           className="container-fluid bg-white py-4 fixed-bottom d-block d-sm-none"
           style={{
@@ -355,7 +377,9 @@ export default function Navbar() {
           <div className="container">
             <div className="row">
               <div
-                className="col-3 d-flex justify-content-center align-items-center"
+                className={`col ${
+                  asA === "pekerja" ? "d-none" : "d-flex"
+                } justify-content-center align-items-center`}
                 role="button"
                 onClick={() => {
                   setMenu("home");
@@ -369,14 +393,14 @@ export default function Navbar() {
                 )}
               </div>
               <div
-                className="col-3 d-flex justify-content-center align-items-center"
+                className="col d-flex justify-content-center align-items-center"
                 role="button"
                 onClick={() => {
-                  setMenu("search");
+                  setMenu("notif");
                   // router.push("/search");
                 }}
               >
-                {menu === "search" ? (
+                {menu === "notif" ? (
                   <i
                     className="d-block bi bi-bell fs-4 text-primary"
                     data-bs-toggle="modal"
@@ -392,7 +416,7 @@ export default function Navbar() {
               </div>
 
               <div
-                className="col-3 d-flex justify-content-center align-items-center"
+                className="col d-flex justify-content-center align-items-center"
                 role="button"
                 onClick={() => {
                   setMenu("chat");
@@ -406,7 +430,7 @@ export default function Navbar() {
                 )}
               </div>
               <div
-                className="col-3 d-flex justify-content-center align-items-center"
+                className="col d-flex justify-content-center align-items-center"
                 role="button"
                 onClick={() => {
                   setMenu("profile");
@@ -420,7 +444,9 @@ export default function Navbar() {
                 <Image
                   d-block
                   src={
-                    "https://res.cloudinary.com/itjobs/image/upload/v1654266716/profiles/profile-placeholder_zpfgnr.png"
+                    userData?.image
+                      ? process.env.URL_CLOUDINARY + userData.image
+                      : "/image/profile-placeholder.png"
                   }
                   alt="profile"
                   width={28}
