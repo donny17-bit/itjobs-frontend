@@ -24,11 +24,28 @@ function Edit() {
   const { id } = router.query;
   const [data, setData] = useState({});
   const [dataDiri, setDataDiri] = useState(user.data[0]);
-  const [sosMed, setSosMed] = useState();
+  const [sosMed, setSosMed] = useState({
+    ig: dataDiri.socialMedia ? dataDiri.socialMedia.split(",")[0] : "",
+    github: dataDiri.socialMedia ? dataDiri.socialMedia.split(",")[1] : "",
+    gitlab: dataDiri.socialMedia ? dataDiri.socialMedia.split(",")[2] : "",
+  });
+
   const [skill, setSkill] = useState([]);
   const [tempSkill, setTempSkill] = useState();
-  const [exp, setExp] = useState({});
-  const [app, setApp] = useState({});
+  const [exp, setExp] = useState({
+    companyName: "",
+    position: "",
+    dateIn: "",
+    dateOut: "",
+    description: "",
+  });
+  const [app, setApp] = useState({
+    appName: "",
+    publicationLink: "",
+    linkRepo: "",
+    workPlace: "",
+    image: null,
+  });
   const [appImage, setAppImage] = useState();
   const [userImg, setUserImg] = useState();
   const [profileImg, setProfileImg] = useState({});
@@ -39,6 +56,10 @@ function Edit() {
       ...dataDiri,
       [e.target.name]: e.target.value,
     });
+    setSosMed({
+      ...sosMed,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const changeSkill = (e) => {
@@ -46,11 +67,12 @@ function Edit() {
   };
 
   const changeExp = (e) => {
-    if (e.target.name == "descExp") {
-      setExp({ ...exp, description: e.target.value });
-    } else {
-      setExp({ ...exp, [e.target.name]: e.target.value });
-    }
+    // if (e.target.name == "descExp") {
+    //   setExp({ ...exp, description: e.target.value });
+    // } else {
+    //   setExp({ ...exp, [e.target.name]: e.target.value });
+    // }
+    setExp({ ...exp, [e.target.name]: e.target.value });
   };
 
   const changeApp = (e) => {
@@ -122,22 +144,62 @@ function Edit() {
     e.preventDefault();
 
     const result = await axios.post(`experience/${id}`, exp);
+    console.log(result);
+    alert(`${result.data.msg}`);
+    // setExp({});
+    resetFormExp();
+  };
 
-    setExp({});
+  const resetFormExp = () => {
+    setExp({
+      companyName: "",
+      position: "",
+      dateIn: "",
+      dateOut: "",
+      descripstion: "",
+    });
+  };
+
+  const resetApp = () => {
+    setApp({
+      appName: "",
+      publicationLink: "",
+      linkRepo: "",
+      workPlace: "",
+      image: null,
+    });
+    document.getElementById("inputFile").value = "";
   };
 
   const submitDataDiri = async (e) => {
     e.preventDefault();
+    // if (sosMed.ig) {
     await axios.patch(`user/updateProfile/${id}`, {
       ...dataDiri,
-      socialMedia: `${dataDiri.ig},${dataDiri.github},${dataDiri.gitlab}`,
+      socialMedia: `${
+        sosMed.ig ||
+        (dataDiri.socialMedia ? dataDiri.socialMedia.split(",")[0] : "")
+      },${
+        sosMed.github ||
+        (dataDiri.socialMedia ? dataDiri.socialMedia.split(",")[1] : "")
+      },${
+        sosMed.gitlab ||
+        (dataDiri.socialMedia ? dataDiri.socialMedia.split(",")[2] : "")
+      }`,
     });
+    // }
 
     alert("sukses update data");
     getUserId();
     // auto reset form bellum implement
     // setDataDiri({});
   };
+  console.log(sosMed.ig);
+
+  // console.log({
+  //   ...dataDiri,
+  //   socialMedia: `${sosMed.ig},${sosMed.github},${sosMed.gitlab}`,
+  // });
 
   const submitApp = async (e) => {
     e.preventDefault();
@@ -151,6 +213,8 @@ function Edit() {
     setAppImage(null);
 
     alert("sukses tambah portofolio");
+
+    resetApp();
     getUserId();
   };
 
@@ -176,6 +240,11 @@ function Edit() {
     }
     getUserId();
     getSkill();
+    // setSosMed({
+    //   ig: ig,
+    //   github: sosMed[1],
+    //   gitlab: sosMed[2],
+    // });
   }, [id]);
 
   return (
@@ -253,14 +322,25 @@ function Edit() {
                   <label className="form-label profile_edit_label">
                     Status
                   </label>
-                  <input
+                  {/* <input
                     type="text"
                     name="role"
                     className="form-control profile_edit_input"
                     placeholder={"ex freelancer / fulltime"}
                     value={dataDiri.role}
                     onChange={(e) => changeDataDiri(e)}
-                  />
+                  /> */}
+                  <select
+                    className="form-select py-3"
+                    id="status"
+                    name="role"
+                    value={dataDiri.role}
+                    onChange={(e) => changeDataDiri(e)}
+                  >
+                    <option defaultValue={""}>Freelance or fulltime?</option>
+                    <option value="freelance">Freelance</option>
+                    <option value="fulltime">Fulltime</option>
+                  </select>
                 </div>
                 <div className="col-sm-12">
                   <label className="form-label profile_edit_label">
@@ -290,6 +370,7 @@ function Edit() {
                           : "Masukkan username IG"
                         : "Masukkan username IG"
                     }
+                    value={sosMed.ig}
                     onChange={(e) => changeDataDiri(e)}
                   />
                 </div>
@@ -308,12 +389,13 @@ function Edit() {
                           : "Masukkan username Github"
                         : "Masukkan username Github"
                     }
+                    value={sosMed.github}
                     onChange={(e) => changeDataDiri(e)}
                   />
                 </div>
                 <div className="col-md-4">
                   <label className="form-label profile_edit_label">
-                    LinkedIn
+                    Gitlab
                   </label>
                   <input
                     type="text"
@@ -326,6 +408,7 @@ function Edit() {
                           : "Masukkan username Gitlab"
                         : "Masukkan username Gitlab"
                     }
+                    value={sosMed.gitlab}
                     onChange={(e) => changeDataDiri(e)}
                   />
                 </div>
@@ -384,7 +467,7 @@ function Edit() {
                     ? skill.map((item) => (
                         <div
                           key={item.id}
-                          className="col-md-auto me-3 ps-2 pe-2 pt-1 pb-1 profile_edit_skill"
+                          className="col-md-auto me-3 ps-2 pe-2 pt-1 pb-1 profile_edit_skill d-flex justify-content-between"
                         >
                           {item.skill}
                           <button
@@ -419,6 +502,7 @@ function Edit() {
                     className="form-control profile_edit_input"
                     placeholder="Masukkan nama perusahaan"
                     onChange={(e) => changeExp(e)}
+                    value={exp.companyName}
                   />
                 </div>
                 <div className="col-sm-6">
@@ -431,6 +515,7 @@ function Edit() {
                     className="form-control profile_edit_input"
                     placeholder="Masukkan posisi"
                     onChange={(e) => changeExp(e)}
+                    value={exp.position}
                   />
                 </div>
                 <div className="col-sm-6">
@@ -443,6 +528,7 @@ function Edit() {
                     className="form-control profile_edit_input"
                     placeholder="Masukkan tanggal masuk"
                     onChange={(e) => changeExp(e)}
+                    value={exp.dateIn}
                   />
                 </div>
                 <div className="col-md-6">
@@ -455,6 +541,7 @@ function Edit() {
                     className="form-control profile_edit_input"
                     placeholder="Masukkan username tanggal keluar"
                     onChange={(e) => changeExp(e)}
+                    value={exp.dateOut}
                   />
                 </div>
                 <div className="col-md-12 mb-4">
@@ -464,10 +551,11 @@ function Edit() {
                   <textarea
                     type="text"
                     className="form-control"
-                    name="descExp"
+                    name="description"
                     rows="5"
                     placeholder="Tulis deskripsi singkat"
                     onChange={(e) => changeExp(e)}
+                    value={exp.description}
                   ></textarea>
                 </div>
                 <hr className="ms-2 me-2 col-sm" />
@@ -495,6 +583,7 @@ function Edit() {
                     className="form-control profile_edit_input"
                     placeholder="Masukkan nama aplikasi"
                     onChange={(e) => changeApp(e)}
+                    value={app.appName}
                   />
                 </div>
                 <div className="col-sm-12">
@@ -503,10 +592,11 @@ function Edit() {
                   </label>
                   <input
                     type="text"
-                    name="publicalitionLink"
+                    name="publicationLink"
                     className="form-control profile_edit_input"
                     placeholder="Masukkan link"
                     onChange={(e) => changeApp(e)}
+                    value={app.publicationLink}
                   />
                 </div>
                 <div className="col-sm-12">
@@ -519,6 +609,7 @@ function Edit() {
                     className="form-control profile_edit_input"
                     placeholder="Masukkan link"
                     onChange={(e) => changeApp(e)}
+                    value={app.linkRepo}
                   />
                 </div>
                 <div className="col-sm-12">
@@ -531,6 +622,7 @@ function Edit() {
                     className="form-control profile_edit_input"
                     placeholder="Masukkan tempat kerja"
                     onChange={(e) => changeApp(e)}
+                    value={app.workPlace}
                   />
                 </div>
                 <div className="col-sm-12">
@@ -541,6 +633,7 @@ function Edit() {
                     Upload gambar
                   </label>
                   <input
+                    id="inputFile"
                     type="file"
                     name="image"
                     className="form-control"

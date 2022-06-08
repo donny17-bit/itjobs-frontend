@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button } from "react-bootstrap";
 import axios from "../utils/axios";
 
@@ -35,7 +34,7 @@ export default function ChangePass(props) {
                   Current password
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   name="currentPassword"
                   className="form-control profile_edit_input"
                   placeholder={"Masukkan password saat ini"}
@@ -47,7 +46,7 @@ export default function ChangePass(props) {
                   Password baru
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   name="newPassword"
                   className="form-control profile_edit_input"
                   placeholder={"Masukkan password baru"}
@@ -59,7 +58,7 @@ export default function ChangePass(props) {
                   Konfirmasi password baru
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   name="confirmPassword"
                   className="form-control profile_edit_input"
                   placeholder={"Silahkan konfirmasi password"}

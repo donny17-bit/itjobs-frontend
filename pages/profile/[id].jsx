@@ -7,11 +7,16 @@ import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../store/action/user";
 import privateRoutePekerja from "../../components/privateRoutePekerja";
+import ModalPorto from "../../components/modalPorto";
 
 function Profile() {
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const asA = Cookies.get("asA");
   const { id } = router.query;
@@ -21,6 +26,7 @@ function Profile() {
   const [skill, setSkill] = useState([]);
   const [porto, setPorto] = useState();
   const [exp, setExp] = useState();
+  const [portoModal, setPortoModal] = useState({});
 
   const getUserId = async () => {
     const result = await dispatch(getUserById(id, asA));
@@ -45,6 +51,12 @@ function Profile() {
     setExp(result.data.data);
   };
 
+  const deleteExp = async (e) => {
+    const result = await axios.delete(`experience/${e}`);
+    alert(`${result.data.msg}`);
+    getExp();
+  };
+
   // make sure id loaded
   useEffect(() => {
     if (!id) {
@@ -54,6 +66,13 @@ function Profile() {
     getPorto();
     getExp();
   }, [id]);
+
+  const handlePorto = (e) => {
+    // e.preventDefault();
+    setPortoModal({ ...e });
+    console.log(e);
+    setShow(true);
+  };
 
   const image1 =
     "https://cdn.dribbble.com/users/427857/screenshots/14119816/media/9bd7c2bc7a0669d777d76ea5b82d1100.png?compress=1&resize=400x300";
@@ -129,10 +148,19 @@ function Profile() {
                           }
                           className="profile_porto_img"
                           alt=""
+                          onClick={() => handlePorto(item)}
+                          style={{ objectFit: "cover" }}
                         />
+
                         <p className="mt-2 profile_porto_text">
                           {item.appName}
                         </p>
+                        <ModalPorto
+                          show={show}
+                          handleShow={handleShow}
+                          handleClose={handleClose}
+                          data={portoModal}
+                        />
                       </div>
                     ))
                   : ""}
@@ -141,14 +169,14 @@ function Profile() {
               exp.map((item) => (
                 <div className="row mt-4 m-0" key={item.id}>
                   <div className="row border-bottom m-2 mb-4">
-                    <div className="col-md-2 text-center">
+                    <div className="col-md-2 text-center order-2 order-md-1">
                       <img
                         src="https://cdn-icons-png.flaticon.com/512/2910/2910795.png"
                         alt=""
                         className="profile_expKerja_img"
                       />
                     </div>
-                    <div className="col-sm">
+                    <div className="col-sm order-3 order-md-2">
                       <h6 className="m-0 profile_exp_job">{item.position}</h6>
                       <p className="m-0 profile_exp_place">
                         {item.companyName}
@@ -157,10 +185,22 @@ function Profile() {
                         {`${item.dateIn.slice(0, 10)} s/d ${item.dateOut.slice(
                           0,
                           10
-                        )}, - months`}
+                        )}`}
                       </p>
                       <p className="profile_exp_desc">{item.description}</p>
                     </div>
+                    {asA == "pekerja" ? (
+                      <div className="col-sm text-end  order-1 order-md-3">
+                        <div
+                          className="btn btn-primary"
+                          onClick={() => deleteExp(item.id)}
+                        >
+                          <i className="bi bi-trash fw-bold"></i>
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
               ))
