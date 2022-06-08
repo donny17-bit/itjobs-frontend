@@ -10,7 +10,7 @@ function MainLayout(props) {
         <title>{props.title}</title>
       </Head>
       <Navbar />
-      <main style={{ paddingTop: "70px" }}>{props.children}</main>
+      <main className="main">{props.children}</main>
       <Footer />
     </>
   );

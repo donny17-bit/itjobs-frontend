@@ -7,9 +7,16 @@ export const postHire = (id, form) => {
   };
 };
 
-export const getHire = (id) => {
+export const getHire = (userId) => {
   return {
     type: "GET_HIRE",
-    payload: axios.get(`/hire/${id}`),
+    payload: axios.get(`/hire/${userId}`),
+  };
+};
+
+export const deleteHire = (hireId) => {
+  return {
+    type: "DELETE_HIRE",
+    payload: axios.delete(`/hire/${hireId}`),
   };
 };

@@ -8,6 +8,7 @@ import { getCompanyById } from "../../store/action/company";
 import Cookie from "js-cookie";
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/router";
+import privateRouteCompany from "../../components/privateRouteCompany";
 
 function Home() {
   const router = useRouter();
@@ -66,7 +67,7 @@ function Home() {
   };
 
   return (
-    <Layout title="Home|itJobs">
+    <Layout title="Home | itJobs">
       <div
         className="home_main"
         style={{
@@ -239,4 +240,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default privateRouteCompany(Home);
