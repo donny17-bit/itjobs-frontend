@@ -23,9 +23,11 @@ function Home() {
     searchSkill: router.query.searchSkill || "",
     sort: router.query.sort || "",
   });
+
+  const user = useSelector((state) => state.user);
+
   useEffect(() => {
     router.isReady;
-    console.log(router.query);
     getData();
   }, []);
 
@@ -69,10 +71,11 @@ function Home() {
   return (
     <Layout title="Home | itJobs">
       <div
-        className="home_main"
+        className="home_main pb-5"
         style={{
           backgroundColor: "#F6F7F8",
           position: "relative",
+          minHeight: "60vh",
         }}
       >
         <div className="">
@@ -194,26 +197,55 @@ function Home() {
           </div>
         </div>
 
-        <div className="container  px-2 px-lg-0">
+        <div
+          className="container px-2 px-lg-0"
+          style={{ minHeight: "inherit" }}
+        >
           {/* <h2 className="fw-bold d-lg-none ">Web developer</h2> */}
-          <div className="shadow-sm p-0 rounded overflow-hidden mt-3 mt-md-0 mx-md-auto w-auto">
-            {userData.length &&
-              userData.map((v) => (
-                <div key={v.id} onTouchEnd={() => alert("touched")}>
-                  <Card
-                    fullName={v.fullName}
-                    type={v.field}
-                    role={v.role}
-                    address={v.address}
-                    skills={v.skill}
-                    image={v.image}
-                    id={v.id}
-                  />
+          {!user.isLoading ? (
+            <div className="shadow-sm p-0 rounded overflow-hidden mt-3 mt-md-0 mx-md-auto w-auto">
+              {userData.length ? (
+                userData.map((v) => (
+                  <div
+                    key={v.id}
+                    onTouchEnd={() => router.push(`profile/${v.id}`)}
+                  >
+                    <Card
+                      fullName={v.fullName}
+                      type={v.field}
+                      role={v.role}
+                      address={v.address}
+                      skills={v.skill}
+                      image={v.image}
+                      id={v.id}
+                    />
+                  </div>
+                ))
+              ) : (
+                <div
+                  className="bg-white d-flex justify-content-center align-items-center"
+                  style={{ height: "60vh" }}
+                >
+                  <h1>404 | Not Found</h1>
                 </div>
-              ))}
-          </div>
+              )}
+            </div>
+          ) : (
+            <div
+              className="d-flex justify-content-center align-items-center"
+              style={{ minHeight: "inherit" }}
+            >
+              <div
+                className="spinner-border text-primary mb-5"
+                style={{ width: "100px", height: "100px" }}
+                role="status"
+              >
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )}
         </div>
-        <div className="pagination justify-content-center mt-5 position-absolute bottom-0 start-50 translate-middle">
+        <div className="pagination justify-content-center mt-5 ">
           <ReactPaginate
             previousLabel="<"
             nextLabel=">"

@@ -20,17 +20,14 @@ export default function ProfileCard(props) {
     localStorage.clear();
     window.location.href = "/";
   };
+  const image = process.env.URL_CLOUDINARY + data.image;
 
   return (
     <>
       <div className="card pb-5 pt-4 profile_card">
         <div className="text-center">
           <img
-            src={
-              data.image
-                ? `${process.env.URL_CLOUDINARY}/${data.image}`
-                : defaultImg
-            }
+            src={data.image ? image : defaultImg}
             className="card-img-top border profile_img"
             alt=".."
           />
@@ -53,7 +50,7 @@ export default function ProfileCard(props) {
             {asA == "pekerja" ? (
               <>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary profile_btn"
                   onClick={() => router.push(`/profile/edit/${data.id}`)}
                 >
                   Edit

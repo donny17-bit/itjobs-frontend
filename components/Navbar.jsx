@@ -21,6 +21,7 @@ export default function Navbar() {
     asA === "pekerja" ? state.user.data[0] : state.company.data[0]
   );
   const hireNotif = useSelector((state) => state.hire.data);
+  const isLoading = useSelector((state) => state.hire.isLoading);
 
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -484,49 +485,64 @@ export default function Navbar() {
                 Notifikasi
               </h5>
             </div>
-            <div className="modal-body p-3">
-              <button
-                className={`btn text-primary ${notifData.length || "d-none"}`}
-                onClick={() => {
-                  notifData.map((v) =>
-                    dispatch(deleteHire(v.id)).then((res) => getHireNotif())
-                  );
-                }}
+            {isLoading ? (
+              <div
+                className="d-flex justify-content-center align-items-center"
+                style={{ minHeight: "75%" }}
               >
-                Tandai sudah dibaca ({notifData.length})
-              </button>
-
-              {notifData.length ? (
-                notifData.map((v) => (
-                  <div
-                    className=" border border-light p-3"
-                    onClick={() =>
-                      dispatch(deleteHire(v.id))
-                        .then((res) => getHireNotif())
-                        .catch((err) => console.log(err))
-                    }
-                  >
-                    <div>
-                      Dari: {v.companyName}
-                      <br />
-                      Subject: {v.subject}
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="col d-flex flex-column align-items-center justify-content-center h-100">
-                  <Image
-                    src="/image/emptyNotif.png"
-                    alt="empty notification"
-                    width={118}
-                    height={76}
-                    objectFit="contain"
-                    className=""
-                  />
-                  Belum ada notifikasi
+                <div
+                  class="spinner-border text-primary mb-5"
+                  style={{ width: "100px", height: "100px" }}
+                  role="status"
+                >
+                  <span class="visually-hidden">Loading...</span>
                 </div>
-              )}
-            </div>
+              </div>
+            ) : (
+              <div className="modal-body p-3">
+                <button
+                  className={`btn text-primary ${notifData.length || "d-none"}`}
+                  onClick={() => {
+                    notifData.map((v) =>
+                      dispatch(deleteHire(v.id)).then((res) => getHireNotif())
+                    );
+                  }}
+                >
+                  Tandai sudah dibaca ({notifData.length})
+                </button>
+
+                {notifData.length ? (
+                  notifData.map((v) => (
+                    <div
+                      className=" border border-light p-3"
+                      onClick={() =>
+                        dispatch(deleteHire(v.id))
+                          .then((res) => getHireNotif())
+                          .catch((err) => console.log(err))
+                      }
+                    >
+                      <div>
+                        Dari: {v.companyName}
+                        <br />
+                        Subject: {v.subject}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="col d-flex flex-column align-items-center justify-content-center h-100">
+                    <Image
+                      src="/image/emptyNotif.png"
+                      alt="empty notification"
+                      width={118}
+                      height={76}
+                      objectFit="contain"
+                      className=""
+                    />
+                    Belum ada notifikasi
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
