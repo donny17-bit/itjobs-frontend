@@ -3,14 +3,18 @@ import { useRouter } from "next/router";
 
 export default function ProfileCard(props) {
   const router = useRouter();
-  const { data, sosMed, skill } = props;
+  const { data, sosMed, skill, asA } = props;
   const defaultImg = "https://cdn-icons-png.flaticon.com/512/7024/7024005.png";
   return (
     <>
       <div className="card pb-5 pt-4 profile_card">
         <div className="text-center">
           <img
-            src={data.image ? data.image : defaultImg}
+            src={
+              data.image
+                ? `${process.env.URL_CLOUDINARY}/${data.image}`
+                : defaultImg
+            }
             className="card-img-top border profile_img"
             alt=".."
           />
@@ -28,13 +32,23 @@ export default function ProfileCard(props) {
             </li>
           </ul>
           <p className="card-text profile_text">{data.description}</p>
+
           <div className="d-grid mb-3">
-            <button
-              className="btn btn-primary"
-              onClick={() => router.push(`/profile/edit/${data.id}`)}
-            >
-              Edit
-            </button>
+            {asA == "pekerja" ? (
+              <button
+                className="btn btn-primary"
+                onClick={() => router.push(`/profile/edit/${data.id}`)}
+              >
+                Edit
+              </button>
+            ) : (
+              <button
+                className="btn btn-primary"
+                onClick={() => router.push(`/hire/${data.id}`)}
+              >
+                Hire
+              </button>
+            )}
           </div>
           <h5 className="card-title">Skill</h5>
           <div className="row p-1 g-2">

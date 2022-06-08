@@ -24,10 +24,9 @@ function Edit() {
   const [exp, setExp] = useState({});
   const [app, setApp] = useState({});
   const [appImage, setAppImage] = useState();
-  const [userImg, setUserImg] = useState({
-    image: "",
-  });
+  const [userImg, setUserImg] = useState();
   const [profileImg, setProfileImg] = useState({});
+  const [simpan, setSimpan] = useState(false);
 
   const changeDataDiri = (e) => {
     setDataDiri({
@@ -61,10 +60,13 @@ function Edit() {
 
   const imgChange = (e) => {
     const { name, value, files } = e.target;
-    console.log(e.target);
-    console.log(files);
+
     setProfileImg({ ...profileImg, image: files[0] });
     setUserImg(URL.createObjectURL(files[0]));
+  };
+
+  const editBtn = (e) => {
+    setSimpan(true);
   };
 
   const getUserId = async () => {
@@ -155,6 +157,7 @@ function Edit() {
     const result = await axios.patch(`user/updateImage/${id}`, formData);
     console.log(result);
     setUserImg(null);
+    setSimpan(false);
 
     alert("sukses update profile image");
     getUserId();
@@ -178,6 +181,8 @@ function Edit() {
               imgChange={imgChange}
               userImg={userImg}
               saveImg={saveImg}
+              simpan={simpan}
+              editBtn={editBtn}
             />
             <div className="d-grid mt-3 mb-3">
               <button className="btn btn-primary">Ubah Password</button>

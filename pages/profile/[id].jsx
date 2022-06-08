@@ -72,7 +72,7 @@ function Profile() {
       <div className="container-fluid profile_container">
         <div className="row m-0">
           <div className="col-md-3 profile_card_container p-0">
-            <ProfileCard data={data} sosMed={sosMed} skill={skill} />
+            <ProfileCard data={data} sosMed={sosMed} skill={skill} asA={asA} />
           </div>
           <div className="col col-sm p-4 profile_col_container">
             <div className="row ms-2">

@@ -1,19 +1,29 @@
 import React, { useState, useEffect } from "react";
 
 export default function EditCard(props) {
-  const { data, userImg } = props;
+  const { data, userImg, simpan } = props;
+  // // const [simpan, setSimpan] = useState(false);
+  // const [image, setImage] = useState(
+  //   `${process.env.URL_CLOUDINARY}/${data.image}`
+  // );
+
+  let image = `${process.env.URL_CLOUDINARY}/${data.image}`;
   let defaultImg = "https://cdn-icons-png.flaticon.com/512/7024/7024005.png";
 
+  console.log(userImg);
+
   if (userImg) {
-    defaultImg = userImg;
+    image = userImg;
   }
+
+  console.log(image);
 
   return (
     <>
       <div className="card pb-1 pt-4 profile_card">
         <div className="text-center">
           <img
-            src={data.image ? data.image : defaultImg}
+            src={data.image ? image : defaultImg}
             className="card-img-top border profile_img"
             alt="..."
           />
@@ -28,13 +38,18 @@ export default function EditCard(props) {
             <label
               for="actual-btn"
               className="btn btn-link profile_edit_btn mb-0 pb-0"
+              onClick={props.editBtn}
             >
               <i className="bi bi-pencil"></i> Edit
             </label>
           </p>
-          <button className=" btn btn-primary" onClick={props.saveImg}>
-            Simpan
-          </button>
+          {simpan ? (
+            <button className="btn btn-primary" onClick={props.saveImg}>
+              Simpan
+            </button>
+          ) : (
+            ``
+          )}
         </div>
         <div className="card-body mt-2">
           <h5 className="card-title profile_name pb-0 mb-0">{data.fullName}</h5>
