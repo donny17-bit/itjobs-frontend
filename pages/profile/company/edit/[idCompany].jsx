@@ -16,7 +16,10 @@ function EditCompany() {
   const company = useSelector((state) => state.company);
 
   const [data, setData] = useState(company.data[0]);
-  const [sosMed, setSosMed] = useState(data.socialMedia.split(","));
+  const [sosMed, setSosMed] = useState({
+    ig: data.socialMedia ? data.socialMedia.split(",")[0] : "",
+    linkedin: data.socialMedia ? data.socialMedia.split(",")[1] : "",
+  });
   const [form, setForm] = useState(data);
   const [simpan, setSimpan] = useState(false);
   const [profileImg, setProfileImg] = useState({});
@@ -32,6 +35,10 @@ function EditCompany() {
 
   const formChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setSosMed({
+      ...sosMed,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const editBtn = (e) => {
@@ -43,7 +50,12 @@ function EditCompany() {
     await dispatch(
       updateProfileCompany(idCompany, {
         ...form,
-        socialMedia: `${form.ig},${form.linkedin}`,
+        socialMedia: `${
+          sosMed.ig || (data.socialMedia ? data.socialMedia.split(",")[0] : "")
+        },${
+          sosMed.linkedin ||
+          (data.socialMedia ? data.socialMedia.split(",")[1] : "")
+        }`,
       })
     );
 
@@ -243,7 +255,7 @@ function EditCompany() {
                       placeholder="Masukkan username IG"
                       name="ig"
                       onChange={(e) => formChange(e)}
-                      value={sosMed[0]}
+                      value={sosMed.ig}
                     />
                   </div>
 
@@ -257,7 +269,7 @@ function EditCompany() {
                       placeholder="Masukkan LinkedIn"
                       name="linkedin"
                       onChange={(e) => formChange(e)}
-                      value={sosMed[1]}
+                      value={sosMed.linkedin}
                     />
                   </div>
                 </div>

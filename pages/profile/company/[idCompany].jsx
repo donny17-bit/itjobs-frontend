@@ -21,20 +21,25 @@ function Company() {
   const getCompanyId = async () => {
     const result = await dispatch(getCompanyById(idCompany));
     setData(result.value.data.data[0]);
+    console.log(result);
 
     if (result.value.data.data[0].socialMedia) {
       setSosMed(result.value.data.data[0].socialMedia.split(","));
     }
   };
 
+  console.log(data);
+  console.log(sosMed);
+
   // make sure id loaded
   useEffect(() => {
     if (!idCompany) {
       return;
     }
-    if (company.data.length == 0) {
-      getCompanyId();
-    }
+    // if (company.data.length == 0) {
+    //   getCompanyId();
+    // }
+    getCompanyId();
     setData(company.data[0]);
   }, [idCompany]);
 
@@ -59,6 +64,7 @@ function Company() {
                   ? process.env.URL_CLOUDINARY + data.image
                   : defaultImg
               }
+              style={{ objectFit: "cover" }}
               className=" border profile_company_img"
               alt="..."
             />
