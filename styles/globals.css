@@ -28,8 +28,16 @@ a {
   box-sizing: border-box;
 }
 
+.main {
+  padding-top: 70px;
+  padding-bottom: 0;
+}
+
 .fs-7 {
   font-size: 0.875rem;
+}
+.fs-8 {
+  font-size: 0.75rem;
 }
 .fw-semibold {
   font-weight: 600;
@@ -84,8 +92,16 @@ a {
 .home_main {
   min-height: 100vh;
 }
+
 @media (min-width: 768px) {
   .home_main {
     min-height: 90vh;
+  }
+}
+
+@media (max-width: 576px) {
+  .main {
+    padding-top: 0;
+    padding-bottom: 120px;
   }
 }
