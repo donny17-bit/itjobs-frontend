@@ -18,6 +18,11 @@ function Hire() {
   });
   const [data, setData] = useState({});
 
+  const [msg, setMsg] = useState({
+    type: "",
+    msg: "",
+  });
+
   useEffect(() => {
     if (router.isReady) {
       getData();
@@ -59,8 +64,8 @@ function Hire() {
     }
 
     dispatch(postHire(Cookie.get("id"), formData))
-      .then((res) => alert("success"))
-      .catch((err) => alert(err));
+      .then((res) => setMsg({ type: "success", msg: res.value.data.msg }))
+      .catch((err) => setMsg({ type: "danger", msg: err.message }));
   };
 
   console.log(form);
@@ -147,6 +152,15 @@ function Hire() {
             </small>
 
             <div className="mt-5">
+              {msg.msg ? (
+                <div
+                  className={`p-3 text-center bg-${msg.type} text-white mb-4`}
+                >
+                  {msg.msg}
+                </div>
+              ) : (
+                ""
+              )}
               <label className="form-label fw-light">
                 Tujuan tentang pesan ini
               </label>
@@ -157,6 +171,7 @@ function Hire() {
                 aria-describedby="emailHelp"
                 name="subject"
                 onChange={handleChangeForm}
+                required
               />
             </div>
 
@@ -168,6 +183,7 @@ function Hire() {
                 rows="3"
                 name="description"
                 onChange={handleChangeForm}
+                required
               ></textarea>
               <label
                 className="btn position-absolute end-0 p-1"
