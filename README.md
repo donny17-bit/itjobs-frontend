@@ -1,6 +1,6 @@
 <h1 align='center'>itJobs</h1>
   <p align="center">
-    <a href="itjobs-project.vercel.app">View Demo</a>
+    <a href="https://itjobs-project.vercel.app/">View Demo</a>
     ·
     <a href="https://github.com/thariqfarsha/itjobs-frontend/issues">Report Bug</a>
     ·
