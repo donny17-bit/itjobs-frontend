@@ -30,8 +30,10 @@ Website Application Hire Job | Frontend Repository
 ## Demo Accounts
 
 1. user account : jane@gmail.com
+   <br>
    password : 123
 2. company account : goto@gmail.com
+   <br>
    password : 123
 
 ## Getting Started
