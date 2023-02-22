@@ -27,6 +27,13 @@ Website Application Hire Job | Frontend Repository
 2. Node_modules `npm install` or `yarn install`
 3. Backend API itJobs [`here`](https://github.com/thariqfarsha/itjobs-backend.git)
 
+## Demo Accounts
+
+1. user account : jane@gmail.com
+   password : 123
+2. company account : goto@gmail.com
+   password : 123
+
 ## Getting Started
 
 1. Download this Project or you can type `git clone https://github.com/thariqfarsha/itjobs-frontend.git`
