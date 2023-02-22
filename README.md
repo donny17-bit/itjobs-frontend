@@ -1,6 +1,6 @@
 <h1 align='center'>itJobs</h1>
   <p align="center">
-    <a href="https://itjobs-project.vercel.app/">View Demo</a>
+    <a href="https://itjobs-projects.vercel.app/">View Demo</a>
     ·
     <a href="https://github.com/thariqfarsha/itjobs-frontend/issues">Report Bug</a>
     ·
@@ -35,7 +35,7 @@ Website Application Hire Job | Frontend Repository
 4. Add .env in nextConfig.js
 
 ```sh
-URL_BACKEND: "https://itjobsproject.herokuapp.com",
+URL_BACKEND: "https://itjobs-api.cyclic.app",
 URL_CLOUDINARY: "https://res.cloudinary.com/itjobs/image/upload/v1654266716",
 ```
 
