@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    URL_BACKEND: "https://itjobsproject.herokuapp.com",
+    URL_BACKEND: "https://itjobs-api.cyclic.app",
     URL_CLOUDINARY:
       "https://res.cloudinary.com/itjobs/image/upload/v1654266716/",
   },
